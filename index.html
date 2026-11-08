@@ -213,13 +213,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @media (min-width:980px){.tk-track li::after{margin-inline:44px;font-size:15px}}
 
 /* process: layered parallax skyline — clouds behind, a chain of baby-item silhouettes cut from the section colour */
-.sky{position:relative;z-index:1;height:clamp(130px,12vw,175px);background:var(--paper);clip-path:inset(-240px 0 0 0)}
+.sky{position:relative;z-index:1;height:clamp(130px,12vw,175px);height:round(clamp(130px,12vw,175px),1px);background:var(--paper);clip-path:inset(-240px 0 3px 0)}
 .sky-l{position:absolute;left:-10%;top:0;width:120%;height:240px;display:block;overflow:visible;will-change:transform}
 .sky-c1{top:-42px}.sky-c2{top:-38px}
 @media (max-width:699px){.sky-l{width:240%;left:-70%}.sky-c1{top:-50px}.sky-c2{top:-48px}}
-.sky-band{position:absolute;left:0;right:0;bottom:0;height:78px;background:var(--cream);
-  -webkit-mask:url(assets/img/baby-band.png) repeat-x left bottom/1775px 78px;mask:url(assets/img/baby-band.png) repeat-x left bottom/1775px 78px}
-@media (max-width:699px){.sky-band{height:50px;-webkit-mask-size:1138px 50px;mask-size:1138px 50px}}
+.sky-band{position:absolute;left:0;right:0;bottom:-4px;height:78px;background:var(--cream);
+  -webkit-mask:url(assets/img/baby-band.png) repeat-x left top/1775px 78px,linear-gradient(#000,#000) left bottom/100% 24px no-repeat;mask:url(assets/img/baby-band.png) repeat-x left top/1775px 78px,linear-gradient(#000,#000) left bottom/100% 24px no-repeat}
+@media (max-width:699px){.sky-band{height:50px;-webkit-mask-size:1138px 50px,100% 16px;mask-size:1138px 50px,100% 16px}}
 /* ---------- torn edges ---------- */
 .edge{display:block;width:100%;height:34px;color:var(--paper)}
 .edge svg{width:100%;height:100%;display:block}
@@ -275,6 +275,7 @@ section{position:relative}
 
 /* ---------- process ---------- */
 .process{background:var(--cream)}
+.process.sec{padding-top:0}.process .sky{margin-bottom:64px}
 .steps{position:relative;display:grid;gap:56px;padding-top:10px}
 .path{position:absolute;inset:0;pointer-events:none;z-index:0}
 .path svg{width:100%;height:100%;overflow:visible}
@@ -556,7 +557,10 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
   </div>
 </section>
 
-<div class="sky grain" aria-hidden="true">
+
+<!-- ============ PROCESS ============ -->
+<section class="process sec grain" id="process">
+<div class="sky" aria-hidden="true">
   <svg width="0" height="0" style="position:absolute"><defs>
     <filter id="brush" x="-5%" y="-30%" width="110%" height="160%"><feTurbulence type="fractalNoise" baseFrequency=".008 .05" numOctaves="4" seed="3"/><feDisplacementMap in="SourceGraphic" scale="34" xChannelSelector="R" yChannelSelector="G"/><feGaussianBlur stdDeviation=".6"/></filter>
     <filter id="brush2" x="-5%" y="-30%" width="110%" height="160%"><feTurbulence type="fractalNoise" baseFrequency=".011 .07" numOctaves="4" seed="9"/><feDisplacementMap in="SourceGraphic" scale="28" xChannelSelector="R" yChannelSelector="G"/><feGaussianBlur stdDeviation=".5"/></filter>
@@ -565,9 +569,6 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
   <svg class="sky-l sky-c2" viewBox="0 0 1440 240" preserveAspectRatio="none" data-px=".35" data-pxx="90"><path d="M-20 141.7 L0 141.7 L24 141.8 L48 140.7 L72 138.7 L96 136.4 L120 134.4 L144 133.3 L168 133.5 L192 135.1 L216 137.8 L240 141.2 L264 144.6 L288 147.2 L312 148.3 L336 147.4 L360 144.3 L384 139.0 L408 132.3 L432 124.9 L456 117.9 L480 112.3 L504 109.1 L528 108.8 L552 111.7 L576 117.5 L600 125.6 L624 135.0 L648 144.3 L672 152.5 L696 158.3 L720 161.2 L744 160.8 L768 157.3 L792 151.3 L816 143.8 L840 135.9 L864 128.7 L888 123.2 L912 120.2 L936 119.7 L960 121.7 L984 125.6 L1008 130.6 L1032 135.7 L1056 140.0 L1080 142.8 L1104 143.7 L1128 142.6 L1152 139.8 L1176 136.0 L1200 131.8 L1224 128.1 L1248 125.4 L1272 124.4 L1296 125.0 L1320 127.1 L1344 130.3 L1368 134.0 L1392 137.5 L1416 140.2 L1440 141.7 L1460 600 L-20 600Z" fill="#fcf9f4" filter="url(#brush2)"/></svg>
   <div class="sky-band"></div>
 </div>
-
-<!-- ============ PROCESS ============ -->
-<section class="process sec grain" id="process">
   <div class="wrap">
     <div class="sec-head">
       <h2 class="h split" data-split>צעד אחרי צעד, יחד</h2>
