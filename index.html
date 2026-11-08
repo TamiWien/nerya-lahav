@@ -157,7 +157,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @keyframes heroIn{from{opacity:0;transform:translateY(26px);filter:blur(6px)}}
 
 /* ---------- trust marquee (inside hero) ---------- */
-.trust{position:relative;z-index:5;padding-bottom:4px;background:linear-gradient(to bottom,transparent 0 58px,var(--paper) 58px)}
+.trust{position:relative;z-index:5;padding-bottom:18px;background:linear-gradient(to bottom,transparent 0 58px,var(--paper) 58px)}
 /* credentials: frosted card that straddles the hero edge, three monochrome authority marks */
 .creds{max-width:1000px;margin-inline:auto;padding:18px 10px 16px;border-radius:26px;
   background:rgba(251,248,243,.74);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);
@@ -166,18 +166,22 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .cr-l{display:grid;grid-template-columns:repeat(3,1fr);list-style:none}
 .cr-l li{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding-inline:6px}
 .cr-l li+li::before{content:"";position:absolute;inset-inline-start:0;top:4%;bottom:4%;width:1px;background:linear-gradient(transparent,rgba(21,56,72,.16),transparent)}
-.cr-l img{height:40px;width:auto;opacity:.8;transition:opacity .4s,transform .6s var(--ease)}
+.cr-l .lg{position:relative;display:block;overflow:hidden;padding-block:2px}
+.cr-l img{display:block;height:40px;width:auto;transition:transform .55s cubic-bezier(.76,0,.24,1)}
+.cr-l img:not(.c){opacity:.8}
+.cr-l img.c{position:absolute;inset:2px 0;width:100%;height:calc(100% - 4px);object-fit:contain;transform:translateY(110%)}
+.cr-l li:hover img:not(.c),.cr-l li:active img:not(.c){transform:translateY(-110%)}
+.cr-l li:hover img.c,.cr-l li:active img.c{transform:none}
 .cr-l li.wide img{height:34px;margin-block:3px}
-.cr-l li:hover img{opacity:1;transform:translateY(-3px)}
 .cr-l .t{display:flex;flex-direction:column;gap:2px}
 .cr-l b{font-size:11.5px;font-weight:600;color:var(--navy);line-height:1.2;white-space:nowrap}
 .cr-l small{font-size:10.5px;color:var(--muted);letter-spacing:.02em}
 /* editorial ticker: big heading type, alternating solid / outline */
-.ticker{overflow:hidden;padding:20px 0 12px;-webkit-mask-image:linear-gradient(to left,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(to left,transparent,#000 10%,#000 90%,transparent)}
+.ticker{position:relative;background:var(--paper);overflow:hidden;padding:22px 0 14px;-webkit-mask-image:linear-gradient(to left,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(to left,transparent,#000 10%,#000 90%,transparent)}
 .tk-track{display:flex;width:max-content;animation:marq 48s linear infinite}
 .tk-track ul{display:flex;list-style:none}
 .tk-track li{display:flex;align-items:center;font-family:Halel;font-size:30px;line-height:1.1;color:var(--navy);white-space:nowrap}
-.tk-track li::after{content:"✦";color:var(--gold-2);font-size:13px;margin-inline:56px}
+.tk-track li::after{content:"✦";color:var(--gold-2);font-size:13px;margin-inline:30px}
 @keyframes marq{from{transform:translateX(50%)}to{transform:none}}
 @media (min-width:700px){
   .trust{background:linear-gradient(to bottom,transparent 0 50px,var(--paper) 50px)}
@@ -190,7 +194,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   .tk-track li{font-size:clamp(34px,3vw,44px)}
   .ticker{padding:30px 0 18px}
 }
-@media (min-width:980px){.tk-track li::after{margin-inline:96px;font-size:15px}}
+@media (min-width:980px){.tk-track li::after{margin-inline:44px;font-size:15px}}
 
 /* ---------- torn edges ---------- */
 .edge{display:block;width:100%;height:34px;color:var(--paper)}
@@ -465,29 +469,30 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
 
   <div class="trust" aria-label="למה לבחור בי">
     <div class="wrap"><div class="creds">
-      <p class="cr-k">מוסמך ומאושר על ידי</p>
+      <p class="cr-k">מוסמך ומאושר<br>על ידי</p>
       <ul class="cr-l">
-        <li><img src="assets/img/auth-health.webp" alt="" width="118" height="120"><span class="t"><b>משרד הבריאות</b><small>רישיון מוהל</small></span></li>
-        <li class="wide"><img src="assets/img/auth-rabbinate.webp" alt="" width="167" height="120"><span class="t"><b>הרבנות הראשית</b><small>הסמכה רשמית</small></span></li>
-        <li><img src="assets/img/auth-religion.webp" alt="" width="97" height="120"><span class="t"><b>המשרד לשירותי דת</b><small>מוהל מאושר</small></span></li>
-      </ul>
-    </div></div>
-    <div class="ticker"><div class="tk-track">
-      <ul>
-        <li>5 שנות ניסיון</li>
-        <li>זמינות 24/7</li>
-        <li>ליווי אישי לפני ואחרי</li>
-        <li>בכל הארץ</li>
-      </ul>
-      <ul aria-hidden="true">
-        <li>5 שנות ניסיון</li>
-        <li>זמינות 24/7</li>
-        <li>ליווי אישי לפני ואחרי</li>
-        <li>בכל הארץ</li>
+        <li><span class="lg"><img src="assets/img/auth-health.webp" alt="" width="118" height="120"><img class="c" src="assets/img/auth-health-c.webp" alt="" width="118" height="120" loading="lazy"></span><span class="t"><b>משרד הבריאות</b><small>רישיון מוהל</small></span></li>
+        <li class="wide"><span class="lg"><img src="assets/img/auth-rabbinate.webp" alt="" width="167" height="120"><img class="c" src="assets/img/auth-rabbinate-c.webp" alt="" width="167" height="120" loading="lazy"></span><span class="t"><b>הרבנות הראשית</b><small>הסמכה רשמית</small></span></li>
+        <li><span class="lg"><img src="assets/img/auth-religion.webp" alt="" width="97" height="120"><img class="c" src="assets/img/auth-religion-c.webp" alt="" width="97" height="120" loading="lazy"></span><span class="t"><b>המשרד לשירותי דת</b><small>מוהל מאושר</small></span></li>
       </ul>
     </div></div>
   </div>
 </section>
+
+<div class="ticker"><div class="tk-track">
+  <ul>
+    <li>5 שנות ניסיון</li>
+    <li>זמינות 24/7</li>
+    <li>ליווי אישי לפני ואחרי</li>
+    <li>בכל הארץ</li>
+  </ul>
+  <ul aria-hidden="true">
+    <li>5 שנות ניסיון</li>
+    <li>זמינות 24/7</li>
+    <li>ליווי אישי לפני ואחרי</li>
+    <li>בכל הארץ</li>
+  </ul>
+</div></div>
 <!-- ============ ABOUT ============ -->
 <section class="about sec grain" id="about">
   <div class="wrap about-grid">
