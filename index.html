@@ -157,35 +157,44 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @keyframes heroIn{from{opacity:0;transform:translateY(26px);filter:blur(6px)}}
 
 /* ---------- trust marquee (inside hero) ---------- */
-.trust{background:rgba(21,56,72,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff;overflow:hidden;position:relative;z-index:5}
-/* credentials: three authority marks, monochrome, set as one quiet seal row */
-.creds{display:flex;align-items:center;justify-content:center;gap:18px;padding:16px 16px 14px;border-bottom:1px solid rgba(227,197,146,.16)}
-.cr-k{font-size:11px;line-height:1.3;letter-spacing:.06em;color:#e3c592;opacity:.75;white-space:nowrap;padding-inline-end:16px;border-inline-end:1px solid rgba(227,197,146,.25)}
-.cr-l{display:flex;align-items:center;gap:18px;list-style:none}
-.cr-l li{display:flex;align-items:center;gap:8px}
-.cr-l img{height:34px;width:auto;opacity:.82;transition:opacity .4s,transform .5s var(--ease)}
-.cr-l li.wide img{height:30px}
-.cr-l li:hover img{opacity:1;transform:translateY(-2px)}
-.cr-l span{font-size:10.5px;line-height:1.25;color:rgba(255,255,255,.6);white-space:nowrap}
-@media (max-width:420px){.cr-l span{display:none}.creds{gap:16px}.cr-l{gap:22px}.cr-l img{height:36px}.cr-l li.wide img{height:32px}}
-.mq-mask{overflow:hidden;-webkit-mask-image:linear-gradient(to left,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(to left,transparent,#000 8%,#000 92%,transparent)}
-.marquee{display:flex;width:max-content;animation:marq 40s linear infinite}
-.marquee ul{display:flex;list-style:none}
-.marquee li{display:flex;align-items:center;gap:14px;padding:16px 0;white-space:nowrap}
-.marquee li .ico{display:grid;place-items:center;color:#e3c592;opacity:.55;flex:none}
-.marquee li svg{width:24px;height:24px;stroke-width:1.3}
-.marquee li .tx{display:flex;flex-direction:column;line-height:1.25}
-.marquee li b{font-weight:500;font-size:14.5px;color:rgba(255,255,255,.8)}
-.marquee li small{font-size:11px;color:rgba(255,255,255,.45);margin-top:3px;letter-spacing:.01em}
-.marquee li::after{content:"✦";color:#e3c592;font-size:12px;margin-inline:48px}
+.trust{position:relative;z-index:5;padding-bottom:4px;background:linear-gradient(to bottom,transparent 0 58px,var(--paper) 58px)}
+/* credentials: frosted card that straddles the hero edge, three monochrome authority marks */
+.creds{max-width:1000px;margin-inline:auto;padding:18px 10px 16px;border-radius:26px;
+  background:rgba(251,248,243,.74);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);
+  box-shadow:0 0 0 1px rgba(21,56,72,.07),0 34px 60px -40px rgba(21,56,72,.55)}
+.cr-k{display:flex;align-items:center;justify-content:center;gap:12px;font-size:11px;letter-spacing:.16em;color:var(--gold);margin-bottom:16px;white-space:nowrap}
+.cr-k::before,.cr-k::after{content:"";height:1px;flex:0 1 54px;background:linear-gradient(to right,transparent,rgba(150,116,74,.55))}
+.cr-k::after{background:linear-gradient(to left,transparent,rgba(150,116,74,.55))}
+.cr-l{display:grid;grid-template-columns:repeat(3,1fr);list-style:none}
+.cr-l li{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding-inline:6px}
+.cr-l li+li::before{content:"";position:absolute;inset-inline-start:0;top:4%;bottom:4%;width:1px;background:linear-gradient(transparent,rgba(21,56,72,.16),transparent)}
+.cr-l img{height:40px;width:auto;opacity:.8;transition:opacity .4s,transform .6s var(--ease)}
+.cr-l li.wide img{height:34px;margin-block:3px}
+.cr-l li:hover img{opacity:1;transform:translateY(-3px)}
+.cr-l .t{display:flex;flex-direction:column;gap:2px}
+.cr-l b{font-size:11.5px;font-weight:600;color:var(--navy);line-height:1.2;white-space:nowrap}
+.cr-l small{font-size:10.5px;color:var(--muted);letter-spacing:.02em}
+/* editorial ticker: big heading type, alternating solid / outline */
+.ticker{overflow:hidden;padding:20px 0 12px;-webkit-mask-image:linear-gradient(to left,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(to left,transparent,#000 10%,#000 90%,transparent)}
+.tk-track{display:flex;width:max-content;animation:marq 48s linear infinite}
+.tk-track ul{display:flex;list-style:none}
+.tk-track li{display:flex;align-items:center;font-family:Halel;font-size:30px;line-height:1.1;color:var(--navy);white-space:nowrap}
+.tk-track li:nth-child(even){color:transparent;-webkit-text-stroke:1px rgba(21,56,72,.55)}
+.tk-track li::after{content:"✦";-webkit-text-stroke:0;color:var(--gold-2);font-size:13px;margin-inline:30px}
 @keyframes marq{from{transform:translateX(50%)}to{transform:none}}
 @media (min-width:900px){
-  .trust{display:flex;align-items:stretch}
-  .creds{flex:none;border-bottom:0;border-inline-end:1px solid rgba(227,197,146,.18);padding:14px 34px 14px 30px;gap:22px}
-  .cr-l{gap:26px}
-  .cr-l img{height:40px}.cr-l li.wide img{height:36px}
-  .mq-mask{flex:1;display:flex;align-items:center}
-  .marquee li{padding:22px 0}
+  .trust{background:linear-gradient(to bottom,transparent 0 50px,var(--paper) 50px)}
+  .creds{display:flex;align-items:center;gap:36px;padding:22px 40px}
+  .cr-k{flex-direction:column;gap:8px;margin:0;font-size:12px;letter-spacing:.12em;text-align:center;line-height:1.4}
+  .cr-k::before{display:none}
+  .cr-k::after{flex:none;width:1px;height:26px;background:linear-gradient(transparent,rgba(150,116,74,.55))}
+  .cr-l{flex:1}
+  .cr-l li{flex-direction:row;justify-content:center;text-align:start;gap:16px}
+  .cr-l img{height:52px}.cr-l li.wide img{height:44px}
+  .cr-l b{font-size:15px}.cr-l small{font-size:12px}
+  .tk-track li{font-size:42px}
+  .tk-track li::after{margin-inline:44px;font-size:15px}
+  .ticker{padding:30px 0 18px}
 }
 
 /* ---------- torn edges ---------- */
@@ -456,26 +465,26 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
 
 
   <div class="trust" aria-label="למה לבחור בי">
-    <div class="creds">
-      <span class="cr-k">מוסמך<br>ומאושר ע״י</span>
+    <div class="wrap"><div class="creds">
+      <p class="cr-k">מוסמך ומאושר על ידי</p>
       <ul class="cr-l">
-        <li><img src="assets/img/auth-health.webp" alt="" width="118" height="120"><span>משרד<br>הבריאות</span></li>
-        <li class="wide"><img src="assets/img/auth-rabbinate.webp" alt="" width="167" height="120"><span>הרבנות<br>הראשית</span></li>
-        <li><img src="assets/img/auth-religion.webp" alt="" width="97" height="120"><span>המשרד<br>לשירותי דת</span></li>
+        <li><img src="assets/img/auth-health.webp" alt="" width="118" height="120"><span class="t"><b>משרד הבריאות</b><small>רישיון מוהל</small></span></li>
+        <li class="wide"><img src="assets/img/auth-rabbinate.webp" alt="" width="167" height="120"><span class="t"><b>הרבנות הראשית</b><small>הסמכה רשמית</small></span></li>
+        <li><img src="assets/img/auth-religion.webp" alt="" width="97" height="120"><span class="t"><b>המשרד לשירותי דת</b><small>מוהל מאושר</small></span></li>
       </ul>
-    </div>
-    <div class="mq-mask"><div class="marquee">
+    </div></div>
+    <div class="ticker"><div class="tk-track">
       <ul>
-        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="tx"><b>כמעט 5 שנות ניסיון</b><small>הכשרה אצל בכירי המוהלים בארץ</small></span></li>
-        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/><path d="M21 16v2a4 4 0 0 1-4 4h-5"/></svg></span><span class="tx"><b>זמינות 24/7</b><small>מענה טלפוני בכל שעה</small></span></li>
-        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span><span class="tx"><b>ליווי אישי לפני ואחרי</b><small>ביקור לפני ואחרי הברית</small></span></li>
-        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></span><span class="tx"><b>בכל הארץ</b><small>ירושלים והסביבה ובתיאום מראש</small></span></li>
+        <li>כמעט 5 שנות ניסיון</li>
+        <li>זמינות 24/7</li>
+        <li>ליווי אישי לפני ואחרי</li>
+        <li>בכל הארץ</li>
       </ul>
       <ul aria-hidden="true">
-        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></span><span class="tx"><b>כמעט 5 שנות ניסיון</b><small>הכשרה אצל בכירי המוהלים בארץ</small></span></li>
-        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/><path d="M21 16v2a4 4 0 0 1-4 4h-5"/></svg></span><span class="tx"><b>זמינות 24/7</b><small>מענה טלפוני בכל שעה</small></span></li>
-        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span><span class="tx"><b>ליווי אישי לפני ואחרי</b><small>ביקור לפני ואחרי הברית</small></span></li>
-        <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.99-5.54 10.19-7.4 11.8a1 1 0 0 1-1.2 0C9.54 20.19 4 14.99 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></span><span class="tx"><b>בכל הארץ</b><small>ירושלים והסביבה ובתיאום מראש</small></span></li>
+        <li>כמעט 5 שנות ניסיון</li>
+        <li>זמינות 24/7</li>
+        <li>ליווי אישי לפני ואחרי</li>
+        <li>בכל הארץ</li>
       </ul>
     </div></div>
   </div>
