@@ -147,6 +147,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .phone-dot:hover .dot svg{transform:rotate(-14deg)}
 .phone-dot:hover .num{transform:translateX(-4px)}
 .phone-dot:focus-visible{outline:none}
+.phone-dot .txt{transition:transform .7s cubic-bezier(.65,0,.35,1)}
+.phone-dot:hover .txt{transform:translateX(-4px)}
+.phone-dot.wa-dot .dot svg{width:24px;height:24px}
 .scroll-cue{align-self:center;margin-top:30px;width:34px;height:57px;border:1.5px solid rgba(21,56,72,.32);border-radius:22px;position:relative;display:block}
 .scroll-cue::after{content:"";position:absolute;top:10px;left:50%;width:4px;height:12px;margin-left:-2px;border-radius:2px;background:var(--gold);animation:cue 1.9s infinite}
 @keyframes cue{0%{opacity:0;transform:translateY(0)}40%{opacity:1}100%{opacity:0;transform:translateY(20px)}}
@@ -157,9 +160,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @keyframes heroIn{from{opacity:0;transform:translateY(26px);filter:blur(6px)}}
 
 /* ---------- trust marquee (inside hero) ---------- */
-.trust{position:relative;z-index:5;padding-bottom:18px;background:linear-gradient(to bottom,transparent 0 58px,var(--paper) 58px)}
+.trust{position:relative;z-index:5;padding-bottom:0;background:linear-gradient(to bottom,transparent 0 58px,var(--paper) 58px)}
 /* credentials: frosted card that straddles the hero edge, three monochrome authority marks */
-.creds{max-width:1000px;margin-inline:auto;padding:18px 10px 16px;border-radius:26px;
+.creds{max-width:1000px;margin-inline:auto;padding:18px 10px 16px;border-radius:26px 26px 0 0;
   background:rgba(251,248,243,.74);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);
   box-shadow:0 24px 48px -40px rgba(21,56,72,.22)}
 .cr-k{font-size:10.5px;line-height:1.2;letter-spacing:.12em;color:var(--gold);text-align:center;margin-bottom:10px;white-space:nowrap}
@@ -177,10 +180,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .cr-l b{font-size:11.5px;font-weight:600;color:var(--navy);line-height:1.2;white-space:nowrap}
 .cr-l small{font-size:10.5px;color:var(--muted);letter-spacing:.02em}
 /* editorial ticker: big heading type, alternating solid / outline */
-.ticker{position:relative;background:var(--paper);overflow:hidden;padding:22px 0 14px;-webkit-mask-image:linear-gradient(to left,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(to left,transparent,#000 10%,#000 90%,transparent)}
+.ticker{position:relative;background:var(--paper);overflow:hidden;padding:28px 0 22px;-webkit-mask-image:linear-gradient(to left,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(to left,transparent,#000 10%,#000 90%,transparent)}
 .tk-track{display:flex;width:max-content;animation:marq 48s linear infinite}
 .tk-track ul{display:flex;list-style:none}
-.tk-track li{display:flex;align-items:center;font-family:Halel;font-size:30px;line-height:1.1;color:var(--navy);white-space:nowrap}
+.tk-track li{display:flex;align-items:center;font-family:Halel;font-size:38px;line-height:1.1;color:var(--navy);white-space:nowrap}
 .tk-track li::after{content:"✦";color:var(--gold-2);font-size:13px;margin-inline:30px}
 @keyframes marq{from{transform:translateX(50%)}to{transform:none}}
 @media (min-width:700px){
@@ -191,8 +194,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   .cr-l li{flex-direction:row;justify-content:center;text-align:start;gap:clamp(10px,1.2vw,16px)}
   .cr-l img{height:clamp(38px,3.6vw,52px)}.cr-l li.wide img{height:clamp(32px,3vw,44px)}
   .cr-l b{font-size:clamp(12.5px,1.1vw,15px)}.cr-l small{font-size:clamp(10.5px,.85vw,12px)}
-  .tk-track li{font-size:clamp(34px,3vw,44px)}
-  .ticker{padding:30px 0 18px}
+  .tk-track li{font-size:clamp(44px,4vw,60px)}
+  .ticker{padding:38px 0 30px}
 }
 @media (min-width:980px){.tk-track li::after{margin-inline:44px;font-size:15px}}
 
@@ -456,12 +459,12 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
       <h1 class="h" data-in="2">אירוע שהוא<span class="gold"><span class="gt">זִכָּרוֹן לְכָל הַחַיִּים</span><span class="stamp" role="img" aria-label="ניסיון, מקצועיות, יחס אישי"><svg class="outer" viewBox="0 0 160 160" aria-hidden="true"><defs><path id="ringO" d="M80,80 m-64,0 a64,64 0 1,1 128,0 a64,64 0 1,1 -128,0"/></defs><text direction="ltr" style="direction:ltr;unicode-bidi:plaintext"><textPath href="#ringO" textLength="400" lengthAdjust="spacing">ניסיון<tspan class="sep"> ✦ </tspan>מקצועיות<tspan class="sep"> ✦ </tspan>יחס אישי<tspan class="sep"> ✦ </tspan>ניסיון<tspan class="sep"> ✦ </tspan>מקצועיות<tspan class="sep"> ✦ </tspan>יחס אישי<tspan class="sep"> ✦ </tspan></textPath></text></svg><svg class="inner" viewBox="0 0 160 160" aria-hidden="true"><defs><path id="ringI" d="M80,80 m-42,0 a42,42 0 1,1 84,0 a42,42 0 1,1 -84,0"/></defs><text direction="ltr" style="direction:ltr;unicode-bidi:plaintext"><textPath href="#ringI" textLength="262" lengthAdjust="spacing">ניסיון<tspan class="sep"> ✦ </tspan>מקצועיות<tspan class="sep"> ✦ </tspan>יחס אישי<tspan class="sep"> ✦ </tspan>ניסיון<tspan class="sep"> ✦ </tspan>מקצועיות<tspan class="sep"> ✦ </tspan>יחס אישי<tspan class="sep"> ✦ </tspan></textPath></text></svg></span></span></h1>
       <p class="lede" data-in="3">מוהל מוסמך שמלווה אתכם באופן אישי, מהשיחה הראשונה אחרי הלידה ועד הימים שאחרי הברית.<strong>זמין עבורכם 24/7, בכל שאלה ובכל שעה.</strong></p>
       <div class="ctas" data-in="4">
-        <a class="cbtn cbtn-gold full pre" href="https://wa.me/972542233665?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%A0%D7%A8%D7%99%D7%94%2C%20%D7%A0%D7%95%D7%9C%D7%93%20%D7%9C%D7%A0%D7%95%20%D7%91%D7%9F%20%D7%91%D7%9E%D7%96%D7%9C%20%D7%98%D7%95%D7%91" target="_blank" rel="noopener">
+        <a class="phone-dot wa-dot" href="https://wa.me/972542233665?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%A0%D7%A8%D7%99%D7%94%2C%20%D7%A0%D7%95%D7%9C%D7%93%20%D7%9C%D7%A0%D7%95%20%D7%91%D7%9F%20%D7%91%D7%9E%D7%96%D7%9C%20%D7%98%D7%95%D7%91" target="_blank" rel="noopener"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 20.4l1.3-4.1a8.6 8.6 0 1 1 3.3 3.1z"/><path d="M9.2 8.6c.2-.5.6-.6.9-.6h.4l.9 2-.7.9a6 6 0 0 0 2.4 2.4l.9-.7 2 .9v.4c0 .3-.1.7-.6.9-.9.5-2.2.3-3.6-.7a9.6 9.6 0 0 1-2.1-2.1c-1-1.4-1.2-2.7-.7-3.6z"/></svg></span><span class="txt">נולד לכם בן? כתבו לי</span></a>
+        <a class="cbtn cbtn-gold full pre" href="tel:+972542233665" aria-label="התקשרו: 054-2233665">
           <span class="cb-bg" aria-hidden="true"><i></i><i></i></span>
-          <span class="cb-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 20.4l1.3-4.1a8.6 8.6 0 1 1 3.3 3.1z"/><path d="M9.2 8.6c.2-.5.6-.6.9-.6h.4l.9 2-.7.9a6 6 0 0 0 2.4 2.4l.9-.7 2 .9v.4c0 .3-.1.7-.6.9-.9.5-2.2.3-3.6-.7a9.6 9.6 0 0 1-2.1-2.1c-1-1.4-1.2-2.7-.7-3.6z"/></svg>נולד לכם בן? כתבו לי</span>
+          <span class="cb-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span dir="ltr">054-2233665</span></span>
           <span class="cb-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span>
         </a>
-        <a class="phone-dot" href="tel:+972542233665" aria-label="התקשרו: 054-2233665"><span class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span><span class="num">054-2233665</span></a>
       </div>
     </div>
   </div>
