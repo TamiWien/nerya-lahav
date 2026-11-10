@@ -366,11 +366,13 @@ section{position:relative}
 .gallery figure:hover img{transform:scale(1.05);filter:saturate(1)}
 /* ---------- letters from parents: an envelope on its side, letters slide out of it one after another ---------- */
 .mail{position:relative;margin-top:90px;display:grid;gap:0;align-items:center}
+.mail-ink{position:absolute;inset:-40px calc(-1*var(--pad)) -20px;z-index:0;overflow:hidden;pointer-events:none;display:flex;flex-direction:column;justify-content:space-around;font-family:Eshchar,Halel,cursive;font-size:clamp(34px,4.6vw,64px);line-height:1;color:var(--navy);opacity:.055;white-space:nowrap;transform:rotate(-4deg)}
+.mail-ink span:nth-child(even){margin-inline-start:-18%}
 .env2{position:relative;z-index:3;width:min(480px,100%);margin-inline:auto}
-@media (min-width:980px){.env2{--bleed:calc((100vw - min(1360px,100vw - 2 * var(--pad))) / 2 + 220px);width:calc(100% + var(--bleed));margin-inline:calc(-1 * var(--bleed)) 0}.env2 .env2-face{left:13%;right:calc(220px + 3%);top:70%}}
+@media (min-width:980px){.env2{--bleed:calc((100vw - min(1360px,100vw - 2 * var(--pad))) / 2 + 60px);width:calc(100% + var(--bleed) - 40px);margin-inline:calc(-1 * var(--bleed)) 0}.env2 .env2-face{left:16%;right:16%;top:68%}}
 .env2-img{display:block;width:100%;height:auto;filter:drop-shadow(0 28px 30px rgba(21,56,72,.16))}
 .env2-face{position:absolute;left:20%;right:20%;top:68%;text-align:center}
-.mail-h{font-family:Halel;font-weight:400;font-size:clamp(26px,2.8vw,36px);line-height:1;color:var(--navy)}
+.mail-h{font-family:Halel;font-weight:400;font-size:clamp(30px,3vw,40px);line-height:1;color:var(--navy)}
 .env2-face p{font-family:Eshchar,Halel,cursive;color:var(--gold);font-size:clamp(20px,1.9vw,26px);line-height:1.1;margin-top:8px}
 .mail-nav{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px}
 .mail-btn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:0;color:var(--navy);background:rgba(255,255,255,.35);cursor:pointer;transition:background .3s,color .3s}
@@ -782,6 +784,7 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
     </div>
 
     <div class="mail" id="mail">
+      <div class="mail-ink" aria-hidden="true"><span>ממליצים בחום · בידיים בטוחות · תודה רבה · מאור פנים מיוחד · שליח נאמן · ביחס חם ונעים · עד הפרט האחרון · מקצועי ויסודי</span><span>תודה רבה · מאור פנים מיוחד · שליח נאמן · ביחס חם ונעים · עד הפרט האחרון · מקצועי ויסודי · ממליצים בחום · בידיים בטוחות</span><span>שליח נאמן · ביחס חם ונעים · עד הפרט האחרון · מקצועי ויסודי · ממליצים בחום · בידיים בטוחות · תודה רבה · מאור פנים מיוחד</span><span>עד הפרט האחרון · מקצועי ויסודי · ממליצים בחום · בידיים בטוחות · תודה רבה · מאור פנים מיוחד · שליח נאמן · ביחס חם ונעים</span></div>
       <div class="env2" aria-hidden="false">
         <img class="env2-img" src="assets/img/envelope.webp" alt="" aria-hidden="true" width="1295" height="842" loading="lazy">
         <div class="env2-face">
