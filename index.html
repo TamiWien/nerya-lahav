@@ -366,16 +366,13 @@ section{position:relative}
 .gallery figure:hover img{transform:scale(1.05);filter:saturate(1)}
 /* ---------- letters from parents: an envelope on its side, letters slide out of it one after another ---------- */
 .mail{position:relative;margin-top:90px;display:grid;gap:0;align-items:center}
-.env2{position:relative;z-index:3;border-radius:22px;background:linear-gradient(160deg,#eadcc9,#dcc9b0);box-shadow:0 40px 70px -45px rgba(21,56,72,.55);overflow:hidden}
-.env2-flap{position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.28),rgba(255,255,255,0));clip-path:polygon(0 0,44% 50%,0 100%);pointer-events:none}
-.env2-flap::after{content:"";position:absolute;inset:0;background:rgba(150,116,74,.22);clip-path:polygon(0 0,0 1%,43.4% 50%,0 99%,0 100%,44% 50%)}
-.env2-face{position:relative;padding:40px 24px 36px 50%;text-align:right}
-.env2-seal{position:absolute;top:50%;left:44%;width:54px;height:54px;margin:-27px 0 0 -27px;border-radius:50%;background:#9a784b;padding:13px;object-fit:contain;filter:brightness(0) invert(1);box-shadow:0 0 0 6px rgba(154,120,75,.18)}
-.env2-seal{filter:none;background:var(--gold)}
-.mail-h{font-family:Halel;font-weight:400;font-size:clamp(32px,3.4vw,44px);line-height:1;color:var(--navy)}
-.env2-face p{color:#6a5a45;font-size:15px;margin-top:10px}
-.mail-nav{display:flex;align-items:center;justify-content:flex-start;gap:10px;margin-top:22px}
-.mail-btn{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(21,56,72,.25);color:var(--navy);background:rgba(255,255,255,.35);cursor:pointer;transition:background .3s,color .3s}
+.env2{position:relative;z-index:3;width:min(480px,100%);margin-inline:auto}
+.env2-img{display:block;width:100%;height:auto;filter:drop-shadow(0 28px 30px rgba(21,56,72,.16))}
+.env2-face{position:absolute;left:18%;right:18%;top:52%;text-align:center}
+.mail-h{font-family:Halel;font-weight:400;font-size:clamp(26px,2.8vw,36px);line-height:1;color:var(--navy)}
+.env2-face p{color:#6a5a45;font-size:13.5px;margin-top:6px}
+.mail-nav{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px}
+.mail-btn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(21,56,72,.25);color:var(--navy);background:rgba(255,255,255,.35);cursor:pointer;transition:background .3s,color .3s}
 .mail-btn:hover{background:var(--navy);color:#fff}
 .mail-btn svg{width:20px;height:20px}
 .notes{position:relative;z-index:1;display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:40px 4px 46px;margin-inline:calc(-1*var(--pad));padding-inline:var(--pad)}
@@ -393,11 +390,8 @@ section{position:relative}
 .mail:not(.open) .note{--from:calc(var(--k) * 40px + 60%);--tilt:2deg}
 @media (min-width:980px){
   .mail{grid-template-columns:480px minmax(0,1fr)}
-  .env2{min-height:300px;display:flex;align-items:center}
-  .env2-face{padding:40px 34px 40px 52%;width:100%}
   .notes{margin-inline:-60px 0;padding-inline:84px 4px;-webkit-mask-image:linear-gradient(270deg,transparent 0,#000 70px,#000 calc(100% - 60px),transparent);mask-image:linear-gradient(270deg,transparent 0,#000 70px,#000 calc(100% - 60px),transparent)}
 }
-@media (max-width:979px){.env2{max-width:460px;margin-inline:auto;width:100%}}
 .dots{display:flex;justify-content:center;gap:10px;margin-top:6px}
 .dots i{width:11px;height:11px;border-radius:6px;background:rgba(21,56,72,.32);cursor:pointer;transition:all .4s}
 .dots i.on{width:36px;background:var(--gold)}
@@ -788,10 +782,9 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
 
     <div class="mail" id="mail">
       <div class="env2" aria-hidden="false">
-        <span class="env2-flap" aria-hidden="true"></span>
+        <img class="env2-img" src="assets/img/envelope.webp" alt="" aria-hidden="true" width="1000" height="650" loading="lazy">
         <div class="env2-face">
-          <img class="env2-seal" src="assets/img/logo-mark.webp" alt="" aria-hidden="true">
-          <h3 class="mail-h">מכתבים<br>מההורים</h3>
+          <h3 class="mail-h">מכתבים מההורים</h3>
           <p>מילים שכתבו לי משפחות אחרי הברית.</p>
           <div class="mail-nav">
             <button class="mail-btn" id="mailPrev" aria-label="המכתב הקודם"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
