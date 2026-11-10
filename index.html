@@ -339,7 +339,7 @@ section{position:relative}
 .reels-row{display:grid;gap:26px}
 .reels-col{min-width:0}
 .reels{--w:min(72vw,280px);display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
-  padding:34px calc(50% - var(--w) / 2) 40px;margin-inline:calc(-1*var(--pad));overscroll-behavior-x:contain}
+  padding:34px 0 40px;margin-inline:calc(-1*var(--pad));overscroll-behavior-x:contain}
 .reels::-webkit-scrollbar{display:none}
 .reels .reel{flex:0 0 var(--w);transform:scale(.8);opacity:.55;transition:transform .6s var(--ease),opacity .6s var(--ease)}
 .reels .reel.active{transform:none;opacity:1}
@@ -874,20 +874,30 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
   // one open accordion at a time
   $$('.acc details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)$$('details',d.parentElement).forEach(o=>o!==d&&(o.open=false))}));
 
-  // video reels
-  $$('.reel').forEach(r=>{const v=$('video',r);if(!v)return;
+  // video reels: three copies of the set, we always sit in the middle one, so both sides are full and it loops forever
+  const reels=$('#reels'),dots=$$('#dots i'),N=reels.children.length;
+  const orig=[...reels.children];
+  orig.forEach(el=>{const c=el.cloneNode(true);c.setAttribute('aria-hidden','true');reels.appendChild(c)});
+  orig.slice().reverse().forEach(el=>{const c=el.cloneNode(true);c.setAttribute('aria-hidden','true');reels.insertBefore(c,reels.firstChild)});
+  $$('.reel',reels).forEach(r=>{const v=$('video',r);if(!v)return;
     const toggle=()=>{if(v.paused){$$('.reel video').forEach(o=>{if(o!==v){o.pause()}});v.play();}else v.pause()};
     $('.play',r).addEventListener('click',toggle);v.addEventListener('click',toggle);
     v.addEventListener('play',()=>{r.classList.add('playing');v.controls=true});
     v.addEventListener('pause',()=>r.classList.remove('playing'));
   });
-  const reels=$('#reels'),dots=$$('#dots i');
-  const syncReels=()=>{const c=[...reels.children];const mid=reels.getBoundingClientRect().left+reels.clientWidth/2;let best=0,bd=1e9;
-    c.forEach((el,i)=>{const r=el.getBoundingClientRect();const d=Math.abs(r.left+r.width/2-mid);if(d<bd){bd=d;best=i}});
-    c.forEach((el,i)=>el.classList.toggle('active',i===best));dots.forEach((d,i)=>d.classList.toggle('on',i===best))};
+  const kids=()=>[...reels.children];
+  const offsetTo=el=>el.getBoundingClientRect().left+el.offsetWidth/2-(reels.getBoundingClientRect().left+reels.clientWidth/2);
+  const center=(i,smooth)=>{const el=kids()[i];if(smooth)reels.scrollBy({left:offsetTo(el),behavior:'smooth'});else{reels.style.scrollSnapType='none';reels.scrollLeft+=offsetTo(el);reels.offsetWidth;reels.style.scrollSnapType=''}};
+  let best=N,settle=0;
+  const syncReels=()=>{const mid=reels.getBoundingClientRect().left+reels.clientWidth/2;let bd=1e9;
+    kids().forEach((el,i)=>{const r=el.getBoundingClientRect();const d=Math.abs(r.left+r.width/2-mid);if(d<bd){bd=d;best=i}});
+    kids().forEach((el,i)=>el.classList.toggle('active',i%N===best%N&&i===best));dots.forEach((d,i)=>d.classList.toggle('on',i===best%N));
+    clearTimeout(settle);settle=setTimeout(()=>{if(best<N||best>=2*N){const playing=kids()[best].classList.contains('playing');if(playing)return;
+      const target=N+best%N,act=kids()[best];center(target,false);
+      kids().forEach((el,i)=>{el.style.transition='none';el.classList.toggle('active',i===target);el.offsetWidth;el.style.transition=''});best=target}},140)};
   reels.addEventListener('scroll',()=>requestAnimationFrame(syncReels),{passive:true});
-  dots.forEach((d,i)=>d.addEventListener('click',()=>{const el=reels.children[i];reels.scrollBy({left:el.getBoundingClientRect().left+el.offsetWidth/2-(reels.getBoundingClientRect().left+reels.clientWidth/2),behavior:'smooth'})}));
-  addEventListener('load',()=>{const el=reels.children[0];reels.scrollLeft+=el.getBoundingClientRect().left+el.offsetWidth/2-(reels.getBoundingClientRect().left+reels.clientWidth/2);syncReels()});syncReels();
+  dots.forEach((d,i)=>d.addEventListener('click',()=>{const k=kids(),cur=best;let t=N+i;[i,N+i,2*N+i].forEach(j=>{if(Math.abs(j-cur)<Math.abs(t-cur))t=j});center(t,true)}));
+  const init=()=>{center(N,false);syncReels()};addEventListener('load',init);init();
 
   // lightbox
   const lb=$('#lb'),lbi=$('img',lb);
