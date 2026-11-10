@@ -367,13 +367,13 @@ section{position:relative}
 /* ---------- letters from parents: an envelope on its side, letters slide out of it one after another ---------- */
 .mail{position:relative;margin-top:90px;display:grid;gap:0;align-items:center}
 .env2{position:relative;z-index:3;width:min(480px,100%);margin-inline:auto}
-@media (min-width:980px){.env2{--bleed:calc((100vw - min(1360px,100vw - 2 * var(--pad))) / 2 + 70px);width:calc(100% + var(--bleed));margin-inline:calc(-1 * var(--bleed)) 0}.env2 .env2-face{left:14%;right:34%}}
+@media (min-width:980px){.env2{--bleed:calc((100vw - min(1360px,100vw - 2 * var(--pad))) / 2 + 220px);width:calc(100% + var(--bleed));margin-inline:calc(-1 * var(--bleed)) 0}.env2 .env2-face{left:13%;right:calc(220px + 3%);top:70%}}
 .env2-img{display:block;width:100%;height:auto;filter:drop-shadow(0 28px 30px rgba(21,56,72,.16))}
-.env2-face{position:absolute;left:18%;right:18%;top:52%;text-align:center}
+.env2-face{position:absolute;left:20%;right:20%;top:68%;text-align:center}
 .mail-h{font-family:Halel;font-weight:400;font-size:clamp(26px,2.8vw,36px);line-height:1;color:var(--navy)}
-.env2-face p{color:#6a5a45;font-size:13.5px;margin-top:6px}
+.env2-face p{font-family:Eshchar,Halel,cursive;color:var(--gold);font-size:clamp(20px,1.9vw,26px);line-height:1.1;margin-top:8px}
 .mail-nav{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:12px}
-.mail-btn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(21,56,72,.25);color:var(--navy);background:rgba(255,255,255,.35);cursor:pointer;transition:background .3s,color .3s}
+.mail-btn{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:0;color:var(--navy);background:rgba(255,255,255,.35);cursor:pointer;transition:background .3s,color .3s}
 .mail-btn:hover{background:var(--navy);color:#fff}
 .mail-btn svg{width:20px;height:20px}
 .notes{position:relative;z-index:1;display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:40px 4px 46px;margin-inline:calc(-1*var(--pad));padding-inline:var(--pad)}
