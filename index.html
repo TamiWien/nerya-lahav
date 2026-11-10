@@ -304,35 +304,23 @@ section{position:relative}
 .included .sec-head h2,.included h2{color:#fff}
 /* background photo, washed in navy */
 .inc-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
-.inc-bg img{width:100%;height:100%;object-fit:cover;object-position:60% 30%;opacity:.42;filter:grayscale(.35) contrast(1.05);transform:scale(1.06)}
-.inc-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--navy) 0%,rgba(21,56,72,.55) 22%,rgba(21,56,72,.62) 75%,var(--navy) 100%),linear-gradient(270deg,rgba(21,56,72,.75),rgba(21,56,72,0) 60%)}
+.inc-bg img{width:100%;height:100%;object-fit:cover;object-position:60% 30%;opacity:.8;transform:scale(1.04)}
+.inc-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--navy) 0%,rgba(21,56,72,.25) 18%,rgba(21,56,72,.3) 80%,var(--navy) 100%),linear-gradient(270deg,rgba(21,56,72,.7),rgba(21,56,72,.05) 55%)}
 .inc-layout{position:relative;z-index:1;display:grid;gap:36px}
-.inc-kicker{display:inline-block;font-size:13px;letter-spacing:.22em;color:#e3c592;margin-bottom:14px}
 .inc-side h2{font-size:clamp(44px,6vw,76px);line-height:1}
 .inc-side p{color:rgba(255,255,255,.72);max-width:40ch;margin-top:16px;font-size:17px}
-.inc-count{display:none;align-items:center;gap:14px;margin-top:44px;font-family:Halel;color:rgba(255,255,255,.45);font-size:22px;direction:ltr;justify-content:flex-end}
-.inc-count .roll{height:1.15em;overflow:hidden;display:block}
-.inc-count b{display:block;font-weight:400;font-size:64px;line-height:1;color:#e3c592;transition:transform .5s cubic-bezier(.76,0,.24,1),opacity .4s}
-.inc-count .roll{height:64px;display:flex;align-items:center}
-.inc-count b{margin:0}
-.inc-count i{width:64px;height:1px;background:rgba(255,255,255,.3)}
 /* stacked cards: each one sticks and the next slides over it */
 .inc-stack{display:grid;gap:26px;padding-bottom:30px}
-.inc-card{--d:0;position:sticky;top:calc(92px + var(--i) * 14px);min-height:300px;display:flex;flex-direction:column;gap:12px;padding:30px 28px 32px;border-radius:28px;overflow:hidden;
-  background:#fbf8f3;color:var(--navy);box-shadow:0 -1px 0 rgba(255,255,255,.6) inset,0 40px 70px -40px rgba(0,0,0,.6);
-  transform-origin:50% 0;transform:scale(calc(1 - var(--d) * .045));filter:brightness(calc(1 - var(--d) * .1))}
-.inc-card .top{display:flex;align-items:center;justify-content:space-between}
-.inc-card .no{font-family:Halel;font-size:22px;letter-spacing:.08em;color:var(--gold)}
-.inc-card .ic{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--cream);color:var(--gold)}
-.inc-card .ic svg{width:26px;height:26px}
-.inc-card h3{font-family:Halel;font-weight:400;font-size:clamp(32px,4vw,46px);line-height:1.02;margin-top:auto;position:relative}
-.inc-card p{position:relative;color:#4b5a60;font-size:17px;line-height:1.55;max-width:36ch}
-.inc-card .wm{position:absolute;left:-6px;bottom:-.22em;font-family:Halel;font-size:clamp(150px,16vw,230px);line-height:1;color:var(--gold);opacity:.09;direction:ltr;pointer-events:none}
-.inc-card.gold{background:linear-gradient(150deg,#a9875a,#86683f);color:#fff}
-.inc-card.gold .no{color:#f3e3c3}
-.inc-card.gold .ic{background:rgba(255,255,255,.16);color:#fff}
-.inc-card.gold p{color:rgba(255,255,255,.85)}
-.inc-card.gold .wm{color:#fff;opacity:.12}
+.inc-card{--d:0;position:sticky;top:calc(92px + var(--i) * 14px);display:grid;grid-template-rows:190px auto;border-radius:26px;overflow:hidden;
+  background:var(--paper-2);color:var(--navy);box-shadow:0 40px 70px -40px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.4) inset;
+  transform-origin:50% 0;transform:scale(calc(1 - var(--d) * .045))}
+.inc-img{grid-row:1;margin:0;position:relative;overflow:hidden}
+.inc-img img{width:100%;height:100%;object-fit:cover}
+.inc-body{grid-row:2;display:flex;flex-direction:column;gap:10px;padding:24px 26px 28px}
+.inc-card .ic{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:var(--cream);color:var(--gold);margin-bottom:6px}
+.inc-card .ic svg{width:24px;height:24px}
+.inc-card h3{font-family:Halel;font-weight:400;font-size:clamp(30px,3.4vw,42px);line-height:1.02}
+.inc-card p{color:#4b5a60;font-size:16.5px;line-height:1.55;max-width:34ch}
 
 /* ---------- testimonials ---------- */
 .voices{background:var(--paper)}
@@ -459,10 +447,11 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
   .step{grid-template-columns:1fr}
   .step .polaroid{width:100%;margin-inline:0!important}
   .step:nth-child(even){margin-top:90px}
-  .inc-layout{grid-template-columns:1fr 1.1fr;gap:clamp(48px,7vw,120px);align-items:start}
+  .inc-layout{grid-template-columns:.8fr 1.25fr;gap:clamp(48px,7vw,120px);align-items:start}
   .inc-side{position:sticky;top:150px}
-  .inc-count{display:flex}
-  .inc-card{top:calc(130px + var(--i) * 16px);min-height:340px;padding:38px 40px 40px}
+  .inc-card{top:calc(130px + var(--i) * 16px);grid-template-rows:none;grid-template-columns:1.1fr .9fr;min-height:360px}
+  .inc-img{grid-row:1;grid-column:2}
+  .inc-body{grid-row:1;grid-column:1;justify-content:center;padding:40px 38px}
   .reels{overflow:visible;justify-content:center;padding-inline:0;margin:0}
   .reel{flex-basis:300px}
   .reel:nth-child(2){transform:translateY(40px)}
@@ -637,41 +626,39 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
   <div class="inc-bg" aria-hidden="true"><img src="assets/img/focus.webp" alt="" loading="lazy"></div>
   <div class="wrap inc-layout">
     <div class="inc-side">
-      <span class="inc-kicker" data-r>הליווי המלא</span>
       <h2 class="h split" data-split>מה מקבלים בליווי</h2>
       <p data-r>לא רק הטקס. כל מה שצריך כדי שתרגישו בידיים בטוחות, מהשיחה הראשונה ועד ההחלמה המלאה.</p>
-      <div class="inc-count" aria-hidden="true"><span class="roll"><b id="incNow">01</b></span><i></i><span>05</span></div>
     </div>
     <div class="inc-stack">
-      <article class="inc-card gold" style="--i:0">
-        <div class="top"><span class="no">01</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.7 2.7-1.8 3.4a16 16 0 0 0 6 6l3.4-1.8 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span></div>
+      <article class="inc-card" style="--i:0">
+        <div class="inc-body"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.7 2.7-1.8 3.4a16 16 0 0 0 6 6l3.4-1.8 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span>
         <h3>מענה טלפוני 24/7</h3>
-        <p>תתקשרו. תמיד. אין שאלה קטנה מדי כשמדובר בתינוק שלכם, ואני כאן בדיוק בשביל זה.</p>
-        <span class="wm" aria-hidden="true">24/7</span>
+        <p>תתקשרו. תמיד. אין שאלה קטנה מדי כשמדובר בתינוק שלכם, ואני כאן בדיוק בשביל זה.</p></div>
+        <figure class="inc-img"><img src="assets/img/elder.webp" alt="נריה בברית עם הסבא" loading="lazy"></figure>
       </article>
       <article class="inc-card" style="--i:1">
-        <div class="top"><span class="no">02</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span></div>
+        <div class="inc-body"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span>
         <h3>ביקור לפני ואחרי</h3>
-        <p>בירושלים והסביבה, ובתיאום בכל הארץ. מכירים לפני, ובודקים שהכל מחלים כמו שצריך אחרי.</p>
-        <span class="wm" aria-hidden="true">02</span>
+        <p>בירושלים והסביבה, ובתיאום בכל הארץ. מכירים לפני, ובודקים שהכל מחלים כמו שצריך אחרי.</p></div>
+        <figure class="inc-img"><img src="assets/img/family.webp" alt="המשפחה סביב התינוק" loading="lazy"></figure>
       </article>
       <article class="inc-card" style="--i:2">
-        <div class="top"><span class="no">03</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8c0-2 2-3 4-3h8c2 0 4 1 4 3v8c0 2-2 3-4 3H8c-2 0-4-1-4-3z"/><path d="M8 12c1.5-2 6.5-2 8 0"/></svg></span></div>
+        <div class="inc-body"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8c0-2 2-3 4-3h8c2 0 4 1 4 3v8c0 2-2 3-4 3H8c-2 0-4-1-4-3z"/><path d="M8 12c1.5-2 6.5-2 8 0"/></svg></span>
         <h3>כרית ברית</h3>
-        <p>אפשרות להביא כרית ברית מהודרת לטקס, כדי שגם התמונות ייראו בדיוק כמו שחלמתם.</p>
-        <span class="wm" aria-hidden="true">03</span>
+        <p>אפשרות להביא כרית ברית מהודרת לטקס, כדי שגם התמונות ייראו בדיוק כמו שחלמתם.</p></div>
+        <figure class="inc-img"><img src="assets/img/blessing.webp" alt="רגע הברכה" loading="lazy"></figure>
       </article>
       <article class="inc-card" style="--i:3">
-        <div class="top"><span class="no">04</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span></div>
+        <div class="inc-body"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span>
         <h3>דפי הדרכה</h3>
-        <p>הנחיות מסודרות לפני הברית ומגנט הוראות למקרר אחריה. הכל כתוב, ברור ובהישג יד.</p>
-        <span class="wm" aria-hidden="true">04</span>
+        <p>הנחיות מסודרות לפני הברית ומגנט הוראות למקרר אחריה. הכל כתוב, ברור ובהישג יד.</p></div>
+        <figure class="inc-img"><img src="assets/img/certificate.webp" alt="נריה מגיש את תעודת הברית" loading="lazy"></figure>
       </article>
       <article class="inc-card" style="--i:4">
-        <div class="top"><span class="no">05</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="10" r="3"/><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/></svg></span></div>
+        <div class="inc-body"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="10" r="3"/><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/></svg></span>
         <h3>בכל הארץ</h3>
-        <p>באולם, בבית הכנסת או בבית. איפה שנוח לכם, אני מגיע.</p>
-        <span class="wm" aria-hidden="true">05</span>
+        <p>באולם, בבית הכנסת או בבית. איפה שנוח לכם, אני מגיע.</p></div>
+        <figure class="inc-img"><img src="assets/img/gather.webp" alt="כל המשפחה בבית הכנסת" loading="lazy"></figure>
       </article>
     </div>
   </div>
