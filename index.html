@@ -366,7 +366,7 @@ section{position:relative}
 .gallery figure:hover img{transform:scale(1.05);filter:saturate(1)}
 /* ---------- letters from parents: an envelope on its side, letters slide out of it one after another ---------- */
 .mail{position:relative;margin-top:90px;display:grid;gap:0;align-items:center}
-.mail-ink{position:absolute;inset:-150px calc(-1*var(--pad)) -120px;z-index:0;overflow:hidden;pointer-events:none;display:grid;place-items:center;font-family:Eshchar,Halel,cursive;font-size:clamp(26px,2.9vw,42px);line-height:1.75;color:var(--navy);opacity:.075;text-align:center;transform:rotate(-4deg)}
+.mail-ink{position:absolute;inset:-150px calc(-1*var(--pad)) -120px;z-index:0;overflow:hidden;pointer-events:none;display:grid;align-items:end;justify-items:end;padding:0 4% 40px;font-family:Eshchar,Halel,cursive;font-size:clamp(26px,2.9vw,42px);line-height:1.3;color:var(--navy);opacity:.075;text-align:center;transform:rotate(-4deg)}
 .mail-ink p{max-width:none;white-space:nowrap}
 .mail-ink .ink-sig{display:block;margin-top:.5em;font-size:1.25em}
 .env2{position:relative;z-index:3;width:min(480px,100%);margin-inline:auto}
@@ -441,8 +441,13 @@ section{position:relative}
 .final .phone{display:block;margin-top:26px;font-family:Halel;font-size:40px;letter-spacing:.04em;color:#fff;direction:ltr}
 .final .blessing{margin-top:40px;font-family:Halel;font-size:26px;color:var(--gold-2)}
 
-footer{background:var(--navy-2);color:rgba(255,255,255,.55);font-size:13px;padding:30px 0 110px;text-align:center}
-footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
+footer{background:var(--navy-2);color:rgba(255,255,255,.55);font-size:13px;padding:44px 0 110px;text-align:center}
+footer img{height:46px;width:auto;margin:0 auto 22px;opacity:.95}
+.foot-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 26px;margin-bottom:18px}
+.foot-nav a,.foot-contact a{color:rgba(255,255,255,.82);font-size:15px;transition:color .3s}
+.foot-nav a:hover,.foot-contact a:hover{color:#e3c592}
+.foot-contact{display:flex;justify-content:center;gap:12px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.1)}
+.foot-meta+.foot-meta{margin-top:6px}
 
 /* ---------- floating whatsapp ---------- */
 .fab{position:fixed;z-index:60;bottom:calc(18px + env(safe-area-inset-bottom));right:18px;transform:translateY(160%);transition:transform .6s var(--ease)}
@@ -896,9 +901,17 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
 </main>
 
 <footer>
-  <img src="assets/img/logo-white.webp" alt="נריה להב · מוהל מוסמך" loading="lazy">
-  <div>מוהל מוסמך · ירושלים והסביבה · בכל הארץ בתיאום מראש</div>
-  <div style="margin-top:6px">© <span id="y"></span> נריה להב</div>
+  <div class="wrap foot">
+    <img src="assets/img/logo-light.webp" alt="נריה להב · מוהל מוסמך" loading="lazy">
+    <nav class="foot-nav" aria-label="ניווט תחתון">
+      <a href="#about">היכרות</a><a href="#process">איך זה עובד</a><a href="#included">מה מקבלים</a><a href="#voices">המלצות</a><a href="#faq">שאלות נפוצות</a><a href="#contact">צור קשר</a>
+    </nav>
+    <div class="foot-contact">
+      <a href="tel:+972542233665" dir="ltr">054-2233665</a><span aria-hidden="true">·</span><a href="https://wa.me/972542233665" target="_blank" rel="noopener">וואטסאפ</a>
+    </div>
+    <div class="foot-meta">מוהל מוסמך · ירושלים והסביבה · בכל הארץ בתיאום מראש</div>
+    <div class="foot-meta">© <span id="y"></span> נריה להב</div>
+  </div>
 </footer>
 
 <div class="fab" id="fab">
