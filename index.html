@@ -378,11 +378,9 @@ section{position:relative}
 .faq{background:var(--cream)}
 .faq .tabs{background:rgba(255,255,255,.55)}
 .acc{border-top:1px solid rgba(21,56,72,.14)}
-.acc details{border-bottom:1px solid rgba(21,56,72,.14);border-radius:18px;
-  transition:background .55s var(--ease),margin .6s var(--ease),padding .6s var(--ease),border-color .4s,box-shadow .6s var(--ease)}
-.acc summary{transition:padding .6s var(--ease)}
-@media (hover:hover){.acc details:hover{background:rgba(255,255,255,.6);margin-inline:-20px;padding-inline:20px;border-bottom-color:transparent;box-shadow:0 18px 36px -28px rgba(21,56,72,.35)}
-  .acc details:hover summary{padding-block:24px}}
+.acc details{border-bottom:1px solid rgba(21,56,72,.14);position:relative;isolation:isolate}
+.acc details::before{content:"";position:absolute;z-index:-1;top:0;bottom:-1px;left:50%;width:100vw;margin-left:-50vw;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.42) 20%,rgba(255,255,255,.42) 80%,rgba(255,255,255,0));opacity:0;transition:opacity .6s var(--ease);pointer-events:none}
+@media (hover:hover){.acc details:hover::before{opacity:1}}
 .acc summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;cursor:pointer;font-weight:600;font-size:17.5px;color:var(--navy);line-height:1.4}
 .acc summary::-webkit-details-marker{display:none}
 .acc .pm{width:34px;height:34px;flex:none;border-radius:50%;border:1px solid rgba(150,116,74,.5);position:relative;transition:background .3s,transform .5s var(--ease)}
