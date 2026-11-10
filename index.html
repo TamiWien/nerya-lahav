@@ -364,6 +364,41 @@ section{position:relative}
 .gallery figure{break-inside:avoid;margin-bottom:10px;border-radius:16px;overflow:hidden;position:relative;cursor:zoom-in;background:var(--cream)}
 .gallery img{width:100%;transition:transform 1s var(--ease),filter .6s;filter:saturate(.88)}
 .gallery figure:hover img{transform:scale(1.05);filter:saturate(1)}
+/* ---------- letters from parents: they slide out of an envelope ---------- */
+.mail{margin-top:90px;text-align:center}
+.mail-h{font-family:Halel;font-weight:400;font-size:clamp(34px,4.4vw,52px);color:var(--navy);line-height:1.05}
+.mail-head p{color:var(--muted);margin-top:8px}
+.env{--ew:min(560px,calc(100vw - 2 * var(--pad)));--eh:calc(var(--ew) * .5);position:relative;width:var(--ew);height:var(--eh);margin:clamp(330px,40vw,380px) auto 0}
+.env-back{position:absolute;inset:0;border-radius:10px;background:#e4d5c1;box-shadow:0 40px 60px -40px rgba(21,56,72,.45)}
+.env-flap{position:absolute;left:0;right:0;bottom:100%;height:calc(var(--eh) * .62);background:#dcccb6;clip-path:polygon(0 100%,50% 0,100% 100%);transform-origin:50% 100%;
+  transform:rotateX(180deg);transition:transform .9s cubic-bezier(.6,0,.2,1)}
+.mail.open .env-flap{transform:none}
+.env-front{position:absolute;inset:0;border-radius:0 0 10px 10px;pointer-events:none;
+  background:linear-gradient(to top right,#efe3d2 49.6%,transparent 50%) left/50.2% 100% no-repeat,linear-gradient(to top left,#ece0ce 49.6%,transparent 50%) right/50.2% 100% no-repeat,
+  linear-gradient(170deg,transparent 0 30%,#e8dbc8 30%)}
+.env-front::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 -1px 0 rgba(255,255,255,.4);
+  background:linear-gradient(to top right,transparent 49.4%,rgba(150,116,74,.18) 49.8%,transparent 50.4%) left/50.2% 100% no-repeat,linear-gradient(to top left,transparent 49.4%,rgba(150,116,74,.18) 49.8%,transparent 50.4%) right/50.2% 100% no-repeat}
+.env-stack{position:absolute;inset:0;clip-path:inset(-900px -60px 0 -60px)}
+.note{position:absolute;left:5%;right:5%;bottom:12px;min-height:calc(var(--eh) + 70px);padding:34px 34px 26px;text-align:right;border-radius:4px;
+  background:#fdfbf7;color:#3e4e55;box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 18px 40px -26px rgba(21,56,72,.45);
+  display:flex;flex-direction:column;gap:14px;font-size:16.5px;line-height:1.75;
+  transform:translateY(var(--down,0px)) rotate(calc((var(--k) - 2) * .4deg));opacity:0;
+  transition:transform 1s cubic-bezier(.7,0,.2,1),opacity .5s ease}
+.note .l-body p+p{margin-top:8px}
+.note .l-mark{font-family:Halel;font-size:70px;line-height:.5;color:var(--gold);opacity:.55;height:26px}
+.note .l-foot{margin-top:auto;display:flex;align-items:baseline;justify-content:space-between;gap:10px;border-top:1px solid rgba(150,116,74,.25);padding-top:12px}
+.note .l-sig{font-family:Eshchar,Halel,cursive;font-size:32px;line-height:1;color:var(--gold)}
+.note .l-loc{font-size:13px;letter-spacing:.06em;color:var(--muted)}
+.mail.open .note{opacity:1}
+.note.out{transform:translateY(var(--up,-300px)) rotate(-.8deg);z-index:2;box-shadow:0 30px 60px -30px rgba(21,56,72,.5)}
+.note.going{transform:translateY(var(--down,0px)) rotate(0);transition-duration:.8s}
+.mail-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:28px}
+.mail-btn{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(150,116,74,.45);color:var(--gold);background:transparent;cursor:pointer;transition:background .3s,color .3s}
+.mail-btn:hover{background:var(--gold);color:#fff}
+.mail-btn svg{width:20px;height:20px}
+.mail-count{font-family:Halel;font-size:22px;color:var(--muted);min-width:60px;direction:ltr}
+.mail-count b{font-weight:400;color:var(--gold)}
+@media (max-width:699px){.note{font-size:15px;padding:26px 22px 20px;line-height:1.7}.note .l-sig{font-size:27px}}
 .dots{display:flex;justify-content:center;gap:10px;margin-top:6px}
 .dots i{width:11px;height:11px;border-radius:6px;background:rgba(21,56,72,.32);cursor:pointer;transition:all .4s}
 .dots i.on{width:36px;background:var(--gold)}
@@ -751,6 +786,49 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
         <figure><img src="assets/img/family.webp" alt="המשפחה מתאספת סביב התינוק" loading="lazy"></figure>
       </div>
     </div>
+
+    <div class="mail" id="mail">
+      <div class="mail-head">
+        <h3 class="mail-h" data-r>מכתבים מההורים</h3>
+        <p data-r>מילים שכתבו לי משפחות אחרי הברית.</p>
+      </div>
+      <div class="env" id="env" aria-live="polite">
+        <div class="env-back" aria-hidden="true"><span class="env-flap"></span></div>
+        <div class="env-stack">
+          <article class="note" style="--k:0">
+            <span class="l-mark" aria-hidden="true">״</span>
+            <div class="l-body"><p>נריה היה המוהל של שני הבנים שלנו! אדם ישר, הגון, מקצועי ויסודי. הסביר לנו הכל ודאג להרגיע תמיד.</p><p>ממליצים מאוד!</p></div>
+            <div class="l-foot"><span class="l-sig">דוד ונינה</span><span class="l-loc">רמת הגולן</span></div>
+          </article>
+          <article class="note" style="--k:1">
+            <span class="l-mark" aria-hidden="true">״</span>
+            <div class="l-body"><p>זכינו שנריה היה המוהל של בננו הבכור. נריה עושה את עבודתו נאמנה, במקצועיות רבה, ביסודיות, מתוך חיבור עמוק למצווה ומאור פנים מיוחד. הדריך אותנו לפני הברית ולאחריה עד הפרט האחרון.</p><p>ממליצים מאוד.</p></div>
+            <div class="l-foot"><span class="l-sig">ידידיה ומרים</span><span class="l-loc">מִגרון</span></div>
+          </article>
+          <article class="note" style="--k:2">
+            <span class="l-mark" aria-hidden="true">״</span>
+            <div class="l-body"><p>נריה הגיע אלינו לבית לפני הברית לראות את התינוק, והסביר לנו על כל שלב בברית בצורה מפורטת ומרגיעה. היה אפשר להתייעץ איתו על כל דבר.. בברית עצמה הכל נעשה במקצועיות. נריה הסביר לנו בדיוק מה לעשות בימים שאחרי הברית, והגיע לראות את התינוק. הרגשנו שאנו בידיים בטוחות ושהכל נעשה בצורה מקצועית ונעימה. ממליצים בחום!</p></div>
+            <div class="l-foot"><span class="l-sig">יהונתן ובת ציון</span><span class="l-loc">מעלה אפרים</span></div>
+          </article>
+          <article class="note" style="--k:3">
+            <span class="l-mark" aria-hidden="true">״</span>
+            <div class="l-body"><p>אנו ממליצים מאוד על נריה, הוא מוהל מומחה ועושה את מלאכתו נאמנה. הכל מלווה ביחס חם ונעים, לנו ולתינוק. מי שיזכה להזמינו למול את בנו ישמח מאוד ויהיה מרוצה ללא ספק.</p></div>
+            <div class="l-foot"><span class="l-sig">מלאכי ורחל</span><span class="l-loc">נתיבות</span></div>
+          </article>
+          <article class="note" style="--k:4">
+            <span class="l-mark" aria-hidden="true">״</span>
+            <div class="l-body"><p>לנריה, תודה רבה על כך שהיית שליח נאמן להכניס את בננו בבריתו של אברהם אבינו, מאוד נהננו מהמקצועיות, מהארת הפנים שלך תודה רבה</p></div>
+            <div class="l-foot"><span class="l-sig">שמואל ויסכה</span><span class="l-loc">לוד</span></div>
+          </article>
+        </div>
+        <div class="env-front" aria-hidden="true"></div>
+      </div>
+      <div class="mail-nav">
+        <button class="mail-btn" id="mailPrev" aria-label="המכתב הקודם"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+        <span class="mail-count"><b id="mailNow">1</b> / 5</span>
+        <button class="mail-btn" id="mailNext" aria-label="המכתב הבא"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -951,6 +1029,17 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
           requestAnimationFrame(()=>{now.style.transition='';now.style.transform='';now.style.opacity=1})},250)}};
     addEventListener('scroll',()=>{if(!q)q=requestAnimationFrame(go)},{passive:true});addEventListener('resize',go);go();
   });
+
+  /* letters: the front one rises out of the envelope; the others wait inside */
+  (()=>{const mail=$('#mail');if(!mail)return;const ls=$$('.note',mail),now=$('#mailNow');let cur=0,busy=false;
+    const env=$('#env');const fit=()=>{const eh=env.offsetHeight;let top=0;ls.forEach((l,k)=>{const h=l.offsetHeight;l.style.setProperty('--down',(h-eh+28+k*5)+'px');const up=eh-36;l.style.setProperty('--up',(-up)+'px');top=Math.max(top,h-eh+12+up)});env.style.marginTop=(top+40)+'px'};fit();addEventListener('resize',fit);addEventListener('load',fit);
+    const show=i=>{ls.forEach((l,k)=>{l.style.zIndex=k===i?5:ls.length-k});ls[i].classList.add('out');now.textContent=i+1};
+    const go=d=>{if(busy)return;busy=true;const old=ls[cur];old.classList.add('going');old.classList.remove('out');
+      cur=(cur+d+ls.length)%ls.length;setTimeout(()=>{old.classList.remove('going');show(cur);setTimeout(()=>busy=false,700)},620)};
+    $('#mailNext').addEventListener('click',()=>go(1));$('#mailPrev').addEventListener('click',()=>go(-1));
+    $('#env').addEventListener('click',()=>go(1));
+    new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){mail.classList.add('open');setTimeout(()=>show(0),650);o.disconnect()}})},{threshold:.35}).observe($('#env'));
+  })();
   /* skyline parallax: far layers lag behind the scroll */
   $$('.sky').forEach(sky=>{const ls=[...sky.querySelectorAll('[data-px]')];let q=0;
     const go=()=>{q=0;const r=sky.getBoundingClientRect();if(r.bottom<-200||r.top>innerHeight+200)return;
