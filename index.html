@@ -276,7 +276,7 @@ section{position:relative}
 /* ---------- process ---------- */
 .process{background:var(--cream)}
 .process.sec{padding-top:0}.process .sky{margin-bottom:64px}
-.steps{position:relative;display:grid;gap:130px;padding-top:30px}
+.steps{position:relative;display:grid;gap:56px;padding-top:10px}
 .path{position:absolute;inset:0;pointer-events:none;z-index:0}
 .path svg{width:100%;height:100%;overflow:visible}
 .path path{fill:none;stroke:var(--gold);stroke-width:1.6;stroke-dasharray:2 9;stroke-linecap:round;opacity:.8}
@@ -438,11 +438,10 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
   .about-grid{grid-template-columns:.85fr 1.15fr;align-items:center;gap:80px}
   .portrait{width:80%;margin-inline:18% 2%}
 
-  /* a winding route: steps alternate sides and walk down the page */
-  .steps{grid-template-columns:1fr;row-gap:150px;padding:40px 0 60px}
-  .step{width:min(760px,64%);grid-template-columns:auto 1fr minmax(230px,300px);column-gap:28px;align-items:center}
-  .step:nth-of-type(even){margin-inline-start:auto}
-  .step .polaroid{grid-column:3;grid-row:1;width:100%;margin:0!important}
+  .steps{grid-template-columns:repeat(4,1fr);gap:28px}
+  .step{grid-template-columns:1fr}
+  .step .polaroid{width:100%;margin-inline:0!important}
+  .step:nth-child(even){margin-top:90px}
   .inc-grid{grid-template-columns:1.3fr 1fr 1fr;grid-auto-rows:1fr}
   .inc.feature{grid-row:span 2;display:flex;flex-direction:column;justify-content:flex-end;padding:34px}
   .inc.feature h3{font-size:44px}
@@ -855,10 +854,10 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
   const draw=()=>{arts.forEach(a=>a.style.setProperty('--e',1));const b=steps.getBoundingClientRect();const pts=nums.map(n=>{const r=n.getBoundingClientRect();return[r.left+r.width/2-b.left,r.top+r.height/2-b.top]});
     svg.setAttribute('viewBox','0 0 '+b.width+' '+b.height);if(pts.length<2)return;
     const wide=innerWidth>=980,m=Math.max(16,(innerWidth-b.width)/2),P=[],last=pts[pts.length-1];
-    if(wide){const bulge=Math.min(140,b.width*.1);
-      P.push([pts[0][0]+m*.9,pts[0][1]-120]);
-      pts.forEach((q,i)=>{P.push(q);if(i<pts.length-1){const n=pts[i+1];P.push([(q[0]+n[0])/2,(q[1]+n[1])/2+(i%2?-bulge:bulge)*.35])}});
-      P.push([last[0]-(pts[0][0]>last[0]?m*.9+120:-(m*.9+120)),last[1]+110]);
+    if(wide){const amp=Math.min(60,b.width*.045);
+      P.push([b.width+m*.8,pts[0][1]+amp]);
+      pts.forEach((q,i)=>{P.push(q);if(i<pts.length-1)P.push([(q[0]+pts[i+1][0])/2,q[1]+(i%2?amp:-amp)])});
+      P.push([-m*.8,last[1]-amp]);
     }else{const sw=Math.min(54,b.width*.15);
       P.push([pts[0][0]+m*.5,pts[0][1]-90]);
       pts.forEach((q,i)=>{P.push(q);if(i<pts.length-1)P.push([q[0]-(i%2?sw*.4:sw),(q[1]+pts[i+1][1])/2])});
@@ -868,9 +867,9 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
   const clamp=v=>v<0?0:v>1?1:v,ease=t=>1-Math.pow(1-t,3);let sq=0;
   const scrub=()=>{sq=0;if(!L)return;const vh=innerHeight,r=steps.getBoundingClientRect(),wide=innerWidth>=980;
     if(matchMedia('(prefers-reduced-motion: reduce)').matches){mask.style.strokeDashoffset=0;return}
-    const P=clamp((vh*.85-r.top)/(r.height*.92+vh*.1));
+    const P=clamp((vh*.85-r.top)/(r.height*(wide?1.05:.92)+vh*.1));
     mask.style.strokeDashoffset=f1(L*(1-ease(P)));
-    arts.forEach((a,i)=>{const ar=a.getBoundingClientRect();const t=(vh*.95-ar.top)/(vh*.5);
+    arts.forEach((a,i)=>{let t;if(wide)t=(P-i*.15)/.45;else{const ar=a.getBoundingClientRect();t=(vh*.95-ar.top)/(vh*.5)}
       a.style.setProperty('--e',ease(clamp(t)).toFixed(3))})};
   addEventListener('scroll',()=>{if(!sq)sq=requestAnimationFrame(scrub)},{passive:true});
   addEventListener('resize',draw);addEventListener('load',draw);setTimeout(draw,600);
