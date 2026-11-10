@@ -336,7 +336,13 @@ section{position:relative}
 .panel[hidden]{display:none}
 .panel{animation:fade .6s var(--ease)}
 @keyframes fade{from{opacity:0;transform:translateY(10px)}}
-.reels{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px var(--pad) 18px;margin-inline:calc(-1*var(--pad));scrollbar-width:none}
+.reels-row{display:grid;gap:26px}
+.reels-col{min-width:0}
+.reels{--w:min(72vw,280px);display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
+  padding:34px calc(50% - var(--w) / 2) 40px;margin-inline:calc(-1*var(--pad));overscroll-behavior-x:contain}
+.reels::-webkit-scrollbar{display:none}
+.reels .reel{flex:0 0 var(--w);transform:scale(.8);opacity:.55;transition:transform .6s var(--ease),opacity .6s var(--ease)}
+.reels .reel.active{transform:none;opacity:1}
 .reels::-webkit-scrollbar{display:none}
 .reel{flex:0 0 min(78%,300px);scroll-snap-align:center;position:relative;border-radius:28px;overflow:hidden;aspect-ratio:9/16;background:var(--navy);box-shadow:0 30px 50px -30px rgba(21,56,72,.7)}
 .reel video{width:100%;height:100%;object-fit:cover}
@@ -349,7 +355,7 @@ section{position:relative}
 .reel .play::before{content:"";position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(255,255,255,.35);animation:pulse 2.2s infinite}
 @keyframes pulse{from{transform:scale(.9);opacity:1}to{transform:scale(1.35);opacity:0}}
 .reel.playing .play,.reel.playing .shade,.reel.playing .meta{opacity:0}
-.reel.quote{background:linear-gradient(160deg,var(--cream),#e3d6c7);display:flex;flex-direction:column;justify-content:center;padding:30px 26px;color:var(--navy)}
+.reel.quote{aspect-ratio:auto;min-height:260px;background:linear-gradient(160deg,var(--cream),#e3d6c7);display:flex;flex-direction:column;justify-content:center;padding:30px 26px;color:var(--navy)}
 .reel.quote .q{font-family:Halel;font-size:90px;line-height:.6;color:var(--gold)}
 .reel.quote p{font-family:Halel;font-size:30px;line-height:1.25;margin:10px 0 18px}
 .reel.quote a{font-weight:600;font-size:15px;color:var(--gold);display:inline-flex;gap:8px;align-items:center}
@@ -358,9 +364,9 @@ section{position:relative}
 .gallery figure{break-inside:avoid;margin-bottom:10px;border-radius:16px;overflow:hidden;position:relative;cursor:zoom-in;background:var(--cream)}
 .gallery img{width:100%;transition:transform 1s var(--ease),filter .6s;filter:saturate(.88)}
 .gallery figure:hover img{transform:scale(1.05);filter:saturate(1)}
-.dots{display:flex;justify-content:center;gap:6px;margin-top:4px}
-.dots i{width:6px;height:6px;border-radius:3px;background:rgba(21,56,72,.2);transition:all .4s}
-.dots i.on{width:22px;background:var(--gold)}
+.dots{display:flex;justify-content:center;gap:10px;margin-top:6px}
+.dots i{width:11px;height:11px;border-radius:6px;background:rgba(21,56,72,.32);cursor:pointer;transition:all .4s}
+.dots i.on{width:36px;background:var(--gold)}
 
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:100;background:rgba(15,43,56,.92);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .4s}
@@ -462,9 +468,9 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
   .inc-card{top:calc(130px + var(--i) * 16px);grid-template-rows:none;grid-template-columns:1.1fr .9fr;min-height:360px}
   .inc-img{grid-row:1;grid-column:2}
   .inc-body{grid-row:1;grid-column:1;justify-content:center;padding:40px 38px}
-  .reels{padding-inline:max(var(--pad),calc((100vw - 1240px)/2));margin-inline:calc(50% - 50vw)}
-  .reel{flex-basis:300px}
-  .reel:nth-child(2){transform:translateY(40px)}
+  .reels-row{grid-template-columns:minmax(0,1fr) 300px;align-items:center;gap:36px}
+  .reels{--w:300px;margin-inline:0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+  .reel.quote{aspect-ratio:9/16;min-height:0}
   .fab{right:28px;bottom:28px}
   footer{padding-bottom:40px}
 }
@@ -685,44 +691,48 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
     </div>
 
     <div class="panel" id="p-video" role="tabpanel" aria-labelledby="t-video">
+      <div class="reels-row">
+      <div class="reels-col">
       <div class="reels" id="reels">
-        <div class="reel" data-r>
+        <div class="reel">
           <video src="assets/video/t1.mp4#t=0.8" preload="metadata" playsinline></video>
           <span class="shade"></span>
           <button class="play" aria-label="נגן סרטון: נדב ואיילת"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg></button>
           <div class="meta"><b>נדב ואיילת</b><span>ירושלים</span></div>
         </div>
-        <div class="reel" data-r>
+        <div class="reel">
           <video src="assets/video/t2.mp4#t=0.8" preload="metadata" playsinline></video>
           <span class="shade"></span>
           <button class="play" aria-label="נגן סרטון: אריאל ועדן"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg></button>
           <div class="meta"><b>אריאל ועדן</b><span>קריית שמונה</span></div>
         </div>
-        <div class="reel" data-r>
+        <div class="reel">
           <video src="assets/video/t3.mp4#t=0.8" preload="metadata" playsinline></video>
           <span class="shade"></span>
           <button class="play" aria-label="נגן סרטון: דביר ומיכל"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg></button>
           <div class="meta"><b>דביר ומיכל</b><span>טבריה</span></div>
         </div>
-        <div class="reel" data-r>
+        <div class="reel">
           <video src="assets/video/t4.mp4#t=0.8" preload="metadata" playsinline></video>
           <span class="shade"></span>
           <button class="play" aria-label="נגן סרטון: חננאל ודניאלה"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg></button>
           <div class="meta"><b>חננאל ודניאלה</b><span>ירושלים</span></div>
         </div>
-        <div class="reel" data-r>
+        <div class="reel">
           <video src="assets/video/t5.mp4#t=0.8" preload="metadata" playsinline></video>
           <span class="shade"></span>
           <button class="play" aria-label="נגן סרטון: יוסף וחמדה"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l12-7.5z"/></svg></button>
           <div class="meta"><b>יוסף וחמדה</b><span>ירושלים</span></div>
         </div>
-        <div class="reel quote" data-r>
+      </div>
+      <div class="dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+      </div>
+        <div class="reel quote">
           <span class="q">״</span>
           <p>הבן שלכם הבא? אשמח להיות חלק מהרגע הזה.</p>
           <a href="https://wa.me/972542233665" target="_blank" rel="noopener">לשיחת היכרות ←</a>
         </div>
       </div>
-      <div class="dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
     </div>
 
     <div class="panel" id="p-gallery" role="tabpanel" aria-labelledby="t-gallery" hidden>
@@ -872,7 +882,12 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
     v.addEventListener('pause',()=>r.classList.remove('playing'));
   });
   const reels=$('#reels'),dots=$$('#dots i');
-  reels.addEventListener('scroll',()=>{const c=[...reels.children];const mid=reels.getBoundingClientRect().left+reels.clientWidth/2;let best=0,bd=1e9;c.forEach((el,i)=>{const r=el.getBoundingClientRect();const d=Math.abs(r.left+r.width/2-mid);if(d<bd){bd=d;best=i}});dots.forEach((d,i)=>d.classList.toggle('on',i===best))},{passive:true});
+  const syncReels=()=>{const c=[...reels.children];const mid=reels.getBoundingClientRect().left+reels.clientWidth/2;let best=0,bd=1e9;
+    c.forEach((el,i)=>{const r=el.getBoundingClientRect();const d=Math.abs(r.left+r.width/2-mid);if(d<bd){bd=d;best=i}});
+    c.forEach((el,i)=>el.classList.toggle('active',i===best));dots.forEach((d,i)=>d.classList.toggle('on',i===best))};
+  reels.addEventListener('scroll',()=>requestAnimationFrame(syncReels),{passive:true});
+  dots.forEach((d,i)=>d.addEventListener('click',()=>{const el=reels.children[i];reels.scrollBy({left:el.getBoundingClientRect().left+el.offsetWidth/2-(reels.getBoundingClientRect().left+reels.clientWidth/2),behavior:'smooth'})}));
+  addEventListener('load',()=>{const el=reels.children[0];reels.scrollLeft+=el.getBoundingClientRect().left+el.offsetWidth/2-(reels.getBoundingClientRect().left+reels.clientWidth/2);syncReels()});syncReels();
 
   // lightbox
   const lb=$('#lb'),lbi=$('img',lb);
