@@ -279,7 +279,17 @@ section{position:relative}
 .steps{position:relative;display:grid;gap:56px;padding-top:10px}
 .path{position:absolute;inset:0;pointer-events:none;z-index:0}
 .path svg{width:100%;height:100%;overflow:visible}
-.path path{fill:none;stroke:var(--gold);stroke-width:1.6;stroke-dasharray:2 9;stroke-linecap:round;opacity:.75}
+.path path{fill:none;stroke:var(--gold);stroke-width:1.6;stroke-dasharray:2 9;stroke-linecap:round}
+.path .base{opacity:.22}
+.path #pathMask{stroke:#fff;stroke-width:14;opacity:1}
+.path .ink{stroke-width:2;opacity:.9}
+.path .head{opacity:0;transition:opacity .5s}
+.path .head.show{opacity:1}
+.path .head .core{fill:var(--gold)}
+.path .head .ring{fill:none;stroke:var(--gold);stroke-width:1;opacity:.5;transform-box:fill-box;transform-origin:center;animation:headRing 2.4s ease-out infinite}
+@keyframes headRing{from{transform:scale(.6);opacity:.7}to{transform:scale(2.4);opacity:0}}
+.step .num{transition:background .6s var(--ease),color .6s var(--ease),transform .7s cubic-bezier(.34,1.56,.64,1),box-shadow .7s var(--ease)}
+.step .num.on{background:var(--gold);color:#fff;transform:scale(1.1);box-shadow:0 0 0 6px var(--cream),0 0 0 7px rgba(150,116,74,.35),0 14px 30px -12px rgba(150,116,74,.7)}
 .step{position:relative;z-index:1;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start}
 .step .num{width:56px;height:56px;border-radius:50%;background:var(--paper);display:grid;place-items:center;font-family:Halel;font-size:30px;color:var(--gold);box-shadow:0 0 0 6px var(--cream),0 10px 24px -12px rgba(21,56,72,.5);position:relative}
 .step h3{font-family:Halel;font-weight:400;font-size:32px;color:var(--navy);line-height:1.1;margin:6px 0 6px}
@@ -580,7 +590,7 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
       <p data-r>מהטלפון הראשון אחרי הלידה ועד הימים שאחרי. ככה נראה הליווי, בלי הפתעות.</p>
     </div>
     <div class="steps" id="steps">
-      <div class="path" aria-hidden="true"><svg id="pathSvg"><path id="pathLine" d=""/></svg></div>
+      <div class="path" aria-hidden="true"><svg id="pathSvg"><defs><mask id="pathMaskM" maskUnits="userSpaceOnUse" x="-3000" y="-3000" width="9000" height="12000"><path id="pathMask" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round"/></mask><radialGradient id="headGlow"><stop offset="0" stop-color="#e3c592" stop-opacity=".9"/><stop offset=".45" stop-color="#e3c592" stop-opacity=".28"/><stop offset="1" stop-color="#e3c592" stop-opacity="0"/></radialGradient></defs><path id="pathBase" class="base"/><path id="pathLine" class="ink" mask="url(#pathMaskM)"/><g id="pathHead" class="head"><circle r="22" fill="url(#headGlow)"/><circle r="5" class="core"/><circle r="9" class="ring"/></g></svg></div>
       <article class="step" data-r>
         <span class="num">1</span>
         <div><h3>שיחת היכרות</h3><p>מתקשרים מיד אחרי הלידה. מספרים לי על התינוק ועל הלידה, ומתאמים יחד תאריך, שעה ומיקום, בכל הארץ.</p></div>
@@ -838,12 +848,35 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
 
   // dotted path through step numbers
   const steps=$('#steps'),svg=$('#pathSvg'),line=$('#pathLine');
-  const draw=()=>{const b=steps.getBoundingClientRect();const pts=$$('.step .num',steps).map(n=>{const r=n.getBoundingClientRect();return[r.left+r.width/2-b.left,r.top+r.height/2-b.top]});
-    svg.setAttribute('viewBox',`0 0 ${b.width} ${b.height}`);
-    if(pts.length<2)return;let d=`M${pts[0][0]},${pts[0][1]}`;
-    for(let i=1;i<pts.length;i++){const[a,c]=[pts[i-1],pts[i]];const wide=innerWidth>=980;const k=wide?0:Math.min(90,b.width*.25);
-      d+=wide?` C${(a[0]+c[0])/2},${a[1]-60} ${(a[0]+c[0])/2},${c[1]+60} ${c[0]},${c[1]}`:` C${a[0]-k},${a[1]+(c[1]-a[1])*.4} ${c[0]+k},${c[1]-(c[1]-a[1])*.4} ${c[0]},${c[1]}`}
-    line.setAttribute('d',d)};
+  const base=$('#pathBase'),mask=$('#pathMask'),head=$('#pathHead'),nums=$$('.step .num',steps);let L=0,marks=[],ready=false;
+  const f1=v=>v.toFixed(1);
+  const cr=p=>{let d='M'+f1(p[0][0])+','+f1(p[0][1]);for(let i=0;i<p.length-1;i++){const a=p[i-1]||p[i],b=p[i],c=p[i+1],e=p[i+2]||c;
+      d+=' C'+f1(b[0]+(c[0]-a[0])/6)+','+f1(b[1]+(c[1]-a[1])/6)+' '+f1(c[0]-(e[0]-b[0])/6)+','+f1(c[1]-(e[1]-b[1])/6)+' '+f1(c[0])+','+f1(c[1])}return d};
+  const draw=()=>{const b=steps.getBoundingClientRect();const pts=nums.map(n=>{const r=n.getBoundingClientRect();return[r.left+r.width/2-b.left,r.top+r.height/2-b.top]});
+    svg.setAttribute('viewBox','0 0 '+b.width+' '+b.height);if(pts.length<2)return;
+    const wide=innerWidth>=980,m=Math.max(16,(innerWidth-b.width)/2),P=[],last=pts[pts.length-1];
+    if(wide){const amp=Math.min(70,b.width*.05);
+      P.push([b.width+m*.85,pts[0][1]+amp*1.4]);
+      pts.forEach((q,i)=>{P.push(q);if(i<pts.length-1)P.push([(q[0]+pts[i+1][0])/2,q[1]+(i%2?amp:-amp)])});
+      P.push([-m*.85,last[1]-amp*1.4]);
+    }else{const sw=Math.min(60,b.width*.16);
+      P.push([pts[0][0]+m*.6,pts[0][1]-110]);P.push([pts[0][0]+m*.3,pts[0][1]-50]);
+      pts.forEach((q,i)=>{P.push(q);if(i<pts.length-1)P.push([q[0]+(i%2?m*.7:-sw),(q[1]+pts[i+1][1])/2])});
+      P.push([last[0]-sw*.6,last[1]+80]);P.push([last[0]+m*.6,last[1]+150]);}
+    const d=cr(P);[line,base,mask].forEach(el=>el.setAttribute('d',d));
+    L=line.getTotalLength();mask.style.strokeDasharray=L+' '+L;
+    const N=500,samp=[];for(let i=0;i<=N;i++){const t=L*i/N,pt=line.getPointAtLength(t);samp.push([t,pt.x,pt.y])}
+    marks=pts.map(q=>{let best=0,bd=1e9;samp.forEach(([t,x,y])=>{const dd=(x-q[0])**2+(y-q[1])**2;if(dd<bd){bd=dd;best=t}});return best});
+    ready=true;prog()};
+  let pq=0;const prog=()=>{pq=0;if(!ready)return;const r=steps.getBoundingClientRect(),vh=innerHeight;
+    const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let p=reduce?1:(vh*.9-r.top)/(r.height+vh*.4);p=Math.min(1,Math.max(0,p));
+    const e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2,len=L*e;
+    mask.style.strokeDashoffset=f1(L-len);
+    const pt=line.getPointAtLength(Math.max(.1,len));head.setAttribute('transform','translate('+f1(pt.x)+','+f1(pt.y)+')');
+    head.classList.toggle('show',p>0&&p<1);
+    nums.forEach((n,i)=>n.classList.toggle('on',len>=marks[i]-2))};
+  addEventListener('scroll',()=>{if(!pq)pq=requestAnimationFrame(prog)},{passive:true});
   addEventListener('resize',draw);addEventListener('load',draw);setTimeout(draw,600);
   /* skyline parallax: far layers lag behind the scroll */
   (()=>{const sky=document.querySelector('.sky');if(!sky)return;const ls=[...sky.querySelectorAll('[data-px]')];let q=0;
