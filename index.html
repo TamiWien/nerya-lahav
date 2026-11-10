@@ -307,6 +307,10 @@ section{position:relative}
 .inc-bg img{width:100%;height:100%;object-fit:cover;object-position:60% 30%;opacity:.8;transform:scale(1.04)}
 .inc-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--navy) 0%,rgba(21,56,72,.25) 18%,rgba(21,56,72,.3) 80%,var(--navy) 100%),linear-gradient(270deg,rgba(21,56,72,.7),rgba(21,56,72,.05) 55%)}
 .inc-layout{position:relative;z-index:1;display:grid;gap:36px}
+.inc-count{display:none;align-items:center;gap:14px;margin-top:44px;font-family:Halel;color:rgba(255,255,255,.55);font-size:22px;direction:ltr;justify-content:flex-end}
+.inc-count .roll{height:64px;display:flex;align-items:center;overflow:hidden}
+.inc-count b{display:block;font-weight:400;font-size:64px;line-height:1;color:#e3c592;transition:transform .5s cubic-bezier(.76,0,.24,1),opacity .4s}
+.inc-count i{width:64px;height:1px;background:rgba(255,255,255,.35)}
 .inc-side h2{font-size:clamp(44px,6vw,76px);line-height:1}
 .inc-side p{color:rgba(255,255,255,.72);max-width:40ch;margin-top:16px;font-size:17px}
 /* stacked cards: each one sticks and the next slides over it */
@@ -449,6 +453,7 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
   .step:nth-child(even){margin-top:90px}
   .inc-layout{grid-template-columns:.8fr 1.25fr;gap:clamp(48px,7vw,120px);align-items:start}
   .inc-side{position:sticky;top:150px}
+  .inc-count{display:flex}
   .inc-card{top:calc(130px + var(--i) * 16px);grid-template-rows:none;grid-template-columns:1.1fr .9fr;min-height:360px}
   .inc-img{grid-row:1;grid-column:2}
   .inc-body{grid-row:1;grid-column:1;justify-content:center;padding:40px 38px}
@@ -628,6 +633,7 @@ footer img{height:46px;width:auto;margin:0 auto 14px;opacity:.9}
     <div class="inc-side">
       <h2 class="h split" data-split>מה מקבלים בליווי</h2>
       <p data-r>לא רק הטקס. כל מה שצריך כדי שתרגישו בידיים בטוחות, מהשיחה הראשונה ועד ההחלמה המלאה.</p>
+      <div class="inc-count" aria-hidden="true"><span class="roll"><b id="incNow">01</b></span><i></i><span>05</span></div>
     </div>
     <div class="inc-stack">
       <article class="inc-card" style="--i:0">
