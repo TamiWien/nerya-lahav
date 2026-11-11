@@ -422,22 +422,24 @@ section{position:relative}
 /* ---------- moments: film strips drifting on gentle diagonals ---------- */
 .moments{background:var(--paper);overflow:clip;padding-bottom:110px}
 .films{position:relative;display:flex;flex-direction:column;gap:clamp(26px,4vw,54px);padding-block:30px;margin-top:10px}
-.film{--h:clamp(140px,17vw,230px);position:relative;width:130vw;margin-inline-start:-15vw;background:#16262e;padding:calc(var(--h)*.13) 0;
-  box-shadow:0 30px 50px -34px rgba(21,56,72,.55)}
-.film::before,.film::after{content:"";position:absolute;inset-inline:0;height:calc(var(--h)*.06);
-  background:repeating-linear-gradient(90deg,transparent 0 10px,rgba(246,240,232,.85) 10px 22px,transparent 22px 32px);border-radius:2px}
-.film::before{top:calc(var(--h)*.035)}.film::after{bottom:calc(var(--h)*.035)}
-.f1{rotate:-4deg}.f2{rotate:2.5deg;margin-inline-start:-10vw}.f3{rotate:-1.5deg}
-.film-track{display:flex;gap:10px;width:max-content;will-change:transform}
-.fr{margin:0;height:var(--h);aspect-ratio:3/2;flex:none;overflow:hidden;cursor:zoom-in;background:#0d1a20}
-.fr img{width:100%;height:100%;object-fit:cover;filter:sepia(.18) saturate(.85) contrast(.98);transition:filter .6s,transform 1.2s var(--ease)}
-.fr:hover img{filter:none;transform:scale(1.06)}
+.film{--h:clamp(150px,17vw,240px);position:relative;width:130vw;margin-inline-start:-15vw}
+.f1{rotate:-3deg}.f2{rotate:2deg;margin-inline-start:-10vw}.f3{rotate:-1.2deg}
+.film-track{display:flex;gap:18px;width:max-content;will-change:transform}
+.fr{margin:0;height:var(--h);aspect-ratio:3/2;flex:none;overflow:hidden;cursor:zoom-in;border-radius:16px;background:var(--cream);box-shadow:0 22px 40px -30px rgba(21,56,72,.5)}
+.fr img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.fr:hover img{transform:scale(1.06)}
 @media (prefers-reduced-motion:reduce){.film-track{transform:none!important}}
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:100;background:rgba(15,43,56,.92);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .4s}
 .lb.open{opacity:1;pointer-events:auto}
 .lb img{max-height:86vh;border-radius:12px;box-shadow:0 30px 60px rgba(0,0,0,.4)}
-.lb button{position:absolute;top:16px;left:16px;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:24px}
+.lb button{position:absolute;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:24px;display:grid;place-items:center;cursor:pointer;transition:background .3s}
+.lb button:hover{background:rgba(255,255,255,.24)}
+.lb .lb-x{top:16px;left:16px}
+.lb .lb-nav{top:50%;margin-top:-23px}.lb .lb-nav svg{width:22px;height:22px}
+.lb .lb-prev{right:18px}.lb .lb-next{left:18px}
+.lb img{transition:opacity .25s}
+.lb-count{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-family:Halel;font-size:20px;direction:ltr}
 
 /* ---------- faq ---------- */
 .faq{background:var(--cream)}
@@ -996,7 +998,7 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
   <a class="wa" href="https://wa.me/972542233665" target="_blank" rel="noopener" aria-label="כתבו לי בוואטסאפ"><span class="wa-txt">כתבו לי בוואטסאפ</span><span class="wa-ic"><i></i><i></i><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.42-.08-.12-.28-.2-.57-.34z"/><path d="M12.05 21.78h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88zm8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.17-3.48-8.41z"/></svg></span></a>
 </div>
 
-<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="תמונה מוגדלת"><button aria-label="סגירה">×</button><img alt=""></div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="תמונה מוגדלת"><button class="lb-x" aria-label="סגירה">×</button><button class="lb-nav lb-prev" aria-label="התמונה הקודמת"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button><img alt=""><button class="lb-nav lb-next" aria-label="התמונה הבאה"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button><span class="lb-count" id="lbCount"></span></div>
 
 <script>
 (()=>{
@@ -1072,10 +1074,18 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
   const init=()=>{center(N,false);syncReels()};addEventListener('load',init);init();
 
   // lightbox
-  const lb=$('#lb'),lbi=$('img',lb);
-  $('#gallery')&&$('#gallery').addEventListener('click',e=>{const f=e.target.closest('figure');if(!f)return;const i=$('img',f);lbi.src=i.src;lbi.alt=i.alt;lb.classList.add('open')});
-  lb.addEventListener('click',()=>lb.classList.remove('open'));
-  addEventListener('keydown',e=>e.key==='Escape'&&lb.classList.remove('open'));
+  const lb=$('#lb'),lbi=$('img',lb),lbc=$('#lbCount');
+  const pics=[...new Map($$('#gallery figure img').map(i=>[i.getAttribute('src'),i.alt])).entries()];let cur=0;
+  const show=i=>{cur=(i+pics.length)%pics.length;lbi.style.opacity=0;setTimeout(()=>{lbi.src=pics[cur][0];lbi.alt=pics[cur][1];lbi.style.opacity=1},140);lbc.textContent=(cur+1)+' / '+pics.length};
+  const close=()=>lb.classList.remove('open');
+  $('#gallery')&&$('#gallery').addEventListener('click',e=>{const f=e.target.closest('figure');if(!f)return;const src=$('img',f).getAttribute('src');show(pics.findIndex(p=>p[0]===src));lb.classList.add('open')});
+  $('.lb-x',lb).addEventListener('click',close);
+  $('.lb-next',lb).addEventListener('click',e=>{e.stopPropagation();show(cur+1)});
+  $('.lb-prev',lb).addEventListener('click',e=>{e.stopPropagation();show(cur-1)});
+  lb.addEventListener('click',e=>{if(e.target===lb)close()});
+  addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(cur+1);if(e.key==='ArrowRight')show(cur-1)});
+  let sx=0;lb.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+  lb.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)show(cur+(dx>0?1:-1))});
 
 
   // dotted path through step numbers
@@ -1151,7 +1161,7 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
   (()=>{const films=$$('.film');if(!films.length)return;const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
     const st=films.map(f=>{const t=$('.film-track',f),o=[...t.children];o.forEach(n=>{const c=n.cloneNode(true);c.setAttribute('aria-hidden','true');t.appendChild(c)});
       return {t,dir:+f.dataset.dir,x:Math.random()*400,W:0,o}});
-    const measure=()=>st.forEach(z=>z.W=z.o.reduce((a,n)=>a+n.offsetWidth+10,0));measure();addEventListener('resize',measure);addEventListener('load',measure);
+    const measure=()=>st.forEach(z=>z.W=z.o.reduce((a,n)=>a+n.offsetWidth+18,0));measure();addEventListener('resize',measure);addEventListener('load',measure);
     let last=performance.now(),lastY=scrollY,vis=false;
     new IntersectionObserver(es=>es.forEach(e=>vis=e.isIntersecting)).observe($('#moments'));
     const tick=t=>{const dt=Math.min(64,t-last);last=t;const dy=scrollY-lastY;lastY=scrollY;
