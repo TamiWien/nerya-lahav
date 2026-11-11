@@ -249,7 +249,7 @@ section{position:relative}
 .about{background:var(--paper)}
 .about-grid{display:grid;gap:44px}
 .portrait{position:relative;width:min(240px,62%);margin-inline:28% auto;margin-block:30px 120px}
-@media (max-width:699px){.portrait{width:62%;margin-inline:auto 0;margin-block:70px 110px}.portrait .otag{font-size:12px;padding:7px 10px 7px 13px;gap:8px}.portrait .otag small{font-size:9.5px;margin:0}.portrait .otag b{font-size:24px;padding-inline-start:8px}}
+@media (max-width:699px){.portrait{width:68%;margin-inline:auto 0;margin-block:70px 120px}.portrait .otag{font-size:12px;padding:7px 10px 7px 13px;gap:8px}.portrait .otag small{font-size:9.5px;margin:0}.portrait .otag b{font-size:24px;padding-inline-start:8px}}
 .portrait .blob{aspect-ratio:1;border-radius:46% 54% 50% 50%/52% 48% 52% 48%;overflow:hidden;background:var(--cream);box-shadow:0 30px 60px -30px rgba(21,56,72,.5);animation:morph 14s ease-in-out infinite}
 .portrait .blob img{width:100%;height:100%;object-fit:cover;transform:scale(1.05)}
 @keyframes morph{50%{border-radius:54% 46% 44% 56%/46% 56% 44% 54%}}
@@ -452,6 +452,7 @@ section{position:relative}
 .final .bg::after{content:"";position:absolute;inset:0;background:radial-gradient(80% 60% at 50% 40%,rgba(21,56,72,.55),var(--navy) 85%)}
 .final .wrap{position:relative;z-index:4}
 .final img.mark{width:96px;margin:0 auto 24px;filter:drop-shadow(0 10px 20px rgba(0,0,0,.3))}
+.final img.mark-phone{width:clamp(150px,16vw,210px);filter:none;margin-bottom:18px}
 .final h2{font-size:clamp(50px,14vw,104px);line-height:1}
 .final h2 em{font-style:normal;color:var(--gold-2)}
 .final p{max-width:38ch;margin:22px auto 34px;color:rgba(255,255,255,.78);font-size:18px}
@@ -546,7 +547,7 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
   .hero .lede{font-size:20px}
   .hero h1 .gold{font-size:.8em;margin-inline-start:1.6em}
   .about-grid{grid-template-columns:.85fr 1.15fr;align-items:center;gap:80px}
-  .portrait{width:66%;margin-inline:30% 4%;margin-block:20px 110px}
+  .portrait{width:74%;margin-inline:24% 2%;margin-block:20px 120px}
 
   .steps{grid-template-columns:repeat(4,1fr);gap:clamp(48px,5.5vw,100px)}
   .step{grid-template-columns:1fr}
@@ -944,7 +945,7 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
 <section class="final grain" id="contact">
   <div class="bg" aria-hidden="true"><img src="assets/img/gather.webp" alt="" loading="lazy"></div>
   <div class="wrap">
-    <img class="mark" src="assets/img/baby-gold.webp" alt="" data-r="s">
+    <img class="mark mark-phone" src="assets/img/baby-phone.webp" alt="" data-r="s">
     <h2 class="h split" data-split>מוכנים <em>לדבר?</em></h2>
     <p data-r>כל שיחה מתחילה בלי התחייבות, רק כדי להכיר ולענות על השאלות שלכם. מומלץ ליצור קשר כבר מיד אחרי הלידה.</p>
     <div class="ctas" data-r>
