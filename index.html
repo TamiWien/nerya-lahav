@@ -419,29 +419,20 @@ section{position:relative}
 .dots i{width:11px;height:11px;border-radius:6px;background:rgba(21,56,72,.32);cursor:pointer;transition:all .4s}
 .dots i.on{width:36px;background:var(--gold)}
 
-/* ---------- moments: a pinned, horizontally drifting gallery ---------- */
-.moments{position:relative;background:var(--paper);height:300vh}
-.mo-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:clamp(18px,3vh,34px)}
-.mo-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.mo-head h2{font-size:clamp(40px,6vw,76px);line-height:1;color:var(--navy)}
-.mo-head p{color:var(--muted);max-width:34ch}
-.mo-track{display:flex;align-items:center;gap:clamp(18px,2.4vw,36px);padding-inline:var(--pad);width:max-content;will-change:transform}
-.mo-item{margin:0;flex:none;cursor:zoom-in;--h:clamp(220px,46vh,460px)}
-.mo-item:nth-child(3n+2){--h:clamp(190px,36vh,360px);align-self:flex-start;margin-top:4vh}
-.mo-item:nth-child(3n){--h:clamp(210px,42vh,420px);align-self:flex-end;margin-bottom:2vh}
-.mo-frame{height:var(--h);aspect-ratio:4/5;overflow:hidden;border-radius:18px;background:var(--cream);
-  clip-path:inset(var(--cl,0%) 0 0 0 round 18px);transition:clip-path .2s linear}
-.mo-item:nth-child(even) .mo-frame{aspect-ratio:3/2}
-.mo-frame img{width:118%;height:100%;max-width:none;object-fit:cover;transform:translateX(var(--px,0px)) scale(var(--sc,1.08));transition:transform .2s linear,filter .5s;filter:saturate(.92)}
-.mo-item:hover .mo-frame img{filter:saturate(1.05)}
-.mo-item figcaption{display:flex;align-items:baseline;gap:10px;margin-top:12px;color:var(--muted);font-size:14px}
-.mo-item figcaption b{font-family:Halel;font-weight:400;font-size:22px;color:var(--gold)}
-.mo-foot{display:flex;align-items:center;gap:18px}
-.mo-bar{flex:1;height:2px;background:rgba(21,56,72,.12);border-radius:2px;overflow:hidden}
-.mo-bar i{display:block;height:100%;width:100%;background:var(--gold);transform-origin:right;transform:scaleX(0)}
-.mo-count{font-family:Halel;font-size:20px;color:var(--muted);direction:ltr}
-.mo-count b{font-weight:400;color:var(--gold)}
-@media (prefers-reduced-motion:reduce){.moments{height:auto}.mo-pin{position:static;height:auto;padding:80px 0}.mo-track{overflow-x:auto;width:auto}}
+/* ---------- moments: film strips drifting on gentle diagonals ---------- */
+.moments{background:var(--paper);overflow:clip;padding-bottom:110px}
+.films{position:relative;display:flex;flex-direction:column;gap:clamp(26px,4vw,54px);padding-block:30px;margin-top:10px}
+.film{--h:clamp(140px,17vw,230px);position:relative;width:130vw;margin-inline-start:-15vw;background:#16262e;padding:calc(var(--h)*.13) 0;
+  box-shadow:0 30px 50px -34px rgba(21,56,72,.55)}
+.film::before,.film::after{content:"";position:absolute;inset-inline:0;height:calc(var(--h)*.06);
+  background:repeating-linear-gradient(90deg,transparent 0 10px,rgba(246,240,232,.85) 10px 22px,transparent 22px 32px);border-radius:2px}
+.film::before{top:calc(var(--h)*.035)}.film::after{bottom:calc(var(--h)*.035)}
+.f1{rotate:-4deg}.f2{rotate:2.5deg;margin-inline-start:-10vw}.f3{rotate:-1.5deg}
+.film-track{display:flex;gap:10px;width:max-content;will-change:transform}
+.fr{margin:0;height:var(--h);aspect-ratio:3/2;flex:none;overflow:hidden;cursor:zoom-in;background:#0d1a20}
+.fr img{width:100%;height:100%;object-fit:cover;filter:sepia(.18) saturate(.85) contrast(.98);transition:filter .6s,transform 1.2s var(--ease)}
+.fr:hover img{filter:none;transform:scale(1.06)}
+@media (prefers-reduced-motion:reduce){.film-track{transform:none!important}}
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:100;background:rgba(15,43,56,.92);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .4s}
 .lb.open{opacity:1;pointer-events:auto}
@@ -895,25 +886,18 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
   </div>
 </section>
 
-<!-- ============ MOMENTS: pinned horizontal gallery ============ -->
-<section class="moments grain" id="moments" aria-label="רגעים מבריתות">
-  <div class="mo-pin">
-    <div class="wrap mo-head">
-      <h2 class="h">רגעים מבריתות</h2>
-      <p>גוללים, והרגעים עוברים לאט. לחיצה על תמונה מגדילה אותה.</p>
+<!-- ============ MOMENTS: film strips ============ -->
+<section class="moments sec grain" id="moments">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h split" data-split>רגעים מבריתות</h2>
+      <p data-r>רגעים קטנים מימים גדולים, מבריתות שזכיתי להיות חלק מהן.</p>
     </div>
-    <div class="mo-track" id="gallery">
-      <figure class="mo-item" style="--k:0"><div class="mo-frame"><img src="assets/img/tender.webp" alt="הסנדק מחזיק את התינוק בעדינות" loading="lazy"></div><figcaption><b>01</b><span>הסנדק מחזיק את התינוק בעדינות</span></figcaption></figure>
-      <figure class="mo-item" style="--k:1"><div class="mo-frame"><img src="assets/img/elder.webp" alt="סבא עטוף בטלית בברית" loading="lazy"></div><figcaption><b>02</b><span>סבא עטוף בטלית בברית</span></figcaption></figure>
-      <figure class="mo-item" style="--k:2"><div class="mo-frame"><img src="assets/img/kos.webp" alt="ברכה על כוס היין" loading="lazy"></div><figcaption><b>03</b><span>ברכה על כוס היין</span></figcaption></figure>
-      <figure class="mo-item" style="--k:3"><div class="mo-frame"><img src="assets/img/father2.webp" alt="האב מחזיק את התינוק" loading="lazy"></div><figcaption><b>04</b><span>האב מחזיק את התינוק</span></figcaption></figure>
-      <figure class="mo-item" style="--k:4"><div class="mo-frame"><img src="assets/img/baby.webp" alt="התינוק בכרית הברית" loading="lazy"></div><figcaption><b>05</b><span>התינוק בכרית הברית</span></figcaption></figure>
-      <figure class="mo-item" style="--k:5"><div class="mo-frame"><img src="assets/img/certificate.webp" alt="מסירת תעודת הברית למשפחה" loading="lazy"></div><figcaption><b>06</b><span>מסירת תעודת הברית למשפחה</span></figcaption></figure>
-      <figure class="mo-item" style="--k:6"><div class="mo-frame"><img src="assets/img/blessing.webp" alt="ברכות בטקס הברית" loading="lazy"></div><figcaption><b>07</b><span>ברכות בטקס הברית</span></figcaption></figure>
-      <figure class="mo-item" style="--k:7"><div class="mo-frame"><img src="assets/img/focus.webp" alt="נריה בזמן הטקס" loading="lazy"></div><figcaption><b>08</b><span>נריה בזמן הטקס</span></figcaption></figure>
-      <figure class="mo-item" style="--k:8"><div class="mo-frame"><img src="assets/img/family.webp" alt="המשפחה מתאספת סביב התינוק" loading="lazy"></div><figcaption><b>09</b><span>המשפחה מתאספת סביב התינוק</span></figcaption></figure>
-    </div>
-    <div class="wrap mo-foot"><div class="mo-bar"><i id="moBar"></i></div><span class="mo-count"><b id="moNow">01</b> / 09</span></div>
+  </div>
+  <div class="films" id="gallery">
+      <div class="film f1" data-dir="1"><div class="film-track"><figure class="fr"><img src="assets/img/elder.webp" alt="סבא עטוף בטלית בברית" loading="lazy"></figure><figure class="fr"><img src="assets/img/kos.webp" alt="ברכה על כוס היין" loading="lazy"></figure><figure class="fr"><img src="assets/img/blessing.webp" alt="ברכות בטקס הברית" loading="lazy"></figure><figure class="fr"><img src="assets/img/focus.webp" alt="נריה בזמן הטקס" loading="lazy"></figure><figure class="fr"><img src="assets/img/family.webp" alt="המשפחה מתאספת סביב התינוק" loading="lazy"></figure><figure class="fr"><img src="assets/img/certificate.webp" alt="מסירת תעודת הברית למשפחה" loading="lazy"></figure><figure class="fr"><img src="assets/img/tender.webp" alt="הסנדק מחזיק את התינוק בעדינות" loading="lazy"></figure><figure class="fr"><img src="assets/img/baby.webp" alt="התינוק בכרית הברית" loading="lazy"></figure><figure class="fr"><img src="assets/img/father2.webp" alt="האב מחזיק את התינוק" loading="lazy"></figure></div></div>
+      <div class="film f2" data-dir="-1"><div class="film-track"><figure class="fr"><img src="assets/img/certificate.webp" alt="מסירת תעודת הברית למשפחה" loading="lazy"></figure><figure class="fr"><img src="assets/img/family.webp" alt="המשפחה מתאספת סביב התינוק" loading="lazy"></figure><figure class="fr"><img src="assets/img/blessing.webp" alt="ברכות בטקס הברית" loading="lazy"></figure><figure class="fr"><img src="assets/img/focus.webp" alt="נריה בזמן הטקס" loading="lazy"></figure><figure class="fr"><img src="assets/img/kos.webp" alt="ברכה על כוס היין" loading="lazy"></figure><figure class="fr"><img src="assets/img/baby.webp" alt="התינוק בכרית הברית" loading="lazy"></figure><figure class="fr"><img src="assets/img/father2.webp" alt="האב מחזיק את התינוק" loading="lazy"></figure><figure class="fr"><img src="assets/img/tender.webp" alt="הסנדק מחזיק את התינוק בעדינות" loading="lazy"></figure><figure class="fr"><img src="assets/img/elder.webp" alt="סבא עטוף בטלית בברית" loading="lazy"></figure></div></div>
+      <div class="film f3" data-dir="1"><div class="film-track"><figure class="fr"><img src="assets/img/family.webp" alt="המשפחה מתאספת סביב התינוק" loading="lazy"></figure><figure class="fr"><img src="assets/img/father2.webp" alt="האב מחזיק את התינוק" loading="lazy"></figure><figure class="fr"><img src="assets/img/certificate.webp" alt="מסירת תעודת הברית למשפחה" loading="lazy"></figure><figure class="fr"><img src="assets/img/elder.webp" alt="סבא עטוף בטלית בברית" loading="lazy"></figure><figure class="fr"><img src="assets/img/focus.webp" alt="נריה בזמן הטקס" loading="lazy"></figure><figure class="fr"><img src="assets/img/tender.webp" alt="הסנדק מחזיק את התינוק בעדינות" loading="lazy"></figure><figure class="fr"><img src="assets/img/blessing.webp" alt="ברכות בטקס הברית" loading="lazy"></figure><figure class="fr"><img src="assets/img/kos.webp" alt="ברכה על כוס היין" loading="lazy"></figure><figure class="fr"><img src="assets/img/baby.webp" alt="התינוק בכרית הברית" loading="lazy"></figure></div></div>
   </div>
 </section>
 
@@ -1089,7 +1073,7 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
 
   // lightbox
   const lb=$('#lb'),lbi=$('img',lb);
-  $$('#gallery figure').forEach(f=>f.addEventListener('click',()=>{const i=$('img',f);lbi.src=i.src;lbi.alt=i.alt;lb.classList.add('open')}));
+  $('#gallery')&&$('#gallery').addEventListener('click',e=>{const f=e.target.closest('figure');if(!f)return;const i=$('img',f);lbi.src=i.src;lbi.alt=i.alt;lb.classList.add('open')});
   lb.addEventListener('click',()=>lb.classList.remove('open'));
   addEventListener('keydown',e=>e.key==='Escape'&&lb.classList.remove('open'));
 
@@ -1163,20 +1147,16 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
     addEventListener('scroll',()=>{if(!q)q=requestAnimationFrame(go)},{passive:true});addEventListener('resize',go);go();
   })();
 
-  /* moments: vertical scroll drives a horizontal walk through the photos */
-  (()=>{const sec=$('#moments');if(!sec||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    const track=$('.mo-track',sec),items=$$('.mo-item',sec),bar=$('#moBar'),now=$('#moNow');let D=0,q=0;
-    const size=()=>{D=Math.max(0,track.scrollWidth-innerWidth);sec.style.height=(innerHeight+D*1.15)+'px';go()};
-    const go=()=>{q=0;const r=sec.getBoundingClientRect(),run=sec.offsetHeight-innerHeight;
-      const p=Math.min(1,Math.max(0,-r.top/Math.max(1,run)));track.style.transform='translate3d('+(p*D).toFixed(1)+'px,0,0)';
-      bar.style.transform='scaleX('+p.toFixed(4)+')';let best=0,bd=1e9;const mid=innerWidth/2;
-      items.forEach((it,i)=>{const b=it.getBoundingClientRect(),c=b.left+b.width/2,d=(c-mid)/innerWidth;
-        const f=it.querySelector('.mo-frame');const enter=Math.min(1,Math.max(0,(innerWidth-b.left)/(innerWidth*.35)));
-        f.style.setProperty('--cl',((1-enter)*100).toFixed(1)+'%');
-        f.style.setProperty('--px',(-d*60-8).toFixed(1)+'px');f.style.setProperty('--sc',(1.08+Math.abs(d)*.06).toFixed(3));
-        if(Math.abs(c-mid)<bd){bd=Math.abs(c-mid);best=i}});
-      now.textContent=String(best+1).padStart(2,'0')};
-    addEventListener('scroll',()=>{if(!q)q=requestAnimationFrame(go)},{passive:true});addEventListener('resize',size);addEventListener('load',size);size();
+  /* moments: each film strip runs on its own, page scroll nudges them in opposite directions */
+  (()=>{const films=$$('.film');if(!films.length)return;const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const st=films.map(f=>{const t=$('.film-track',f),o=[...t.children];o.forEach(n=>{const c=n.cloneNode(true);c.setAttribute('aria-hidden','true');t.appendChild(c)});
+      return {t,dir:+f.dataset.dir,x:Math.random()*400,W:0,o}});
+    const measure=()=>st.forEach(z=>z.W=z.o.reduce((a,n)=>a+n.offsetWidth+10,0));measure();addEventListener('resize',measure);addEventListener('load',measure);
+    let last=performance.now(),lastY=scrollY,vis=false;
+    new IntersectionObserver(es=>es.forEach(e=>vis=e.isIntersecting)).observe($('#moments'));
+    const tick=t=>{const dt=Math.min(64,t-last);last=t;const dy=scrollY-lastY;lastY=scrollY;
+      if(vis&&!still)st.forEach((z,i)=>{if(!z.W)return;z.x+=z.dir*(dt*(.022+i*.006)+dy*.35);z.x=((z.x%z.W)+z.W)%z.W;z.t.style.transform='translate3d('+(z.W-z.x).toFixed(1)+'px,0,0)'});
+      requestAnimationFrame(tick)};requestAnimationFrame(tick);
   })();
   /* skyline parallax: far layers lag behind the scroll */
   $$('.sky').forEach(sky=>{const ls=[...sky.querySelectorAll('[data-px]')];let q=0;
