@@ -462,15 +462,19 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
   -webkit-mask:url(assets/img/baby-band.png) repeat-x left bottom/1046px 46px;mask:url(assets/img/baby-band.png) repeat-x left bottom/1046px 46px}
 .foot{display:grid;gap:36px;padding-top:54px;position:relative;z-index:1}
 .foot-brand img{height:50px;width:auto;margin-bottom:16px}
-.foot-line{font-family:Eshchar,Halel,cursive;font-size:24px;color:#e3c592;line-height:1.2;max-width:22ch}
-.foot-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-.foot-cta a{display:inline-flex;align-items:center;height:46px;padding:0 22px;border-radius:999px;font-weight:600;font-size:15px;transition:background .3s,color .3s}
-.foot-wa{background:#25D366;color:#fff}.foot-wa:hover{background:#1fb457}
-.foot-ph{border:1px solid rgba(255,255,255,.25);color:#fff}.foot-ph:hover{background:#fff;color:var(--navy)}
+.foot-line{font-family:Polin,sans-serif;font-weight:300;font-size:15px;letter-spacing:.02em;color:rgba(255,255,255,.55);line-height:1.6;max-width:28ch}
+.foot-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.foot-i{display:flex;align-items:center;gap:10px}
+.foot-i svg{width:18px;height:18px;color:#e3c592;flex:none}
+.foot-links{display:grid;grid-template-columns:repeat(2,max-content);gap:12px 44px}
+.foot-links a{position:relative;display:block;overflow:hidden;color:rgba(255,255,255,.72);line-height:1.4}
+.foot-links a span{display:block;transition:transform .55s cubic-bezier(.76,0,.24,1)}
+.foot-links a span::after{content:attr(data-t);position:absolute;inset:100% 0 auto;color:#e3c592}
+.foot-links a::before{content:"";position:absolute;right:0;bottom:0;width:100%;height:1px;background:#e3c592;transform:scaleX(0);transform-origin:right;transition:transform .55s cubic-bezier(.76,0,.24,1)}
+.foot-links a:hover span{transform:translateY(-100%)}
+.foot-links a:hover::before{transform:scaleX(1)}
 .foot-col{display:flex;flex-direction:column;gap:10px}
 .foot-col h4{font-family:Halel;font-weight:400;font-size:24px;color:#fff;margin-bottom:4px}
-.foot-col a{color:rgba(255,255,255,.72);width:max-content;background:linear-gradient(#e3c592,#e3c592) right bottom/0 1px no-repeat;transition:color .3s,background-size .45s var(--ease)}
-.foot-col a:hover{color:#e3c592;background-size:100% 1px}
 .foot-bottom{position:relative;z-index:1;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-top:46px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;color:rgba(255,255,255,.45)}
 .foot-up{color:rgba(255,255,255,.6)}.foot-up:hover{color:#e3c592}
 .foot-word{position:absolute;left:50%;bottom:-.28em;transform:translateX(-50%);font-family:Halel;font-size:clamp(110px,22vw,340px);line-height:1;color:#fff;opacity:.035;white-space:nowrap;pointer-events:none}
@@ -957,18 +961,15 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
     <div class="foot-brand">
       <img src="assets/img/logo-light.webp" alt="נריה להב · מוהל מוסמך" loading="lazy">
       <p class="foot-line">ליווי אישי לברית, מהשיחה הראשונה ועד ההחלמה.</p>
-      <div class="foot-cta">
-        <a class="foot-wa" href="https://wa.me/972542233665" target="_blank" rel="noopener">כתבו לי בוואטסאפ</a>
-        <a class="foot-ph" href="tel:+972542233665" dir="ltr">054-2233665</a>
-      </div>
     </div>
     <nav class="foot-col" aria-label="ניווט תחתון">
       <h4>באתר</h4>
-      <a href="#about">היכרות</a><a href="#process">איך זה עובד</a><a href="#included">מה מקבלים</a><a href="#voices">המלצות</a><a href="#faq">שאלות נפוצות</a>
+      <div class="foot-links"><a href="#about"><span data-t="היכרות">היכרות</span></a><a href="#process"><span data-t="איך זה עובד">איך זה עובד</span></a><a href="#included"><span data-t="מה מקבלים">מה מקבלים</span></a><a href="#voices"><span data-t="המלצות">המלצות</span></a><a href="#faq"><span data-t="שאלות נפוצות">שאלות נפוצות</span></a><a href="#contact"><span data-t="צור קשר">צור קשר</span></a></div>
     </nav>
     <div class="foot-col">
       <h4>אזורי שירות</h4>
-      <span>ירושלים והסביבה</span><span>בכל הארץ בתיאום מראש</span><span>זמין 24/7</span>
+      <span class="foot-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> ירושלים והסביבה</span><span class="foot-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h6.5a3.5 3.5 0 0 0 0-7h-5a3.5 3.5 0 0 1 0-7H16"/></svg> בכל הארץ בתיאום מראש</span><span class="foot-i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> זמין 24/7</span>
+      <div class="foot-cta"><a class="cbtn cbtn-gold cbtn-sm" href="https://wa.me/972542233665" target="_blank" rel="noopener"><span class="cb-bg" aria-hidden="true"><i></i><i></i></span><span class="cb-label">כתבו לי בוואטסאפ</span><span class="cb-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span></a><a class="cbtn cbtn-sand cbtn-sm" href="tel:+972542233665"><span class="cb-bg" aria-hidden="true"><i></i><i></i></span><span class="cb-label"><span dir="ltr">054-2233665</span></span><span class="cb-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></span></a></div>
     </div>
   </div>
   <div class="wrap foot-bottom"><span>© <span id="y"></span> נריה להב · מוהל מוסמך</span><a href="#top" class="foot-up">חזרה למעלה ↑</a></div>
