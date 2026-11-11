@@ -419,6 +419,29 @@ section{position:relative}
 .dots i{width:11px;height:11px;border-radius:6px;background:rgba(21,56,72,.32);cursor:pointer;transition:all .4s}
 .dots i.on{width:36px;background:var(--gold)}
 
+/* ---------- moments: a pinned, horizontally drifting gallery ---------- */
+.moments{position:relative;background:var(--paper);height:300vh}
+.mo-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:clamp(18px,3vh,34px)}
+.mo-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.mo-head h2{font-size:clamp(40px,6vw,76px);line-height:1;color:var(--navy)}
+.mo-head p{color:var(--muted);max-width:34ch}
+.mo-track{display:flex;align-items:center;gap:clamp(18px,2.4vw,36px);padding-inline:var(--pad);width:max-content;will-change:transform}
+.mo-item{margin:0;flex:none;cursor:zoom-in;--h:clamp(220px,46vh,460px)}
+.mo-item:nth-child(3n+2){--h:clamp(190px,36vh,360px);align-self:flex-start;margin-top:4vh}
+.mo-item:nth-child(3n){--h:clamp(210px,42vh,420px);align-self:flex-end;margin-bottom:2vh}
+.mo-frame{height:var(--h);aspect-ratio:4/5;overflow:hidden;border-radius:18px;background:var(--cream);
+  clip-path:inset(var(--cl,0%) 0 0 0 round 18px);transition:clip-path .2s linear}
+.mo-item:nth-child(even) .mo-frame{aspect-ratio:3/2}
+.mo-frame img{width:118%;height:100%;max-width:none;object-fit:cover;transform:translateX(var(--px,0px)) scale(var(--sc,1.08));transition:transform .2s linear,filter .5s;filter:saturate(.92)}
+.mo-item:hover .mo-frame img{filter:saturate(1.05)}
+.mo-item figcaption{display:flex;align-items:baseline;gap:10px;margin-top:12px;color:var(--muted);font-size:14px}
+.mo-item figcaption b{font-family:Halel;font-weight:400;font-size:22px;color:var(--gold)}
+.mo-foot{display:flex;align-items:center;gap:18px}
+.mo-bar{flex:1;height:2px;background:rgba(21,56,72,.12);border-radius:2px;overflow:hidden}
+.mo-bar i{display:block;height:100%;width:100%;background:var(--gold);transform-origin:right;transform:scaleX(0)}
+.mo-count{font-family:Halel;font-size:20px;color:var(--muted);direction:ltr}
+.mo-count b{font-weight:400;color:var(--gold)}
+@media (prefers-reduced-motion:reduce){.moments{height:auto}.mo-pin{position:static;height:auto;padding:80px 0}.mo-track{overflow-x:auto;width:auto}}
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:100;background:rgba(15,43,56,.92);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .4s}
 .lb.open{opacity:1;pointer-events:auto}
@@ -780,13 +803,8 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
   <div class="wrap">
     <div class="sec-head">
       <h2 class="h split" data-split>מה ההורים מספרים</h2>
+      <p data-r>משפחות שכבר עברו את הרגע הזה, במילים ובסרטונים שלהן.</p>
     </div>
-    <div class="tabs" role="tablist" data-r>
-      <span class="pill" aria-hidden="true"></span>
-      <button role="tab" aria-selected="true" aria-controls="p-video" id="t-video">בסרטון</button>
-      <button role="tab" aria-selected="false" aria-controls="p-gallery" id="t-gallery">רגעים מבריתות</button>
-    </div>
-
     <div class="panel" id="p-video" role="tabpanel" aria-labelledby="t-video">
       <div class="reels-row">
       <div class="reels-col">
@@ -832,19 +850,6 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
       </div>
     </div>
 
-    <div class="panel" id="p-gallery" role="tabpanel" aria-labelledby="t-gallery" hidden>
-      <div class="gallery" id="gallery">
-        <figure><img src="assets/img/tender.webp" alt="הסנדק מחזיק את התינוק בעדינות" loading="lazy"></figure>
-        <figure><img src="assets/img/elder.webp" alt="סבא עטוף בטלית בברית" loading="lazy"></figure>
-        <figure><img src="assets/img/kos.webp" alt="ברכה על כוס היין" loading="lazy"></figure>
-        <figure><img src="assets/img/father2.webp" alt="האב מחזיק את התינוק" loading="lazy"></figure>
-        <figure><img src="assets/img/baby.webp" alt="התינוק בכרית הברית" loading="lazy"></figure>
-        <figure><img src="assets/img/certificate.webp" alt="מסירת תעודת הברית למשפחה" loading="lazy"></figure>
-        <figure><img src="assets/img/blessing.webp" alt="ברכות בטקס הברית" loading="lazy"></figure>
-        <figure><img src="assets/img/focus.webp" alt="נריה בזמן הטקס" loading="lazy"></figure>
-        <figure><img src="assets/img/family.webp" alt="המשפחה מתאספת סביב התינוק" loading="lazy"></figure>
-      </div>
-    </div>
 
     <div class="mail" id="mail">
       <div class="mail-ink" aria-hidden="true"><p>נריה הגיע אלינו<br>לבית לפני הברית לראות את<br>התינוק, והסביר לנו על כל שלב<br>בברית בצורה מפורטת ומרגיעה. היה אפשר<br>להתייעץ איתו על כל דבר. בברית עצמה<br>הכל נעשה במקצועיות. נריה הסביר לנו בדיוק<br>מה לעשות בימים שאחרי הברית, והגיע<br>לראות את התינוק. הרגשנו שאנו בידיים<br>בטוחות ושהכל נעשה בצורה מקצועית<br>ונעימה. ממליצים בחום!<span class="ink-sig">יהונתן ובת ציון</span></p></div>
@@ -887,6 +892,28 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
         </article>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============ MOMENTS: pinned horizontal gallery ============ -->
+<section class="moments grain" id="moments" aria-label="רגעים מבריתות">
+  <div class="mo-pin">
+    <div class="wrap mo-head">
+      <h2 class="h">רגעים מבריתות</h2>
+      <p>גוללים, והרגעים עוברים לאט. לחיצה על תמונה מגדילה אותה.</p>
+    </div>
+    <div class="mo-track" id="gallery">
+      <figure class="mo-item" style="--k:0"><div class="mo-frame"><img src="assets/img/tender.webp" alt="הסנדק מחזיק את התינוק בעדינות" loading="lazy"></div><figcaption><b>01</b><span>הסנדק מחזיק את התינוק בעדינות</span></figcaption></figure>
+      <figure class="mo-item" style="--k:1"><div class="mo-frame"><img src="assets/img/elder.webp" alt="סבא עטוף בטלית בברית" loading="lazy"></div><figcaption><b>02</b><span>סבא עטוף בטלית בברית</span></figcaption></figure>
+      <figure class="mo-item" style="--k:2"><div class="mo-frame"><img src="assets/img/kos.webp" alt="ברכה על כוס היין" loading="lazy"></div><figcaption><b>03</b><span>ברכה על כוס היין</span></figcaption></figure>
+      <figure class="mo-item" style="--k:3"><div class="mo-frame"><img src="assets/img/father2.webp" alt="האב מחזיק את התינוק" loading="lazy"></div><figcaption><b>04</b><span>האב מחזיק את התינוק</span></figcaption></figure>
+      <figure class="mo-item" style="--k:4"><div class="mo-frame"><img src="assets/img/baby.webp" alt="התינוק בכרית הברית" loading="lazy"></div><figcaption><b>05</b><span>התינוק בכרית הברית</span></figcaption></figure>
+      <figure class="mo-item" style="--k:5"><div class="mo-frame"><img src="assets/img/certificate.webp" alt="מסירת תעודת הברית למשפחה" loading="lazy"></div><figcaption><b>06</b><span>מסירת תעודת הברית למשפחה</span></figcaption></figure>
+      <figure class="mo-item" style="--k:6"><div class="mo-frame"><img src="assets/img/blessing.webp" alt="ברכות בטקס הברית" loading="lazy"></div><figcaption><b>07</b><span>ברכות בטקס הברית</span></figcaption></figure>
+      <figure class="mo-item" style="--k:7"><div class="mo-frame"><img src="assets/img/focus.webp" alt="נריה בזמן הטקס" loading="lazy"></div><figcaption><b>08</b><span>נריה בזמן הטקס</span></figcaption></figure>
+      <figure class="mo-item" style="--k:8"><div class="mo-frame"><img src="assets/img/family.webp" alt="המשפחה מתאספת סביב התינוק" loading="lazy"></div><figcaption><b>09</b><span>המשפחה מתאספת סביב התינוק</span></figcaption></figure>
+    </div>
+    <div class="wrap mo-foot"><div class="mo-bar"><i id="moBar"></i></div><span class="mo-count"><b id="moNow">01</b> / 09</span></div>
   </div>
 </section>
 
@@ -1022,7 +1049,7 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
   document.fonts&&document.fonts.ready.then(()=>$$('.tabs').forEach(pill));
 
   const vt=$('#voices .tabs');
-  $$('button',vt).forEach(b=>b.addEventListener('click',()=>{
+  if(vt)$$('button',vt).forEach(b=>b.addEventListener('click',()=>{
     $$('button',vt).forEach(x=>x.setAttribute('aria-selected',x===b));pill(vt);
     $$('#voices .panel').forEach(p=>p.hidden=p.id!==b.getAttribute('aria-controls'));
     $$('#reels video').forEach(v=>v.pause());
@@ -1135,13 +1162,29 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
       const p=Math.min(1,Math.max(0,(innerHeight-r.top)/r.height));w.style.transform='translateX(calc(-50% + '+((p-.5)*innerWidth*.28).toFixed(1)+'px))'};
     addEventListener('scroll',()=>{if(!q)q=requestAnimationFrame(go)},{passive:true});addEventListener('resize',go);go();
   })();
+
+  /* moments: vertical scroll drives a horizontal walk through the photos */
+  (()=>{const sec=$('#moments');if(!sec||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    const track=$('.mo-track',sec),items=$$('.mo-item',sec),bar=$('#moBar'),now=$('#moNow');let D=0,q=0;
+    const size=()=>{D=Math.max(0,track.scrollWidth-innerWidth);sec.style.height=(innerHeight+D*1.15)+'px';go()};
+    const go=()=>{q=0;const r=sec.getBoundingClientRect(),run=sec.offsetHeight-innerHeight;
+      const p=Math.min(1,Math.max(0,-r.top/Math.max(1,run)));track.style.transform='translate3d('+(p*D).toFixed(1)+'px,0,0)';
+      bar.style.transform='scaleX('+p.toFixed(4)+')';let best=0,bd=1e9;const mid=innerWidth/2;
+      items.forEach((it,i)=>{const b=it.getBoundingClientRect(),c=b.left+b.width/2,d=(c-mid)/innerWidth;
+        const f=it.querySelector('.mo-frame');const enter=Math.min(1,Math.max(0,(innerWidth-b.left)/(innerWidth*.35)));
+        f.style.setProperty('--cl',((1-enter)*100).toFixed(1)+'%');
+        f.style.setProperty('--px',(-d*60-8).toFixed(1)+'px');f.style.setProperty('--sc',(1.08+Math.abs(d)*.06).toFixed(3));
+        if(Math.abs(c-mid)<bd){bd=Math.abs(c-mid);best=i}});
+      now.textContent=String(best+1).padStart(2,'0')};
+    addEventListener('scroll',()=>{if(!q)q=requestAnimationFrame(go)},{passive:true});addEventListener('resize',size);addEventListener('load',size);size();
+  })();
   /* skyline parallax: far layers lag behind the scroll */
   $$('.sky').forEach(sky=>{const ls=[...sky.querySelectorAll('[data-px]')];let q=0;
     const go=()=>{q=0;const r=sky.getBoundingClientRect();if(r.bottom<-200||r.top>innerHeight+200)return;
       const p=Math.min(1,Math.max(0,(innerHeight-r.top)/(innerHeight+r.height)));
       ls.forEach(l=>l.style.transform='translate3d('+((p-.5)*(+l.dataset.pxx||0)).toFixed(1)+'px,'+((p-.5)*r.height*+l.dataset.px).toFixed(1)+'px,0)')};
     addEventListener('scroll',()=>{if(!q)q=requestAnimationFrame(go)},{passive:true});addEventListener('resize',go);go();
-  })();
+  });
 
   /* hero photos: span header→card, slide left of whatever text shares their height */
   (()=>{const pics=document.querySelector('.hero-pics');if(!pics)return;
