@@ -222,6 +222,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .sky-c0,.sky-c2{top:-38px}
 @media (max-width:699px){.sky-l{width:240%;left:-70%}.sky-c0,.sky-c2{top:-48px}}
 .sky-cloud{position:absolute;display:block;height:auto;pointer-events:none;will-change:transform}
+.cl-back{opacity:.4;scale:-1 1}
+.cb-1{left:22%;bottom:-28px;width:clamp(240px,30vw,480px)}
+.cb-2{right:24%;bottom:-34px;width:clamp(200px,24vw,380px)}
+.cb-3{left:-4%;bottom:-20px;width:clamp(160px,18vw,280px)}
 .cl-a{left:3%;bottom:-6px;width:clamp(200px,24vw,380px)}
 .cl-b{left:40%;bottom:12px;width:clamp(110px,12vw,190px);opacity:.85}
 .cl-c{right:4%;bottom:-2px;width:clamp(230px,29vw,460px)}
@@ -666,6 +670,9 @@ footer img{height:46px;width:auto;margin:0 auto 22px;opacity:.95}
     <filter id="brush2" x="-5%" y="-30%" width="110%" height="160%"><feTurbulence type="fractalNoise" baseFrequency=".011 .07" numOctaves="4" seed="9"/><feDisplacementMap in="SourceGraphic" scale="28" xChannelSelector="R" yChannelSelector="G"/><feGaussianBlur stdDeviation=".5"/></filter>
     <filter id="brush3" x="-5%" y="-30%" width="110%" height="160%"><feTurbulence type="fractalNoise" baseFrequency=".014 .09" numOctaves="3" seed="15"/><feDisplacementMap in="SourceGraphic" scale="22" xChannelSelector="R" yChannelSelector="G"/></filter>
   </defs></svg>
+  <img class="sky-cloud cl-back cb-1" src="assets/img/c-long.webp" alt="" loading="lazy" data-px=".18" data-pxx="25">
+  <img class="sky-cloud cl-back cb-2" src="assets/img/c-tall.webp" alt="" loading="lazy" data-px=".22" data-pxx="-20">
+  <img class="sky-cloud cl-back cb-3" src="assets/img/c-small.webp" alt="" loading="lazy" data-px=".15" data-pxx="15">
   <img class="sky-cloud cl-a" src="assets/img/c-tall.webp" alt="" loading="lazy" data-px=".45" data-pxx="-40">
   <img class="sky-cloud cl-b" src="assets/img/c-small.webp" alt="" loading="lazy" data-px=".7" data-pxx="30">
   <img class="sky-cloud cl-c" src="assets/img/c-long.webp" alt="" loading="lazy" data-px=".3" data-pxx="55">
