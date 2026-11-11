@@ -223,6 +223,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @media (max-width:699px){.sky-l{width:240%;left:-70%}.sky-c0,.sky-c2{top:-48px}}
 .sky-cloud{position:absolute;display:block;height:auto;pointer-events:none;will-change:transform}
 .cl-back{opacity:.4;scale:-1 1}
+.faq .sky-cloud{scale:-1 1}.faq .cl-back{scale:1 1}
 .cb-1{left:22%;bottom:-28px;width:clamp(240px,30vw,480px)}
 .cb-2{right:24%;bottom:-34px;width:clamp(200px,24vw,380px)}
 .cb-3{left:-4%;bottom:-20px;width:clamp(160px,18vw,280px)}
@@ -247,7 +248,8 @@ section{position:relative}
 /* ---------- about ---------- */
 .about{background:var(--paper)}
 .about-grid{display:grid;gap:44px}
-.portrait{position:relative;width:min(320px,80%);margin-inline:auto;margin-block:20px 34px}
+.portrait{position:relative;width:min(240px,62%);margin-inline:28% auto;margin-block:30px 120px}
+@media (max-width:699px){.portrait{width:62%;margin-inline:auto 0;margin-block:70px 110px}.portrait .otag{font-size:12px;padding:7px 10px 7px 13px;gap:8px}.portrait .otag small{font-size:9.5px;margin:0}.portrait .otag b{font-size:24px;padding-inline-start:8px}}
 .portrait .blob{aspect-ratio:1;border-radius:46% 54% 50% 50%/52% 48% 52% 48%;overflow:hidden;background:var(--cream);box-shadow:0 30px 60px -30px rgba(21,56,72,.5);animation:morph 14s ease-in-out infinite}
 .portrait .blob img{width:100%;height:100%;object-fit:cover;transform:scale(1.05)}
 @keyframes morph{50%{border-radius:54% 46% 44% 56%/46% 56% 44% 54%}}
@@ -265,7 +267,9 @@ section{position:relative}
 .tag:hover{transform:translateY(-3px)}
 /* "5 years" as a round glass badge on the photo's edge */
 /* the credentials, as a row under the signature */
-.sign-tags{display:flex;flex-wrap:wrap;gap:14px;margin-top:4px}
+.portrait .otag{position:absolute;left:0;top:0;z-index:2;white-space:nowrap;animation:none;opacity:0;will-change:transform,opacity;transition:none}
+.portrait .otag:hover{transform:none}
+.portrait .otag b{font-size:34px}
 .sign-tags .tag b{border:0;padding:0;font-size:38px}
 .sign-tags .tag{animation:none;font-size:14px;padding:14px 20px;gap:14px;flex-direction:row;
   background:linear-gradient(135deg,rgba(255,255,255,.34),rgba(255,255,255,.12))}
@@ -453,13 +457,23 @@ section{position:relative}
 .final .phone{display:block;margin-top:26px;font-family:Halel;font-size:40px;letter-spacing:.04em;color:#fff;direction:ltr}
 .final .blessing{margin-top:40px;font-family:Halel;font-size:26px;color:var(--gold-2)}
 
-footer{background:var(--navy-2);color:rgba(255,255,255,.55);font-size:13px;padding:44px 0 110px;text-align:center}
-footer img{height:46px;width:auto;margin:0 auto 22px;opacity:.95}
-.foot-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 26px;margin-bottom:18px}
-.foot-nav a,.foot-contact a{color:rgba(255,255,255,.82);font-size:15px;transition:color .3s}
-.foot-nav a:hover,.foot-contact a:hover{color:#e3c592}
-.foot-contact{display:flex;justify-content:center;gap:12px;margin-bottom:22px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.1)}
-.foot-meta+.foot-meta{margin-top:6px}
+footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255,255,255,.62);font-size:14.5px;padding:0 0 110px;text-align:right}
+.foot-band{height:46px;background:var(--navy-2);margin-top:-45px;position:relative;
+  -webkit-mask:url(assets/img/baby-band.png) repeat-x left bottom/1046px 46px;mask:url(assets/img/baby-band.png) repeat-x left bottom/1046px 46px}
+.foot{display:grid;gap:36px;padding-top:54px;position:relative;z-index:1}
+.foot-brand img{height:50px;width:auto;margin-bottom:16px}
+.foot-line{font-family:Eshchar,Halel,cursive;font-size:24px;color:#e3c592;line-height:1.2;max-width:22ch}
+.foot-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.foot-cta a{display:inline-flex;align-items:center;height:46px;padding:0 22px;border-radius:999px;font-weight:600;font-size:15px;transition:background .3s,color .3s}
+.foot-wa{background:#25D366;color:#fff}.foot-wa:hover{background:#1fb457}
+.foot-ph{border:1px solid rgba(255,255,255,.25);color:#fff}.foot-ph:hover{background:#fff;color:var(--navy)}
+.foot-col{display:flex;flex-direction:column;gap:10px}
+.foot-col h4{font-family:Halel;font-weight:400;font-size:24px;color:#fff;margin-bottom:4px}
+.foot-col a{color:rgba(255,255,255,.72);width:max-content;background:linear-gradient(#e3c592,#e3c592) right bottom/0 1px no-repeat;transition:color .3s,background-size .45s var(--ease)}
+.foot-col a:hover{color:#e3c592;background-size:100% 1px}
+.foot-bottom{position:relative;z-index:1;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-top:46px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;color:rgba(255,255,255,.45)}
+.foot-up{color:rgba(255,255,255,.6)}.foot-up:hover{color:#e3c592}
+.foot-word{position:absolute;left:50%;bottom:-.28em;transform:translateX(-50%);font-family:Halel;font-size:clamp(110px,22vw,340px);line-height:1;color:#fff;opacity:.035;white-space:nowrap;pointer-events:none}
 
 /* ---------- floating whatsapp ---------- */
 .fab{position:fixed;z-index:60;bottom:calc(18px + env(safe-area-inset-bottom));right:18px;transform:translateY(160%);transition:transform .6s var(--ease)}
@@ -526,7 +540,7 @@ footer img{height:46px;width:auto;margin:0 auto 22px;opacity:.95}
   .hero .lede{font-size:20px}
   .hero h1 .gold{font-size:.8em;margin-inline-start:1.6em}
   .about-grid{grid-template-columns:.85fr 1.15fr;align-items:center;gap:80px}
-  .portrait{width:80%;margin-inline:18% 2%}
+  .portrait{width:66%;margin-inline:30% 4%;margin-block:20px 110px}
 
   .steps{grid-template-columns:repeat(4,1fr);gap:clamp(48px,5.5vw,100px)}
   .step{grid-template-columns:1fr}
@@ -542,7 +556,8 @@ footer img{height:46px;width:auto;margin:0 auto 22px;opacity:.95}
   .reels{--w:300px;margin-inline:0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
   .reel.quote{aspect-ratio:9/16;min-height:0}
   .fab{right:28px;bottom:28px}
-  footer{padding-bottom:40px}
+  footer{padding-bottom:60px}
+  .foot{grid-template-columns:1.4fr 1fr 1fr;gap:60px}
 }
 </style>
 </head>
@@ -637,6 +652,10 @@ footer img{height:46px;width:auto;margin:0 auto 22px;opacity:.95}
   <div class="wrap about-grid">
     <div class="portrait" data-r="s">
       <span class="ring" aria-hidden="true"></span>
+      <div class="tag otag"><b>5</b><span><small>שנים של</small>בריתות מרגשות</span></div>
+      <div class="tag otag"><i></i><span><small>מוסמך</small>משרד הבריאות</span></div>
+      <div class="tag otag"><i></i><span><small>הסמכת</small>הרבנות הראשית</span></div>
+      <div class="tag otag"><i></i><span><small>מאושר</small>המשרד לשירותי דת</span></div>
       <div class="blob"><img src="assets/img/profile.webp" alt="נריה להב, מוהל מוסמך" loading="lazy" width="900" height="900"></div>
     </div>
     <div class="letter">
@@ -647,12 +666,6 @@ footer img{height:46px;width:auto;margin:0 auto 22px;opacity:.95}
       <p class="pull" data-r>אני כאן כדי להקל עליכם.</p>
       <p data-r>עם <strong>הסמכה מטעם הרבנות הראשית</strong>, <strong>ברישיון משרד הבריאות</strong>, ניסיון של שנים בתחום והכשרה אצל בכירי המוהלים בארץ. בעדינות ובמקצועיות, אני עושה הכל כדי שהרגע הזה יהיה בדיוק כמו שחלמתם: בטוח, מרגש ומשמעותי.</p>
       <div class="sign" data-r><div><span class="name">אני אתכם לאורך כל הדרך.</span><small>נריה להב · מוהל מוסמך</small><span class="sig" aria-hidden="true"><span class="sig-t">נריה להב</span></span></div></div>
-      <div class="sign-tags" data-r>
-        <div class="tag"><b>5</b><span><small>שנים של</small>בריתות מרגשות</span></div>
-        <div class="tag"><i></i><span><small>מוסמך</small>משרד הבריאות</span></div>
-        <div class="tag"><i></i><span><small>הסמכת</small>הרבנות הראשית</span></div>
-        <div class="tag"><i></i><span><small>מאושר</small>המשרד לשירותי דת</span></div>
-      </div>
     </div>
   </div>
 </section>
@@ -871,9 +884,13 @@ footer img{height:46px;width:auto;margin:0 auto 22px;opacity:.95}
 <!-- ============ FAQ ============ -->
 <section class="faq sec grain" id="faq">
 <div class="sky" aria-hidden="true">
-  <svg class="sky-l sky-c0" viewBox="0 0 1440 240" preserveAspectRatio="none" data-px=".6" data-pxx="-70"><path d="M-20 122.5 L0 122.5 L16 123.2 L32 124.1 L48 125.2 L64 126.4 L80 127.7 L96 129.1 L112 130.6 L128 132.1 L144 133.5 L160 135.0 L176 136.4 L192 137.7 L208 138.9 L224 139.9 L240 140.8 L256 141.6 L272 142.1 L288 142.5 L304 142.6 L320 142.6 L336 142.3 L352 141.8 L368 141.2 L384 140.3 L400 139.3 L416 138.2 L432 136.9 L448 135.6 L464 134.2 L480 132.7 L496 131.2 L512 129.7 L528 128.3 L544 127.0 L560 125.7 L576 124.6 L592 123.6 L608 122.8 L624 122.1 L640 121.7 L656 121.4 L672 121.4 L688 121.6 L704 121.9 L720 122.5 L736 123.2 L752 124.1 L768 125.2 L784 126.4 L800 127.7 L816 129.1 L832 130.6 L848 132.1 L864 133.5 L880 135.0 L896 136.4 L912 137.7 L928 138.9 L944 139.9 L960 140.8 L976 141.6 L992 142.1 L1008 142.5 L1024 142.6 L1040 142.6 L1056 142.3 L1072 141.8 L1088 141.2 L1104 140.3 L1120 139.3 L1136 138.2 L1152 136.9 L1168 135.6 L1184 134.2 L1200 132.7 L1216 131.2 L1232 129.7 L1248 128.3 L1264 127.0 L1280 125.7 L1296 124.6 L1312 123.6 L1328 122.8 L1344 122.1 L1360 121.7 L1376 121.4 L1392 121.4 L1408 121.6 L1424 121.9 L1440 122.5 L1460 600 L-20 600Z" fill="url(#fadeB)" filter="url(#feather2)"/></svg>
-  <svg class="sky-l sky-c2" viewBox="0 0 1440 240" preserveAspectRatio="none" data-px=".3" data-pxx="80"><path d="M-20 98.6 L0 98.6 L16 100.2 L32 103.6 L48 108.7 L64 114.8 L80 121.6 L96 128.4 L112 134.7 L128 140.0 L144 143.9 L160 146.2 L176 146.8 L192 145.7 L208 143.3 L224 139.8 L240 135.5 L256 131.0 L272 126.5 L288 122.4 L304 118.9 L320 116.2 L336 114.2 L352 113.0 L368 112.5 L384 112.4 L400 112.7 L416 113.1 L432 113.7 L448 114.3 L464 115.1 L480 115.9 L496 117.0 L512 118.5 L528 120.3 L544 122.6 L560 125.3 L576 128.2 L592 131.3 L608 134.3 L624 137.0 L640 139.0 L656 140.1 L672 140.2 L688 139.1 L704 136.8 L720 133.5 L736 129.4 L752 124.9 L768 120.3 L784 116.0 L800 112.4 L816 109.9 L832 108.6 L848 108.7 L864 110.2 L880 112.8 L896 116.2 L912 120.1 L928 124.1 L944 127.6 L960 130.3 L976 131.9 L992 132.4 L1008 131.6 L1024 129.7 L1040 127.0 L1056 123.9 L1072 120.8 L1088 118.2 L1104 116.5 L1120 115.9 L1136 116.5 L1152 118.5 L1168 121.7 L1184 125.7 L1200 130.1 L1216 134.4 L1232 138.2 L1248 140.8 L1264 142.0 L1280 141.5 L1296 139.3 L1312 135.4 L1328 130.2 L1344 124.0 L1360 117.5 L1376 111.2 L1392 105.7 L1408 101.5 L1424 99.1 L1440 98.6 L1460 600 L-20 600Z" fill="url(#fadeA)" filter="url(#feather)"/></svg>
-  <div class="sky-band"></div>
+    <img class="sky-cloud cl-back cb-1" src="assets/img/c-long.webp" alt="" loading="lazy" data-px=".18" data-pxx="25">
+  <img class="sky-cloud cl-back cb-2" src="assets/img/c-tall.webp" alt="" loading="lazy" data-px=".22" data-pxx="-20">
+  <img class="sky-cloud cl-back cb-3" src="assets/img/c-small.webp" alt="" loading="lazy" data-px=".15" data-pxx="15">
+  <img class="sky-cloud cl-a" src="assets/img/c-tall.webp" alt="" loading="lazy" data-px=".45" data-pxx="-40">
+  <img class="sky-cloud cl-b" src="assets/img/c-small.webp" alt="" loading="lazy" data-px=".7" data-pxx="30">
+  <img class="sky-cloud cl-c" src="assets/img/c-long.webp" alt="" loading="lazy" data-px=".3" data-pxx="55">
+<div class="sky-band"></div>
 </div>
   <div class="wrap">
     <div class="sec-head">
@@ -935,17 +952,27 @@ footer img{height:46px;width:auto;margin:0 auto 22px;opacity:.95}
 </main>
 
 <footer>
+  <div class="foot-band" aria-hidden="true"></div>
   <div class="wrap foot">
-    <img src="assets/img/logo-light.webp" alt="נריה להב · מוהל מוסמך" loading="lazy">
-    <nav class="foot-nav" aria-label="ניווט תחתון">
-      <a href="#about">היכרות</a><a href="#process">איך זה עובד</a><a href="#included">מה מקבלים</a><a href="#voices">המלצות</a><a href="#faq">שאלות נפוצות</a><a href="#contact">צור קשר</a>
-    </nav>
-    <div class="foot-contact">
-      <a href="tel:+972542233665" dir="ltr">054-2233665</a><span aria-hidden="true">·</span><a href="https://wa.me/972542233665" target="_blank" rel="noopener">וואטסאפ</a>
+    <div class="foot-brand">
+      <img src="assets/img/logo-light.webp" alt="נריה להב · מוהל מוסמך" loading="lazy">
+      <p class="foot-line">ליווי אישי לברית, מהשיחה הראשונה ועד ההחלמה.</p>
+      <div class="foot-cta">
+        <a class="foot-wa" href="https://wa.me/972542233665" target="_blank" rel="noopener">כתבו לי בוואטסאפ</a>
+        <a class="foot-ph" href="tel:+972542233665" dir="ltr">054-2233665</a>
+      </div>
     </div>
-    <div class="foot-meta">מוהל מוסמך · ירושלים והסביבה · בכל הארץ בתיאום מראש</div>
-    <div class="foot-meta">© <span id="y"></span> נריה להב</div>
+    <nav class="foot-col" aria-label="ניווט תחתון">
+      <h4>באתר</h4>
+      <a href="#about">היכרות</a><a href="#process">איך זה עובד</a><a href="#included">מה מקבלים</a><a href="#voices">המלצות</a><a href="#faq">שאלות נפוצות</a>
+    </nav>
+    <div class="foot-col">
+      <h4>אזורי שירות</h4>
+      <span>ירושלים והסביבה</span><span>בכל הארץ בתיאום מראש</span><span>זמין 24/7</span>
+    </div>
   </div>
+  <div class="wrap foot-bottom"><span>© <span id="y"></span> נריה להב · מוהל מוסמך</span><a href="#top" class="foot-up">חזרה למעלה ↑</a></div>
+  <div class="foot-word" aria-hidden="true">נריה להב</div>
 </footer>
 
 <div class="fab" id="fab">
@@ -1081,6 +1108,19 @@ footer img{height:46px;width:auto;margin:0 auto 22px;opacity:.95}
       let next=pos+d*w;if(next>max+5)next=0;if(next<-5)next=max;track.scrollTo({left:-next,behavior:'smooth'})};
     $('#mailNext').addEventListener('click',()=>step(1));$('#mailPrev').addEventListener('click',()=>step(-1));
     new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){mail.classList.add('open');o.disconnect()}})},{threshold:.3}).observe(mail);
+  })();
+
+  /* about tags: they glide along the dashed ring into the lower-right third as you scroll */
+  (()=>{const pt=$('.portrait');if(!pt)return;const tg=$$('.otag',pt);if(!tg.length)return;
+    const still=matchMedia('(prefers-reduced-motion: reduce)').matches;let q=0;
+    const target=()=>innerWidth<700?[-30,0,28,62]:[-24,10,44,100];
+    const go=()=>{q=0;const r=pt.getBoundingClientRect(),vh=innerHeight,R=r.width/2+14,cx=r.width/2,cy=r.height/2;
+      const P=still?1:Math.min(1,Math.max(0,(vh*.95-r.top)/(vh*.75)));const T=target();
+      tg.forEach((t,k)=>{const e0=Math.min(1,Math.max(0,(P-k*.1)/.6)),e=1-Math.pow(1-e0,3);
+        const a=(T[k]-(1-e)*95)*Math.PI/180;const dot=innerWidth<700?15:24;
+        t.style.transform='translate('+(cx+R*Math.cos(a)-dot).toFixed(1)+'px,'+(cy+R*Math.sin(a)-t.offsetHeight/2).toFixed(1)+'px)';
+        t.style.opacity=e.toFixed(3)})};
+    addEventListener('scroll',()=>{if(!q)q=requestAnimationFrame(go)},{passive:true});addEventListener('resize',go);addEventListener('load',go);go();
   })();
   /* skyline parallax: far layers lag behind the scroll */
   $$('.sky').forEach(sky=>{const ls=[...sky.querySelectorAll('[data-px]')];let q=0;
