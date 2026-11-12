@@ -325,10 +325,14 @@ section{position:relative}
 .inc-bg img{width:100%;height:100%;object-fit:cover;object-position:60% 30%;opacity:.42;transform:scale(1.04);filter:saturate(.3)}
 .inc-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--navy) 0%,rgba(21,56,72,.25) 18%,rgba(21,56,72,.3) 80%,var(--navy) 100%),linear-gradient(270deg,rgba(21,56,72,.7),rgba(21,56,72,.05) 55%)}
 .inc-layout{position:relative;z-index:1;display:grid;gap:36px}
-.inc-count{display:none;align-items:center;gap:14px;margin-top:44px;font-family:Halel;color:rgba(255,255,255,.55);font-size:22px;direction:ltr;justify-content:flex-end}
-.inc-count .roll{height:64px;display:flex;align-items:center;overflow:hidden}
-.inc-count b{display:block;font-weight:400;font-size:64px;line-height:1;color:#e3c592;transition:transform .5s cubic-bezier(.76,0,.24,1),opacity .4s}
-.inc-count i{width:64px;height:1px;background:rgba(255,255,255,.35)}
+.inc-count{display:none;align-items:center;gap:16px;margin-top:44px;font-family:Halel;color:rgba(255,255,255,.55);font-size:22px;direction:ltr;justify-content:flex-end;flex-wrap:wrap}
+.inc-count .roll{height:64px;overflow:hidden;display:block}
+.inc-count .roll-in{display:flex;flex-direction:column;transition:transform .8s cubic-bezier(.7,0,.2,1)}
+.inc-count .roll-in b{display:block;height:64px;font-weight:400;font-size:64px;line-height:64px;color:#e3c592}
+.inc-segs{display:flex;gap:6px;flex-basis:100%;justify-content:flex-end}
+.inc-segs i{width:28px;height:3px;border-radius:2px;background:rgba(255,255,255,.2);position:relative;overflow:hidden}
+.inc-segs i::after{content:"";position:absolute;inset:0;background:#e3c592;transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease)}
+.inc-segs i.on::after{transform:none}
 .inc-side h2{font-size:clamp(44px,6vw,76px);line-height:1}
 .inc-side p{color:rgba(255,255,255,.72);max-width:40ch;margin-top:16px;font-size:17px}
 /* stacked cards: each one sticks and the next slides over it */
@@ -360,8 +364,18 @@ section{position:relative}
 .reels{--w:min(72vw,280px);display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
   padding:34px 0 40px;margin-inline:calc(-1*var(--pad));overscroll-behavior-x:contain}
 .reels::-webkit-scrollbar{display:none}
-.reels .reel{flex:0 0 var(--w);transform:scale(.8);opacity:.55;transition:transform .6s var(--ease),opacity .6s var(--ease)}
-.reels .reel.active{transform:none;opacity:1}
+.reels .reel{flex:0 0 var(--w);transform:scale(.92);transition:transform .6s var(--ease)}
+.reels .reel.active{transform:none}
+.reels-wrap{position:relative}
+.reels-arrow{position:absolute;top:50%;z-index:3;width:54px;height:54px;margin-top:-27px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:#fff;border:0;cursor:pointer;box-shadow:0 16px 30px -14px rgba(21,56,72,.6);transition:background .3s,transform .3s}
+.reels-arrow:hover{background:var(--gold);transform:scale(1.06)}
+.reels-arrow svg{width:22px;height:22px}
+.ra-prev{right:0}.ra-next{left:0}
+@media (max-width:699px){.ra-prev{right:-6px}.ra-next{left:-6px}.reels-arrow{width:46px;height:46px;margin-top:-23px}}
+.reels-invite{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 22px;margin-top:30px;text-align:center}
+.reels-invite .q{font-family:Halel;font-size:60px;line-height:.5;color:var(--gold);height:22px}
+.reels-invite p{font-family:Halel;font-size:clamp(24px,2.6vw,32px);color:var(--navy)}
+.reels-invite a{font-weight:600;font-size:15px;color:var(--gold)}
 .reels::-webkit-scrollbar{display:none}
 .reel{flex:0 0 min(78%,300px);scroll-snap-align:center;position:relative;border-radius:28px;overflow:hidden;aspect-ratio:9/16;background:var(--navy);box-shadow:0 30px 50px -30px rgba(21,56,72,.7)}
 .reel video{width:100%;height:100%;object-fit:cover}
@@ -578,9 +592,7 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
   .inc-card{top:calc(130px + var(--i) * 16px);grid-template-rows:none;grid-template-columns:1.1fr .9fr;min-height:360px}
   .inc-img{grid-row:1;grid-column:2}
   .inc-body{grid-row:1;grid-column:1;justify-content:center;padding:40px 38px}
-  .reels-row{grid-template-columns:minmax(0,1fr) 300px;align-items:center;gap:36px}
-  .reels{--w:300px;margin-inline:0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
-  .reel.quote{aspect-ratio:9/16;min-height:0}
+  .reels{--w:300px;margin-inline:calc(50% - 50vw);padding-inline:calc(50vw - var(--w) / 2)}
   .fab{right:28px;bottom:28px}
   footer{padding-bottom:60px}
   .foot{display:flex;justify-content:space-between;align-items:flex-start;gap:60px}
@@ -755,7 +767,7 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
     <div class="inc-side">
       <h2 class="h split" data-split>מה מקבלים בליווי</h2>
       <p data-r>לא רק הטקס. כל מה שצריך כדי שתרגישו בידיים בטוחות, מהשיחה הראשונה ועד ההחלמה המלאה.</p>
-      <div class="inc-count" aria-hidden="true"><span class="roll"><b id="incNow">01</b></span><i></i><span>05</span></div>
+      <div class="inc-count" aria-hidden="true"><span class="roll"><span class="roll-in" id="incRoll"><b>01</b><b>02</b><b>03</b><b>04</b><b>05</b></span></span><span class="inc-of">/ 05</span><span class="inc-segs" id="incSegs"><i></i><i></i><i></i><i></i><i></i></span></div>
     </div>
     <div class="inc-stack">
       <article class="inc-card" style="--i:0">
@@ -802,6 +814,9 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
     <div class="panel" id="p-video" role="tabpanel" aria-labelledby="t-video">
       <div class="reels-row">
       <div class="reels-col">
+      <div class="reels-wrap">
+      <button class="reels-arrow ra-prev" id="reelsPrev" aria-label="הסרטון הקודם"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+      <button class="reels-arrow ra-next" id="reelsNext" aria-label="הסרטון הבא"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
       <div class="reels" id="reels">
         <div class="reel">
           <video src="assets/video/t1.mp4#t=0.8" preload="metadata" playsinline></video>
@@ -834,13 +849,10 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
           <div class="meta"><b>יוסף וחמדה</b><span>ירושלים</span></div>
         </div>
       </div>
-      <div class="dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
       </div>
-        <div class="reel quote">
-          <span class="q">״</span>
-          <p>הבן שלכם הבא? אשמח להיות חלק מהרגע הזה.</p>
-          <a href="https://wa.me/972542233665" target="_blank" rel="noopener">לשיחת היכרות ←</a>
-        </div>
+      <div class="dots" id="dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+      <div class="reels-invite"><span class="q">״</span><p>הבן שלכם הבא? אשמח להיות חלק מהרגע הזה.</p><a href="https://wa.me/972542233665" target="_blank" rel="noopener">לשיחת היכרות ←</a></div>
+      </div>
       </div>
     </div>
 
@@ -1071,6 +1083,8 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
       const target=N+best%N,act=kids()[best];center(target,false);
       kids().forEach((el,i)=>{el.style.transition='none';el.classList.toggle('active',i===target);el.offsetWidth;el.style.transition=''});best=target}},140)};
   reels.addEventListener('scroll',()=>requestAnimationFrame(syncReels),{passive:true});
+  $('#reelsNext')&&$('#reelsNext').addEventListener('click',()=>center(best+1,true));
+  $('#reelsPrev')&&$('#reelsPrev').addEventListener('click',()=>center(best-1,true));
   dots.forEach((d,i)=>d.addEventListener('click',()=>{const k=kids(),cur=best;let t=N+i;[i,N+i,2*N+i].forEach(j=>{if(Math.abs(j-cur)<Math.abs(t-cur))t=j});center(t,true)}));
   const init=()=>{center(N,false);syncReels()};addEventListener('load',init);init();
 
@@ -1119,15 +1133,13 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
   addEventListener('resize',draw);addEventListener('load',draw);setTimeout(draw,600);
 
   /* stacked cards: depth of each card = how much the later cards cover it */
-  (()=>{const cards=$$('.inc-card');if(!cards.length)return;const now=$('#incNow');let q=0,cur=-1;
+  (()=>{const cards=$$('.inc-card');if(!cards.length)return;let q=0,cur=-1;
     const go=()=>{q=0;const rs=cards.map(c=>c.getBoundingClientRect());let act=0;
       cards.forEach((c,i)=>{let d=0;for(let j=i+1;j<cards.length;j++)d+=Math.min(1,Math.max(0,(rs[i].bottom-rs[j].top)/rs[i].height));
-        c.style.setProperty('--d',Math.min(d,3).toFixed(3));if(rs[i].top<innerHeight*.55)act=i});
-      if(now&&act!==cur){cur=act;now.style.transform='translateY(-30%)';now.style.opacity=0;
-        setTimeout(()=>{now.textContent='0'+(act+1);now.style.transition='none';now.style.transform='translateY(30%)';
-          requestAnimationFrame(()=>{now.style.transition='';now.style.transform='';now.style.opacity=1})},250)}};
+        c.style.setProperty('--d',Math.min(d,3).toFixed(3));if(rs[i].top<innerHeight*.5)act=i});
+      if(act!==cur){cur=act;const r=$('#incRoll');if(r)r.style.transform='translateY('+(-64*act)+'px)';$$('#incSegs i').forEach((x,k)=>x.classList.toggle('on',k<=act))}};
     addEventListener('scroll',()=>{if(!q)q=requestAnimationFrame(go)},{passive:true});addEventListener('resize',go);go();
-  });
+  })();
 
   /* letters: slide out of the envelope one after another, then a simple slider */
   (()=>{const mail=$('#mail');if(!mail)return;const track=$('#notes');
