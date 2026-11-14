@@ -445,11 +445,15 @@ section{position:relative}
 
 /* ---------- moments: film strips drifting on gentle diagonals ---------- */
 .moments{background:var(--paper);overflow:clip;padding-bottom:110px}
-.films{position:relative;display:flex;flex-direction:column;gap:clamp(48px,6vw,84px);padding-block:50px;margin-top:10px}
+.films{position:relative;display:flex;flex-direction:column;gap:clamp(26px,4vw,54px);padding-block:30px;margin-top:10px}
 .film{--h:clamp(150px,17vw,240px);position:relative;width:130vw;margin-inline-start:-15vw}
 .f1{rotate:-3deg}.f2{rotate:2deg;margin-inline-start:-10vw}.f3{rotate:-1.2deg}
+.film-hero{position:absolute;left:50%;top:50%;z-index:3;width:clamp(260px,34vw,540px);aspect-ratio:3/2;translate:-50% -50%;border-radius:22px;overflow:hidden;
+  background:var(--cream);box-shadow:0 0 0 8px var(--paper),0 40px 70px -34px rgba(21,56,72,.6);pointer-events:none}
+.film-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity 1s ease,transform 1.6s cubic-bezier(.2,.7,.2,1)}
+.film-hero img.on{opacity:1;transform:none}
 .film-track{display:flex;gap:18px;width:max-content;will-change:transform}
-.fr{position:relative;margin:0;height:var(--h);aspect-ratio:3/2;flex:none;overflow:hidden;cursor:zoom-in;border-radius:16px;will-change:transform;background:var(--cream);box-shadow:0 22px 40px -30px rgba(21,56,72,.5)}
+.fr{margin:0;height:var(--h);aspect-ratio:3/2;flex:none;overflow:hidden;cursor:zoom-in;border-radius:16px;background:var(--cream);box-shadow:0 22px 40px -30px rgba(21,56,72,.5)}
 .fr img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
 .fr:hover img{transform:scale(1.06)}
 @media (prefers-reduced-motion:reduce){.film-track{transform:none!important}}
@@ -919,6 +923,7 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
     </div>
   </div>
   <div class="films" id="gallery">
+    <div class="film-hero" aria-hidden="true"><img alt=""><img alt=""></div>
       <div class="film f1" data-dir="1"><div class="film-track"><figure class="fr"><img src="assets/img/elder.webp" alt="סבא עטוף בטלית בברית" loading="lazy"></figure><figure class="fr"><img src="assets/img/kos.webp" alt="ברכה על כוס היין" loading="lazy"></figure><figure class="fr"><img src="assets/img/blessing.webp" alt="ברכות בטקס הברית" loading="lazy"></figure><figure class="fr"><img src="assets/img/focus.webp" alt="נריה בזמן הטקס" loading="lazy"></figure><figure class="fr"><img src="assets/img/family.webp" alt="המשפחה מתאספת סביב התינוק" loading="lazy"></figure><figure class="fr"><img src="assets/img/certificate.webp" alt="מסירת תעודת הברית למשפחה" loading="lazy"></figure><figure class="fr"><img src="assets/img/tender.webp" alt="הסנדק מחזיק את התינוק בעדינות" loading="lazy"></figure><figure class="fr"><img src="assets/img/baby.webp" alt="התינוק בכרית הברית" loading="lazy"></figure><figure class="fr"><img src="assets/img/father2.webp" alt="האב מחזיק את התינוק" loading="lazy"></figure></div></div>
       <div class="film f2" data-dir="-1"><div class="film-track"><figure class="fr"><img src="assets/img/certificate.webp" alt="מסירת תעודת הברית למשפחה" loading="lazy"></figure><figure class="fr"><img src="assets/img/family.webp" alt="המשפחה מתאספת סביב התינוק" loading="lazy"></figure><figure class="fr"><img src="assets/img/blessing.webp" alt="ברכות בטקס הברית" loading="lazy"></figure><figure class="fr"><img src="assets/img/focus.webp" alt="נריה בזמן הטקס" loading="lazy"></figure><figure class="fr"><img src="assets/img/kos.webp" alt="ברכה על כוס היין" loading="lazy"></figure><figure class="fr"><img src="assets/img/baby.webp" alt="התינוק בכרית הברית" loading="lazy"></figure><figure class="fr"><img src="assets/img/father2.webp" alt="האב מחזיק את התינוק" loading="lazy"></figure><figure class="fr"><img src="assets/img/tender.webp" alt="הסנדק מחזיק את התינוק בעדינות" loading="lazy"></figure><figure class="fr"><img src="assets/img/elder.webp" alt="סבא עטוף בטלית בברית" loading="lazy"></figure></div></div>
       <div class="film f3" data-dir="1"><div class="film-track"><figure class="fr"><img src="assets/img/family.webp" alt="המשפחה מתאספת סביב התינוק" loading="lazy"></figure><figure class="fr"><img src="assets/img/father2.webp" alt="האב מחזיק את התינוק" loading="lazy"></figure><figure class="fr"><img src="assets/img/certificate.webp" alt="מסירת תעודת הברית למשפחה" loading="lazy"></figure><figure class="fr"><img src="assets/img/elder.webp" alt="סבא עטוף בטלית בברית" loading="lazy"></figure><figure class="fr"><img src="assets/img/focus.webp" alt="נריה בזמן הטקס" loading="lazy"></figure><figure class="fr"><img src="assets/img/tender.webp" alt="הסנדק מחזיק את התינוק בעדינות" loading="lazy"></figure><figure class="fr"><img src="assets/img/blessing.webp" alt="ברכות בטקס הברית" loading="lazy"></figure><figure class="fr"><img src="assets/img/kos.webp" alt="ברכה על כוס היין" loading="lazy"></figure><figure class="fr"><img src="assets/img/baby.webp" alt="התינוק בכרית הברית" loading="lazy"></figure></div></div>
@@ -1186,10 +1191,14 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
     const measure=()=>st.forEach(z=>z.W=z.o.reduce((a,n)=>a+n.offsetWidth+18,0));measure();addEventListener('resize',measure);addEventListener('load',measure);
     let last=performance.now(),lastY=scrollY,vis=false;
     new IntersectionObserver(es=>es.forEach(e=>vis=e.isIntersecting)).observe($('#moments'));
+    const hero=$('.film-hero'),hi=hero?[...hero.querySelectorAll('img')]:[];let hsrc='',hk=0;
+    const feature=()=>{if(!hero)return;const z=st[1];if(!z)return;const mid=innerWidth/2;let best=null,bd=1e9;
+      for(const f of z.t.children){const b=f.getBoundingClientRect();const d=Math.abs(b.left+b.width/2-mid);if(d<bd){bd=d;best=f}}
+      const im=best&&best.querySelector('img');if(!im)return;const src=im.getAttribute('src');if(src===hsrc)return;hsrc=src;
+      const nx=hi[hk^1];nx.src=src;const go=()=>{hi[hk].classList.remove('on');nx.classList.add('on');hk^=1};nx.complete?go():nx.onload=go};
     const tick=t=>{const dt=Math.min(64,t-last);last=t;const dy=scrollY-lastY;lastY=scrollY;
-      if(vis&&!still)st.forEach((z,i)=>{if(!z.W)return;z.x+=z.dir*(dt*(.022+i*.006)+dy*.35);z.x=((z.x%z.W)+z.W)%z.W;z.t.style.transform='translate3d('+(z.W-z.x).toFixed(1)+'px,0,0)';
-        if(i!==1)return;const mid=innerWidth/2;for(const f of z.t.children){const b=f.getBoundingClientRect();if(b.right<-50||b.left>innerWidth+50)continue;const k=Math.max(0,1-Math.abs(b.left+b.width/2-mid)/(b.width*1.9));const e=k*k*k*(k*(k*6-15)+10);f.style.transform='scale('+(1+e*.16).toFixed(4)+')';f.style.zIndex=e>.4?2:'';f.style.boxShadow='0 '+(22+e*24).toFixed(0)+'px '+(40+e*40).toFixed(0)+'px -30px rgba(21,56,72,'+(.5+e*.2).toFixed(2)+')'}});
-      requestAnimationFrame(tick)};requestAnimationFrame(tick);
+      if(vis&&!still)st.forEach((z,i)=>{if(!z.W)return;z.x+=z.dir*(dt*(.022+i*.006)+dy*.35);z.x=((z.x%z.W)+z.W)%z.W;z.t.style.transform='translate3d('+(z.W-z.x).toFixed(1)+'px,0,0)';});
+      if(vis)feature();requestAnimationFrame(tick)};requestAnimationFrame(tick);
   })();
 
   /* hero stamp: turns slowly; hovering eases it round the other way */
