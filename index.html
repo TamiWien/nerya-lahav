@@ -138,8 +138,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   -webkit-mask-image:linear-gradient(to left,transparent 16%,rgba(0,0,0,.35) 40%,#000 66%);mask-image:linear-gradient(to left,transparent 16%,rgba(0,0,0,.35) 40%,#000 66%)}
 .stamp svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .stamp text{font-family:Halel,serif;fill:currentColor}
-.stamp .outer{animation:spin 70s linear infinite}
-.stamp .inner{animation:spin 50s linear infinite reverse}
+.stamp .outer,.stamp .inner{transform-origin:50% 50%;will-change:transform}
+.stamp{pointer-events:auto!important;cursor:default}
 .stamp .outer text{font-size:17px;opacity:.5}
 .stamp .inner text{font-size:10.5px;opacity:.85}
 .stamp .sep{font-size:.5em}
@@ -1189,6 +1189,15 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
     const tick=t=>{const dt=Math.min(64,t-last);last=t;const dy=scrollY-lastY;lastY=scrollY;
       if(vis&&!still)st.forEach((z,i)=>{if(!z.W)return;z.x+=z.dir*(dt*(.022+i*.006)+dy*.35);z.x=((z.x%z.W)+z.W)%z.W;z.t.style.transform='translate3d('+(z.W-z.x).toFixed(1)+'px,0,0)'});
       requestAnimationFrame(tick)};requestAnimationFrame(tick);
+  })();
+
+  /* hero stamp: turns slowly; hovering eases it round the other way */
+  (()=>{const st=$('.stamp');if(!st||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    const o=$('.outer',st),i=$('.inner',st);let a=0,b=0,dir=1,v=1,last=performance.now();
+    st.addEventListener('mouseenter',()=>dir=-1);st.addEventListener('mouseleave',()=>dir=1);
+    const tick=t=>{const dt=Math.min(64,t-last)/1000;last=t;v+=(dir*(dir<0?3:1)-v)*Math.min(1,dt*2.2);
+      a+=v*360/70*dt;b-=v*360/50*dt;o.style.transform='rotate('+a.toFixed(2)+'deg)';i.style.transform='rotate('+b.toFixed(2)+'deg)';requestAnimationFrame(tick)};
+    requestAnimationFrame(tick);
   })();
   /* skyline parallax: far layers lag behind the scroll */
   $$('.sky').forEach(sky=>{const ls=[...sky.querySelectorAll('[data-px]')];let q=0;
