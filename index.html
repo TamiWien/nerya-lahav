@@ -445,11 +445,11 @@ section{position:relative}
 
 /* ---------- moments: film strips drifting on gentle diagonals ---------- */
 .moments{background:var(--paper);overflow:clip;padding-bottom:110px}
-.films{position:relative;display:flex;flex-direction:column;gap:clamp(26px,4vw,54px);padding-block:30px;margin-top:10px}
+.films{position:relative;display:flex;flex-direction:column;gap:clamp(48px,6vw,84px);padding-block:50px;margin-top:10px}
 .film{--h:clamp(150px,17vw,240px);position:relative;width:130vw;margin-inline-start:-15vw}
 .f1{rotate:-3deg}.f2{rotate:2deg;margin-inline-start:-10vw}.f3{rotate:-1.2deg}
 .film-track{display:flex;gap:18px;width:max-content;will-change:transform}
-.fr{margin:0;height:var(--h);aspect-ratio:3/2;flex:none;overflow:hidden;cursor:zoom-in;border-radius:16px;background:var(--cream);box-shadow:0 22px 40px -30px rgba(21,56,72,.5)}
+.fr{position:relative;margin:0;height:var(--h);aspect-ratio:3/2;flex:none;overflow:hidden;cursor:zoom-in;border-radius:16px;will-change:transform;background:var(--cream);box-shadow:0 22px 40px -30px rgba(21,56,72,.5)}
 .fr img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
 .fr:hover img{transform:scale(1.06)}
 @media (prefers-reduced-motion:reduce){.film-track{transform:none!important}}
@@ -1187,7 +1187,8 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
     let last=performance.now(),lastY=scrollY,vis=false;
     new IntersectionObserver(es=>es.forEach(e=>vis=e.isIntersecting)).observe($('#moments'));
     const tick=t=>{const dt=Math.min(64,t-last);last=t;const dy=scrollY-lastY;lastY=scrollY;
-      if(vis&&!still)st.forEach((z,i)=>{if(!z.W)return;z.x+=z.dir*(dt*(.022+i*.006)+dy*.35);z.x=((z.x%z.W)+z.W)%z.W;z.t.style.transform='translate3d('+(z.W-z.x).toFixed(1)+'px,0,0)'});
+      if(vis&&!still)st.forEach((z,i)=>{if(!z.W)return;z.x+=z.dir*(dt*(.022+i*.006)+dy*.35);z.x=((z.x%z.W)+z.W)%z.W;z.t.style.transform='translate3d('+(z.W-z.x).toFixed(1)+'px,0,0)';
+        const mid=innerWidth/2;for(const f of z.t.children){const b=f.getBoundingClientRect();if(b.right<-50||b.left>innerWidth+50)continue;const k=Math.max(0,1-Math.abs(b.left+b.width/2-mid)/(b.width*1.15));const e=k*k*(3-2*k);f.style.transform='scale('+(1+e*.28).toFixed(3)+')';f.style.zIndex=e>.5?2:''}});
       requestAnimationFrame(tick)};requestAnimationFrame(tick);
   })();
 
