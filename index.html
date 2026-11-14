@@ -417,6 +417,7 @@ section{position:relative}
 .mail-ink .ink-sig{display:block;margin-top:.5em;font-size:1.25em}
 .env2{position:relative;z-index:3;width:min(480px,100%);margin-inline:auto}
 @media (min-width:980px){.env2{--bleed:calc((100vw - min(1360px,100vw - 2 * var(--pad))) / 2 + 60px);width:calc(100% + var(--bleed) - 40px);margin-inline:calc(-1 * var(--bleed)) 0}.env2 .env2-face{left:16%;right:16%;top:13%}}
+.env2-seal{position:absolute;left:50.6%;top:58%;width:11%;height:auto;translate:-50% -50%;filter:drop-shadow(0 4px 6px rgba(21,56,72,.18));pointer-events:none}
 .env2-img{display:block;width:100%;height:auto;filter:drop-shadow(0 28px 30px rgba(21,56,72,.16))}
 .env2-face{position:absolute;left:16%;right:16%;top:13%;text-align:center}
 .mail-h{font-family:Halel;font-weight:400;font-size:clamp(36px,3.8vw,52px);line-height:1;color:var(--navy)}
@@ -878,6 +879,7 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
       <div class="mail-ink" aria-hidden="true"><p>נריה הגיע אלינו<br>לבית לפני הברית לראות את<br>התינוק, והסביר לנו על כל שלב<br>בברית בצורה מפורטת ומרגיעה. היה אפשר<br>להתייעץ איתו על כל דבר. בברית עצמה<br>הכל נעשה במקצועיות. נריה הסביר לנו בדיוק<br>מה לעשות בימים שאחרי הברית, והגיע<br>לראות את התינוק. הרגשנו שאנו בידיים<br>בטוחות ושהכל נעשה בצורה מקצועית<br>ונעימה. ממליצים בחום!<span class="ink-sig">יהונתן ובת ציון</span></p></div>
       <div class="env2" aria-hidden="false">
         <img class="env2-img" src="assets/img/envelope.webp" alt="" aria-hidden="true" width="1295" height="842" loading="lazy">
+        <img class="env2-seal" src="assets/img/baby-gold.webp" alt="" aria-hidden="true" loading="lazy">
         <div class="env2-face">
           <h3 class="mail-h">מכתבים מההורים</h3>
           <p>מילים שכתבו לי משפחות אחרי הברית.</p>
