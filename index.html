@@ -372,12 +372,15 @@ section{position:relative}
 .reels::-webkit-scrollbar{display:none}
 .reels .reel{flex:0 0 var(--w);transform:scale(.92);transition:transform .6s var(--ease)}
 .reels .reel.active{transform:none}
-.reels-wrap{position:relative}
+.reels-wrap{position:relative;margin-inline:calc(50% - 50vw)}
+.reels-wrap::before,.reels-wrap::after{content:"";position:absolute;top:0;bottom:0;width:min(22vw,320px);z-index:2;pointer-events:none}
+.reels-wrap::before{right:0;background:linear-gradient(270deg,rgba(246,240,232,.88),rgba(246,240,232,.55) 55%,rgba(246,240,232,0))}
+.reels-wrap::after{left:0;background:linear-gradient(90deg,rgba(246,240,232,.88),rgba(246,240,232,.55) 55%,rgba(246,240,232,0))}
 .reels-arrow{position:absolute;top:50%;z-index:3;width:54px;height:54px;margin-top:-27px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:#fff;border:0;cursor:pointer;box-shadow:0 16px 30px -14px rgba(21,56,72,.6);transition:background .3s,transform .3s}
 .reels-arrow:hover{background:var(--gold);transform:scale(1.06)}
 .reels-arrow svg{width:22px;height:22px}
-.ra-prev{right:0}.ra-next{left:0}
-@media (max-width:699px){.ra-prev{right:-6px}.ra-next{left:-6px}.reels-arrow{width:46px;height:46px;margin-top:-23px}}
+.ra-prev{right:max(16px,3vw)}.ra-next{left:max(16px,3vw)}
+@media (max-width:699px){.ra-prev{right:10px}.ra-next{left:10px}.reels-wrap::before,.reels-wrap::after{width:16vw}.reels-arrow{width:46px;height:46px;margin-top:-23px}}
 .reels-invite{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 22px;margin-top:30px;text-align:center}
 .reels-invite .q{font-family:Halel;font-size:60px;line-height:.5;color:var(--gold);height:22px}
 .reels-invite p{font-family:Halel;font-size:clamp(24px,2.6vw,32px);color:var(--navy)}
@@ -598,7 +601,7 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
   .inc-card{top:calc(130px + var(--i) * 16px);grid-template-rows:none;grid-template-columns:1.1fr .9fr;min-height:360px}
   .inc-img{grid-row:1;grid-column:2}
   .inc-body{grid-row:1;grid-column:1;justify-content:center;padding:40px 38px}
-  .reels{--w:300px;margin-inline:calc(50% - 50vw);padding-inline:calc(50vw - var(--w) / 2)}
+  .reels{--w:300px;margin-inline:0;padding-inline:calc(50vw - var(--w) / 2)}
   .fab{right:28px;bottom:28px}
   footer{padding-bottom:60px}
   .foot{display:flex;justify-content:space-between;align-items:flex-start;gap:60px}
