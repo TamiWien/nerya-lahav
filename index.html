@@ -1255,13 +1255,16 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
     let last=performance.now(),lastY=scrollY,vis=false;
     new IntersectionObserver(es=>es.forEach(e=>vis=e.isIntersecting)).observe($('#moments'));
     const hero=$('.film-hero'),hi=hero?[...hero.querySelectorAll('img')]:[];let hsrc='',hk=0;
-    const feature=()=>{if(!hero)return;const z=st[1];if(!z)return;const mid=innerWidth/2;let best=null,bd=1e9;
-      for(const f of z.t.children){const b=f.getBoundingClientRect();const d=Math.abs(b.left+b.width/2-mid);if(d<bd){bd=d;best=f}}
-      const im=best&&best.querySelector('img');if(!im)return;const src=im.getAttribute('src');if(src===hsrc)return;hsrc=src;
-      const nx=hi[hk^1];nx.src=src;const go=()=>{hi[hk].classList.remove('on');nx.classList.add('on');hk^=1};nx.complete?go():nx.onload=go};
+    const show=src=>{if(!src||src===hsrc)return;hsrc=src;const nx=hi[hk^1];nx.src=src;const go=()=>{hi[hk].classList.remove('on');nx.classList.add('on');hk^=1};nx.complete?go():nx.onload=go};
+    const srcs=st[1]?st[1].o.map(f=>{const im=f.querySelector('img');return im&&im.getAttribute('src')}).filter(Boolean):[];let si=-1;
+    const centre=()=>{const z=st[1];const mid=innerWidth/2;let best=null,bd=1e9;for(const f of z.t.children){const b=f.getBoundingClientRect();const d=Math.abs(b.left+b.width/2-mid);if(d<bd){bd=d;best=f}}
+      const im=best&&best.querySelector('img');return im?srcs.indexOf(im.getAttribute('src')):0};
+    /* large photo: changes every ~2.3s, starting from the photo at the centre of the middle row */
+    const feature=()=>{if(!hero||!srcs.length||!vis)return;si=si<0?Math.max(0,centre()):(si+1)%srcs.length;show(srcs[si])};
+    setInterval(feature,2300);
     const tick=t=>{const dt=Math.min(64,t-last);last=t;const dy=scrollY-lastY;lastY=scrollY;
       if(vis&&!still)st.forEach((z,i)=>{if(!z.W)return;z.x+=z.dir*(dt*(.022+i*.006)+dy*.35);z.x=((z.x%z.W)+z.W)%z.W;z.t.style.transform='translate3d('+(z.W-z.x).toFixed(1)+'px,0,0)';});
-      if(vis)feature();requestAnimationFrame(tick)};requestAnimationFrame(tick);
+      if(vis&&si<0)feature();requestAnimationFrame(tick)};requestAnimationFrame(tick);
   })();
 
   /* hero stamp: turns slowly; hovering eases it round the other way */
