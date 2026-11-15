@@ -1068,13 +1068,13 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
   /* page loader: wait for the fill (and page/video, max 4.5s), then fly the logo into the header */
   (()=>{const L=$('.loader'),R=document.documentElement;if(!L){R.classList.remove('ld','ld-hold');return}
     const t0=performance.now(),hv=$('#heroVid'),box=$('.ld-in',L);let done=false;
-    const land=()=>{R.classList.remove('ld-hold');L.remove()};
+    let landed=false;const land=()=>{if(landed)return;landed=true;R.classList.remove('ld-hold');requestAnimationFrame(()=>requestAnimationFrame(()=>L.remove()))};
     const fly=()=>{const t=$('.top .logo img');R.classList.remove('ld');
       if(!t||matchMedia('(prefers-reduced-motion: reduce)').matches){land();return}
       const a=box.getBoundingClientRect(),b=t.getBoundingClientRect();
       L.classList.add('fly');box.style.transition='transform 1.15s cubic-bezier(.7,0,.2,1)';
       box.style.transform='translate('+(b.left-a.left)+'px,'+(b.top-a.top)+'px) scale('+(b.width/a.width)+')';
-      box.addEventListener('transitionend',land,{once:true});setTimeout(land,1500)};
+      box.addEventListener('transitionend',e=>{if(e.target===box&&e.propertyName==='transform')land()});setTimeout(land,1400)};
     const go=()=>{if(done)return;done=true;setTimeout(fly,Math.max(0,2150-(performance.now()-t0)))};
     let n=hv?2:1;const one=()=>{if(--n<=0)go()};
     document.readyState==='complete'?one():addEventListener('load',one,{once:true});
