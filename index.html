@@ -127,9 +127,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .polaroid.hp1{z-index:1}
 .scroll-cue{display:none!important}
 .polaroid.hp:hover{transform:perspective(900px) rotate(calc(var(--rot) * .4)) translateY(-18px) scale(1.09);box-shadow:0 34px 60px -26px rgba(21,56,72,.6);z-index:5}
-@keyframes hpDeal{0%{opacity:0;transform:perspective(900px) translate(var(--from),-90px) rotate(calc(var(--rot) * -3.2)) rotateX(38deg) scale(1.18)}55%{opacity:1}100%{transform:perspective(900px) rotate(var(--rot))}}
-.polaroid.hp img{animation:hpDevelop 2.8s cubic-bezier(.4,0,.2,1) backwards}
-.polaroid.hp1 img{animation-delay:1.5s}.polaroid.hp2 img{animation-delay:1.2s}.polaroid.hp3 img{animation-delay:.9s}
+@keyframes hpDeal{0%{opacity:0;transform:perspective(900px) translateX(calc(-100% - 12vw)) rotate(calc(var(--rot) * -1.5))}40%{opacity:1}100%{transform:perspective(900px) rotate(var(--rot))}}
 @keyframes hpDevelop{0%{filter:brightness(1.75) contrast(.55) saturate(0) sepia(.25) blur(1.5px)}45%{filter:brightness(1.3) contrast(.75) saturate(.35) sepia(.3) blur(.4px)}100%{filter:none}}
 
 @keyframes hpInL{from{opacity:0;transform:perspective(900px) translateX(-80px) rotate(calc(var(--rot) * 2))}}
@@ -523,7 +521,7 @@ section{position:relative}
 .final .phone{display:block;margin-top:26px;font-family:Halel;font-size:40px;letter-spacing:.04em;color:#fff;direction:ltr}
 .final .blessing{margin-top:40px;font-family:Halel;font-size:26px;color:var(--gold-2)}
 
-footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255,255,255,.62);font-size:14.5px;padding:0 0 110px;text-align:right}
+footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255,255,255,.62);font-size:14.5px;padding:0 0 calc(110px + clamp(190px,37vw,600px) * .14);text-align:right}
 .foot-band{height:46px;background:var(--navy-2);margin-top:-45px;position:relative;
   -webkit-mask:url(assets/img/baby-band.png) repeat-x left bottom/1046px 46px;mask:url(assets/img/baby-band.png) repeat-x left bottom/1046px 46px}
 .foot{display:grid;gap:36px;padding-top:54px;position:relative;z-index:1}
@@ -541,11 +539,11 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
 .foot-links a:hover::before{transform:scaleX(1)}
 .foot-col{display:flex;flex-direction:column;gap:10px}
 .foot-col h4{font-family:Halel;font-weight:400;font-size:24px;color:#fff;margin-bottom:4px}
-.foot-bottom{display:flex;justify-content:center;padding:14px var(--pad);background:var(--navy-2);font-size:13px;color:rgba(255,255,255,.45);text-align:center}
+.foot-bottom{display:flex;justify-content:center;padding:14px var(--pad);background:var(--navy-2);border-top:1px solid rgba(255,255,255,.1);font-size:13px;color:rgba(255,255,255,.45);text-align:center}
 .foot-credit{display:inline-flex;align-items:center;gap:5px}
 .foot-credit svg{width:13px;height:13px;color:#e3c592}
 .foot-me{color:rgba(255,255,255,.75);border-bottom:1px solid rgba(227,197,146,.4);transition:color .3s}.foot-me:hover{color:#e3c592}
-.foot-word{will-change:transform;position:absolute;left:50%;bottom:-.24em;transform:translateX(-50%);font-family:Halel;font-size:clamp(190px,37vw,600px);line-height:1;color:#fff;opacity:.035;white-space:nowrap;pointer-events:none}
+.foot-word{will-change:transform;position:absolute;left:50%;bottom:-.1em;transform:translateX(-50%);font-family:Halel;font-size:clamp(190px,37vw,600px);line-height:1;color:#fff;opacity:.035;white-space:nowrap;pointer-events:none}
 
 /* ---------- floating whatsapp ---------- */
 .fab{position:fixed;z-index:60;bottom:calc(18px + env(safe-area-inset-bottom));right:18px;transform:translateY(160%);transition:transform .6s var(--ease)}
@@ -626,7 +624,7 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
   .inc-body{grid-row:1;grid-column:1;justify-content:center;padding:40px 38px}
   .reels{--w:300px;margin-inline:0;padding-inline:calc(50vw - var(--w) / 2)}
   .fab{right:28px;bottom:28px}
-  footer{padding-bottom:60px}
+  footer{padding-bottom:calc(60px + clamp(190px,37vw,600px) * .14)}
   .foot{display:flex;justify-content:space-between;align-items:flex-start;gap:60px}
 }
 /* page loader: the hero video plays as usual; the logo fills from the bottom, then shrinks into its place in the header while the rest arrives */
