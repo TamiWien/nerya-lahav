@@ -440,8 +440,13 @@ section{position:relative}
 .note .l-body p+p{margin-top:8px}
 .note .l-mark{font-family:Halel;font-size:64px;line-height:.5;color:var(--gold);opacity:.55;height:24px}
 .note .l-foot{margin-top:auto;display:flex;align-items:baseline;justify-content:space-between;gap:10px;border-top:1px solid rgba(150,116,74,.25);padding-top:12px}
-.note .l-sig{font-family:Eshchar,Halel,cursive;font-size:30px;line-height:1;color:var(--gold)}
+.note .l-sig{font-family:Eshchar,Halel,cursive;font-size:26px;line-height:1;color:var(--gold)}
 .note .l-loc{font-size:13px;letter-spacing:.06em;color:var(--muted)}
+.note .l-foot{align-items:flex-end}
+.note .l-who{display:flex;flex-direction:column;gap:6px}
+.note .l-par{font-size:14px;color:var(--muted)}
+.note .l-loc{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.note .l-pin{width:12px;height:12px;flex:none}
 .note{--from:0;--tilt:0deg}
 .mail:not(.open) .note{--from:calc(var(--k) * 40px + 60%);--tilt:2deg}
 @media (min-width:980px){
@@ -920,27 +925,27 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
         <article class="note" style="--k:0">
           <span class="l-mark" aria-hidden="true">״</span>
           <div class="l-body"><p>נריה היה המוהל של שני הבנים שלנו! אדם ישר, הגון, מקצועי ויסודי. הסביר לנו הכל ודאג להרגיע תמיד.</p><p>ממליצים מאוד!</p></div>
-          <div class="l-foot"><span class="l-sig">דוד ונינה</span><span class="l-loc">רמת הגולן</span></div>
+          <div class="l-foot"><span class="l-who"><span class="l-sig">ההורים של איתן</span><small class="l-par">דוד ונינה</small></span><span class="l-loc"><svg class="l-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>רמת הגולן</span></div>
         </article>
         <article class="note" style="--k:1">
           <span class="l-mark" aria-hidden="true">״</span>
           <div class="l-body"><p>זכינו שנריה היה המוהל של בננו הבכור. נריה עושה את עבודתו נאמנה, במקצועיות רבה, ביסודיות, מתוך חיבור עמוק למצווה ומאור פנים מיוחד. הדריך אותנו לפני הברית ולאחריה עד הפרט האחרון.</p><p>ממליצים מאוד.</p></div>
-          <div class="l-foot"><span class="l-sig">ידידיה ומרים</span><span class="l-loc">מִגרון</span></div>
+          <div class="l-foot"><span class="l-who"><span class="l-sig">ההורים של יצחק</span><small class="l-par">ידידיה ומרים</small></span><span class="l-loc"><svg class="l-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>מִגרון</span></div>
         </article>
         <article class="note" style="--k:2">
           <span class="l-mark" aria-hidden="true">״</span>
           <div class="l-body"><p>נריה הגיע אלינו לבית לפני הברית לראות את התינוק, והסביר לנו על כל שלב בברית בצורה מפורטת ומרגיעה. היה אפשר להתייעץ איתו על כל דבר.. בברית עצמה הכל נעשה במקצועיות. נריה הסביר לנו בדיוק מה לעשות בימים שאחרי הברית, והגיע לראות את התינוק. הרגשנו שאנו בידיים בטוחות ושהכל נעשה בצורה מקצועית ונעימה. ממליצים בחום!</p></div>
-          <div class="l-foot"><span class="l-sig">יהונתן ובת ציון</span><span class="l-loc">מעלה אפרים</span></div>
+          <div class="l-foot"><span class="l-who"><span class="l-sig">ההורים של אחיה</span><small class="l-par">יהונתן ובת ציון</small></span><span class="l-loc"><svg class="l-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>מעלה אפרים</span></div>
         </article>
         <article class="note" style="--k:3">
           <span class="l-mark" aria-hidden="true">״</span>
           <div class="l-body"><p>אנו ממליצים מאוד על נריה, הוא מוהל מומחה ועושה את מלאכתו נאמנה. הכל מלווה ביחס חם ונעים, לנו ולתינוק. מי שיזכה להזמינו למול את בנו ישמח מאוד ויהיה מרוצה ללא ספק.</p></div>
-          <div class="l-foot"><span class="l-sig">מלאכי ורחל</span><span class="l-loc">נתיבות</span></div>
+          <div class="l-foot"><span class="l-who"><span class="l-sig">ההורים של ישראל מאיר</span><small class="l-par">מלאכי ורחלי</small></span><span class="l-loc"><svg class="l-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>נתיבות</span></div>
         </article>
         <article class="note" style="--k:4">
           <span class="l-mark" aria-hidden="true">״</span>
           <div class="l-body"><p>לנריה, תודה רבה על כך שהיית שליח נאמן להכניס את בננו בבריתו של אברהם אבינו, מאוד נהננו מהמקצועיות, מהארת הפנים שלך תודה רבה</p></div>
-          <div class="l-foot"><span class="l-sig">שמואל ויסכה</span><span class="l-loc">לוד</span></div>
+          <div class="l-foot"><span class="l-who"><span class="l-sig">ההורים של דוד רווה</span><small class="l-par">שמואל ויסכה</small></span><span class="l-loc"><svg class="l-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>לוד</span></div>
         </article>
       </div>
     </div>
