@@ -291,7 +291,11 @@ section{position:relative}
 .sign{display:flex;align-items:center;gap:16px;margin-top:28px;padding-bottom:54px}
 .sign>div{position:relative;isolation:isolate}
 .sign .name{font-family:Halel;font-size:clamp(30px,8.5vw,42px);color:var(--gold);line-height:1}
-.sign small{display:block;color:var(--muted);font-size:13px;margin-top:6px}
+.sign small{display:block;color:var(--muted);font-size:19px;margin-top:10px}
+/* about text fills in word by word with scroll */
+.letter .fw{opacity:.16;transition:opacity .45s ease}
+.letter .fw.on{opacity:1}
+@media (prefers-reduced-motion:reduce){.letter .fw{opacity:1}}
 /* big faint signature under his name */
 @media (max-width:699px){.sig{top:-8%!important}}
 .sig{position:absolute;z-index:-1;right:-2%;top:-62%;display:block;width:max-content;pointer-events:none}
@@ -744,7 +748,7 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
       <p data-r>אך יחד עם החלום, מגיעים החששות. מאחורי ההתרגשות מסתתרת דאגה: האם הכל יעבור בשלום?</p>
       <p class="pull" data-r>אני כאן כדי להקל עליכם.</p>
       <p data-r>עם <strong>הסמכה</strong> מטעם הרבנות הראשית, ברישיון משרד הבריאות, <strong>ניסיון</strong> של שנים בתחום ו<strong>הכשרה</strong> אצל בכירי המוהלים בארץ. בעדינות ובמקצועיות, אני עושה הכל כדי שהרגע הזה יהיה בדיוק כמו שחלמתם: בטוח, מרגש ומשמעותי.</p>
-      <div class="sign" data-r><div><span class="name">אני אתכם לאורך כל הדרך.</span><small>נריה להב · מוהל מוסמך</small><span class="sig" aria-hidden="true"><span class="sig-t">נריה להב</span></span></div></div>
+      <div class="sign" data-r><div><span class="name">אתכם לאורך כל הדרך.</span><small>נריה להב · מוהל מוסמך</small><span class="sig" aria-hidden="true"><span class="sig-t">נריה להב</span></span></div></div>
     </div>
   </div>
 </section>
@@ -1080,6 +1084,15 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
     document.readyState==='complete'?one():addEventListener('load',one,{once:true});
     if(hv){hv.readyState>=3?one():(hv.addEventListener('playing',one,{once:true}),hv.addEventListener('error',one,{once:true}))}
     setTimeout(go,4500);
+  })();
+  /* about: words fill in as the paragraphs scroll through the viewport */
+  (()=>{const ps=$$('.letter > p');if(!ps.length)return;
+    const wrap=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t))f.append(t);else{const sp=document.createElement('span');sp.className='fw';sp.textContent=t;f.append(sp)}});c.replaceWith(f)}else if(c.nodeType===1)wrap(c)})};
+    const items=ps.map(p=>{wrap(p);return{p,w:[...p.querySelectorAll('.fw')],n:-1}});
+    let tick=false;const upd=()=>{tick=false;const vh=innerHeight;items.forEach(it=>{const r=it.p.getBoundingClientRect();
+      const k=Math.min(1,Math.max(0,(vh*.88-r.top)/(vh*.38+r.height)));const n=Math.round(k*it.w.length);
+      if(n!==it.n){it.n=n;it.w.forEach((w,i)=>w.classList.toggle('on',i<n))}})};
+    addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(upd)}},{passive:true});addEventListener('resize',upd);upd();
   })();
   const hv=$('#heroVid'); if(hv){hv.addEventListener('playing',()=>hv.classList.add('on'),{once:true});hv.play&&hv.play().catch(()=>{});}
 
