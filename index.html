@@ -637,6 +637,7 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
 .hero>:not(.hero-media){transition:opacity .9s var(--ease)}
 .ld .hero>:not(.hero-media){opacity:0}
 .ld-hold .top .logo{opacity:0}
+.ld-skip .loader{display:none}
 .loader{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;pointer-events:none}
 .ld .loader{pointer-events:auto}
 .ld-in{position:relative;width:min(340px,64vw);aspect-ratio:900/261;transform-origin:0 0}
@@ -651,7 +652,7 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
 .loader.fly .ld-ghost{opacity:0;transition:opacity .3s}
 @media (prefers-reduced-motion:reduce){.loader{display:none}}
 </style>
-<script>document.documentElement.classList.add("ld","ld-hold")</script>
+<script>(function(R){var seen=false;try{seen=sessionStorage.getItem("nl-seen");sessionStorage.setItem("nl-seen","1")}catch(e){}R.classList.add.apply(R.classList,seen?["ld-skip"]:["ld","ld-hold"])})(document.documentElement)</script>
 </head>
 <body>
 <div class="loader" aria-hidden="true"><div class="ld-in"><img class="ld-ghost" src="assets/img/logo-mark.webp" alt=""><img class="ld-fill" src="assets/img/logo-mark.webp" alt=""><img class="ld-tag" src="assets/img/logo-tag.webp" alt=""></div></div>
@@ -1079,7 +1080,7 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
 
   // hero video: hide poster img once playing
   /* page loader: wait for the fill (and page/video, max 4.5s), then fly the logo into the header */
-  (()=>{const L=$('.loader'),R=document.documentElement;if(!L){R.classList.remove('ld','ld-hold');return}
+  (()=>{const L=$('.loader'),R=document.documentElement;if(!L||R.classList.contains('ld-skip')){L&&L.remove();R.classList.remove('ld','ld-hold');return}
     const t0=performance.now(),hv=$('#heroVid'),box=$('.ld-in',L);let done=false;
     let landed=false;const land=()=>{if(landed)return;landed=true;R.classList.remove('ld-hold');requestAnimationFrame(()=>requestAnimationFrame(()=>L.remove()))};
     const fly=()=>{const t=$('.top .logo img');R.classList.remove('ld');
