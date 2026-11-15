@@ -630,13 +630,17 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
 .ld-ghost{opacity:.16}
 .ld-fill{clip-path:inset(100% 0 0 0);animation:ldFill 1.6s cubic-bezier(.65,0,.35,1) .25s forwards}
 @keyframes ldFill{to{clip-path:inset(0 0 0 0)}}
+.ld-in img.ld-tag{inset:auto;top:98.9%;left:0;height:auto;opacity:0;transform:translateY(-6px);animation:ldTag .9s cubic-bezier(.2,.7,.2,1) 1.5s forwards}
+@keyframes ldTag{to{opacity:1;transform:none}}
+.loader.fly .ld-tag{animation:ldTagOut .35s ease forwards}
+@keyframes ldTagOut{from{opacity:1;transform:none}to{opacity:0;transform:none}}
 .loader.fly .ld-ghost{opacity:0;transition:opacity .3s}
 @media (prefers-reduced-motion:reduce){.loader{display:none}}
 </style>
 <script>document.documentElement.classList.add("ld","ld-hold")</script>
 </head>
 <body>
-<div class="loader" aria-hidden="true"><div class="ld-in"><img class="ld-ghost" src="assets/img/logo-mark.webp" alt=""><img class="ld-fill" src="assets/img/logo-mark.webp" alt=""></div></div>
+<div class="loader" aria-hidden="true"><div class="ld-in"><img class="ld-ghost" src="assets/img/logo-mark.webp" alt=""><img class="ld-fill" src="assets/img/logo-mark.webp" alt=""><img class="ld-tag" src="assets/img/logo-tag.webp" alt=""></div></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/><feColorMatrix in="b" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8" result="g"/><feComposite in="SourceGraphic" in2="g" operator="atop"/></filter></svg>
 
 <!-- ============ HEADER ============ -->
