@@ -377,7 +377,11 @@ section{position:relative}
 .reels{--w:min(72vw,280px);display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
   padding:34px 0 40px;margin-inline:calc(-1*var(--pad));overscroll-behavior-x:contain}
 .reels::-webkit-scrollbar{display:none}
-.reels .reel{flex:0 0 var(--w);transform:scale(.92);transition:transform .6s var(--ease)}
+.reels .reel{flex:0 0 var(--w);transform:scale(.92);transition:transform .6s var(--ease),flex-basis .7s var(--ease),aspect-ratio .7s var(--ease)}
+/* landscape video: the card widens to the video's own shape while it plays */
+.reels{align-items:center}
+.reels .reel.wide{flex-basis:min(calc(var(--w) * 3.16),94vw);aspect-ratio:16/9}
+.reel.wide video{object-fit:contain;background:#000}
 .reels .reel.active{transform:none}
 .reels-wrap{position:relative;margin-inline:calc(50% - 50vw)}
 .reels-wrap::before,.reels-wrap::after{content:"";position:absolute;top:0;bottom:0;width:min(22vw,320px);z-index:2;pointer-events:none}
@@ -1148,16 +1152,19 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
   $$('.reel',reels).forEach(r=>{const v=$('video',r);if(!v)return;
     const toggle=()=>{if(v.paused){$$('.reel video').forEach(o=>{if(o!==v){o.pause()}});v.play();}else v.pause()};
     $('.play',r).addEventListener('click',toggle);v.addEventListener('click',toggle);
-    v.addEventListener('play',()=>{r.classList.add('playing');v.controls=true});
+    v.addEventListener('play',()=>{r.classList.add('playing');v.controls=true;if(v.videoWidth>v.videoHeight&&!r.classList.contains('wide')){r.classList.add('wide');follow(r)}});
+    v.addEventListener('ended',()=>{r.classList.remove('wide');follow(r)});
     v.addEventListener('pause',()=>r.classList.remove('playing'));
   });
   const kids=()=>[...reels.children];
+  /* keep a card centred while it grows or shrinks */
+  function follow(el){const t0=performance.now();const step=()=>{reels.style.scrollSnapType='none';reels.scrollLeft+=offsetTo(el);if(performance.now()-t0<800)requestAnimationFrame(step);else reels.style.scrollSnapType=''};requestAnimationFrame(step)}
   const offsetTo=el=>el.getBoundingClientRect().left+el.offsetWidth/2-(reels.getBoundingClientRect().left+reels.clientWidth/2);
   const center=(i,smooth)=>{const el=kids()[i];if(smooth)reels.scrollBy({left:offsetTo(el),behavior:'smooth'});else{reels.style.scrollSnapType='none';reels.scrollLeft+=offsetTo(el);reels.offsetWidth;reels.style.scrollSnapType=''}};
   let best=N,settle=0;
   const syncReels=()=>{const mid=reels.getBoundingClientRect().left+reels.clientWidth/2;let bd=1e9;
     kids().forEach((el,i)=>{const r=el.getBoundingClientRect();const d=Math.abs(r.left+r.width/2-mid);if(d<bd){bd=d;best=i}});
-    kids().forEach((el,i)=>el.classList.toggle('active',i%N===best%N&&i===best));dots.forEach((d,i)=>d.classList.toggle('on',i===best%N));
+    kids().forEach((el,i)=>{el.classList.toggle('active',i%N===best%N&&i===best);if(i!==best&&el.classList.contains('wide')){el.classList.remove('wide');const v=$('video',el);v&&v.pause()}});dots.forEach((d,i)=>d.classList.toggle('on',i===best%N));
     clearTimeout(settle);settle=setTimeout(()=>{if(best<N||best>=2*N){const playing=kids()[best].classList.contains('playing');if(playing)return;
       const target=N+best%N,act=kids()[best];center(target,false);
       kids().forEach((el,i)=>{el.style.transition='none';el.classList.toggle('active',i===target);el.offsetWidth;el.style.transition=''});best=target}},140)};
