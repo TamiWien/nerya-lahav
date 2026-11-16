@@ -296,7 +296,7 @@ section{position:relative}
 .sign .name{font-family:Halel;font-size:clamp(30px,8.5vw,42px);color:var(--gold);line-height:1}
 .sign small{display:block;color:var(--muted);font-size:19px;margin-top:10px}
 /* about text fills in word by word with scroll */
-.letter .fw{opacity:.16;transition:opacity .45s ease}
+.letter .fw{opacity:.16;transition:opacity .6s ease}
 .letter .fw.on{opacity:1}
 @media (prefers-reduced-motion:reduce){.letter .fw{opacity:1}}
 /* big faint signature under his name */
@@ -747,7 +747,7 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
   <div class="wrap about-grid">
     <div class="portrait" data-r="s">
       <span class="ring" aria-hidden="true"></span>
-      <div class="tag otag yrs"><b>5</b><span><small>שנים של</small>בריתות מרגשות</span></div>
+      <div class="tag otag"><span><small>שנים של</small>בריתות מרגשות</span></div>
       <div class="tag otag"><i></i><span><small>מוסמך</small>משרד הבריאות</span></div>
       <div class="tag otag"><i></i><span><small>הסמכת</small>הרבנות הראשית</span></div>
       <div class="tag otag"><i></i><span><small>מאושר</small>המשרד לשירותי דת</span></div>
@@ -1092,14 +1092,12 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
     if(hv){hv.readyState>=3?one():(hv.addEventListener('playing',one,{once:true}),hv.addEventListener('error',one,{once:true}))}
     setTimeout(go,4500);
   })();
-  /* about: words fill in as the paragraphs scroll through the viewport */
+  /* about: once a paragraph comes into view its words fill in one after another, so the whole text can be read without scrolling */
   (()=>{const ps=$$('.letter > p');if(!ps.length)return;
     const wrap=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t))f.append(t);else{const sp=document.createElement('span');sp.className='fw';sp.textContent=t;f.append(sp)}});c.replaceWith(f)}else if(c.nodeType===1)wrap(c)})};
-    const items=ps.map(p=>{wrap(p);return{p,w:[...p.querySelectorAll('.fw')],n:-1}});
-    let tick=false;const upd=()=>{tick=false;const vh=innerHeight;items.forEach(it=>{const r=it.p.getBoundingClientRect();
-      const k=Math.min(1,Math.max(0,(vh*.88-r.top)/(vh*.38+r.height)));const n=Math.round(k*it.w.length);
-      if(n!==it.n){it.n=n;it.w.forEach((w,i)=>w.classList.toggle('on',i<n))}})};
-    addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(upd)}},{passive:true});addEventListener('resize',upd);upd();
+    ps.forEach(p=>{wrap(p);[...p.querySelectorAll('.fw')].forEach((w,i)=>w.style.transitionDelay=(i*55)+'ms')});
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.fw').forEach(w=>w.classList.add('on'));io.unobserve(e.target)}}),{rootMargin:'0px 0px -12% 0px'});
+    ps.forEach(p=>io.observe(p));
   })();
   const hv=$('#heroVid'); if(hv){hv.addEventListener('playing',()=>hv.classList.add('on'),{once:true});hv.play&&hv.play().catch(()=>{});}
 
