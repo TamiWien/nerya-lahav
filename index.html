@@ -224,7 +224,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @media (min-width:980px){.tk-track li::after{margin-inline:44px;font-size:15px}}
 
 /* process: layered parallax skyline — clouds behind, a chain of baby-item silhouettes cut from the section colour */
-.sky{position:relative;z-index:1;height:clamp(130px,12vw,175px);height:round(clamp(130px,12vw,175px),1px);background:var(--paper);clip-path:inset(-240px 0 3px 0)}
+.sky{position:relative;z-index:1;height:clamp(130px,12vw,175px);height:round(clamp(130px,12vw,175px),1px);background:linear-gradient(var(--paper) calc(100% - 14px),var(--cream) 0);clip-path:inset(-240px 0 3px 0)}
 .sky-l{position:absolute;left:-10%;top:0;width:120%;height:240px;display:block;overflow:visible;will-change:transform}
 .sky-c0,.sky-c2{top:-38px}
 @media (max-width:699px){.sky-l{width:240%;left:-70%}.sky-c0,.sky-c2{top:-48px}}
