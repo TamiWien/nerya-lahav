@@ -1,0 +1,3 @@
+import { json, clearCookie } from '../../cms/server.js';
+
+export const onRequestPost = () => json({ ok: true }, 200, { 'Set-Cookie': clearCookie() });
