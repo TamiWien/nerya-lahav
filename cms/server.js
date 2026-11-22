@@ -46,13 +46,13 @@ export async function readUser(env, request) {
 
 /* ---------- GitHub ---------- */
 export function github(env) {
-  const base = `https://api.github.com/repos/${env.GITHUB_REPO}`;
-  const branch = env.GITHUB_BRANCH || 'main';
+  const base = `https://api.github.com/repos/${String(env.GITHUB_REPO).trim()}`;
+  const branch = String(env.GITHUB_BRANCH || "main").trim();
   async function call(path, opt = {}) {
     const r = await fetch(base + path, {
       ...opt,
       headers: {
-        Authorization: 'Bearer ' + env.GITHUB_TOKEN,
+        Authorization: 'Bearer ' + String(env.GITHUB_TOKEN).trim(),
         Accept: opt.raw ? 'application/vnd.github.raw+json' : 'application/vnd.github+json',
         'User-Agent': 'nerya-lahav-cms',
         'X-GitHub-Api-Version': '2022-11-28',

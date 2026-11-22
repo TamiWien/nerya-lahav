@@ -16,6 +16,8 @@ export async function onRequest(ctx) {
     return await next();
   } catch (e) {
     console.error(e);
-    return fail(e.status === 401 || e.status === 403 ? 'אין הרשאה ל-GitHub. כדאי לבדוק את ה-GITHUB_TOKEN.' : 'משהו השתבש בשרת: ' + e.message, 500);
+    return fail(e.status === 401 ? 'GitHub דחה את הטוקן (GITHUB_TOKEN): הוא שגוי, פג תוקף או הודבק עם תווים מיותרים.'
+      : e.status === 403 || e.status === 404 ? 'לטוקן של GitHub אין גישה לריפו ' + env.GITHUB_REPO + '. צריך לבחור את הריפו ולתת הרשאת Contents: Read and write.'
+      : 'משהו השתבש בשרת: ' + e.message, 500);
   }
 }

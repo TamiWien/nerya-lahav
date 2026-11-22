@@ -110,7 +110,7 @@ function showLogin(msg = '') {
 /* ---------------- boot ---------------- */
 async function boot() {
   let data;
-  try { data = await api('content'); } catch (e) { if (e.message !== '401') $('#root').replaceChildren(h('div', { class: 'loading' }, h('p', {}, e.message), h('button', { class: 'btn btn-line', onclick: boot }, 'לנסות שוב'))); return; }
+  try { data = await api('content'); } catch (e) { if (e.message !== '401') $('#root').replaceChildren(h('div', { class: 'loading' }, h('p', {}, e.message), h('div', { style: 'display:flex;gap:10px;justify-content:center' }, h('button', { class: 'btn btn-line', onclick: boot }, 'לנסות שוב'), h('button', { class: 'btn btn-line', onclick: async () => { try { await api('logout', { method: 'POST' }); } catch {} showLogin(); } }, 'חזרה למסך הכניסה')))); return; }
   Object.assign(S, { content: data.content, saved: JSON.stringify(data.content), sha: data.sha, template: data.template, user: data.user, name: data.name });
   buildApp();
   let draft = null;
