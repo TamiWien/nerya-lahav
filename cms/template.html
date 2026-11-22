@@ -1169,14 +1169,21 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
   /* hero photos: span header→card, slide left of whatever text shares their height */
   (()=>{const pics=document.querySelector('.hero-pics');if(!pics)return;
     const hm=pics.parentElement,hdr=document.querySelector('.top'),figs=[...pics.querySelectorAll('.hp')];
-    const obs=()=>[...hm.querySelectorAll('.wrap h1,.wrap .lede,.wrap .ctas>*')].map(el=>{const r=document.createRange();r.selectNodeContents(el);const b=r.getBoundingClientRect();return el.tagName=='A'?el.getBoundingClientRect():b});
+    const obs=lines=>[...hm.querySelectorAll('.wrap h1,.wrap .lede,.wrap .ctas>*')].flatMap(el=>{if(el.tagName=='A')return [el.getBoundingClientRect()];const r=document.createRange();r.selectNodeContents(el);return lines?[...r.getClientRects()]:[r.getBoundingClientRect()]});
     const fit=()=>{
       pics.style.setProperty('--pt',(hdr.offsetTop+hdr.offsetHeight+14-(hm.getBoundingClientRect().top+scrollY)+scrollY*0)+'px');
-      const pr=pics.getBoundingClientRect(),o=obs();
-      let need=0;figs.forEach(f=>{f.style.marginLeft='0px'});figs.forEach(f=>{
-        const l=pr.left+f.offsetLeft,t=pr.top+f.offsetTop,w=f.offsetWidth,h=f.offsetHeight,gap=18+w*.08;
-        let lim=Infinity;o.forEach(b=>{if(b.width&&b.bottom>t-10&&b.top<t+h+10)lim=Math.min(lim,b.left)});
-        need=Math.max(need,l+w+gap-lim)});figs.forEach(f=>f.style.marginLeft=(-need)+'px');
+      pics.style.visibility='';
+      const o1=obs(),oL=obs(1);
+      /* shrink the group until every photo is at least 80% on screen beside the text; hide if too small */
+      for(let sc=1;sc>=.38;sc-=.04)for(const og of ['left bottom','left top']){
+        pics.style.transformOrigin=og;pics.style.transform='scale('+sc+')';const o=sc>.99?o1:oL;
+        let need=0,left=Infinity;figs.forEach(f=>{const b=f.getBoundingClientRect(),gap=18+b.width*.08;
+          let lim=Infinity;o.forEach(t=>{if(t.width&&t.bottom>b.top-10&&t.top<b.bottom+10)lim=Math.min(lim,t.left)});
+          need=Math.max(need,b.right+gap-lim);left=Math.min(left,b.left+b.width*.2)});
+        need=Math.max(0,need);
+        if(left-need>=0){pics.style.transform='translateX('+(-need)+'px) scale('+sc+')';return}
+      }
+      pics.style.visibility='hidden';
     };
     fit();addEventListener('resize',fit);addEventListener('load',fit);setTimeout(fit,1800);if(document.fonts)document.fonts.ready.then(fit);
   })();
