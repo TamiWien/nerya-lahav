@@ -654,6 +654,43 @@ footer{position:relative;overflow:hidden;background:var(--navy-2);color:rgba(255
 @keyframes ldTagOut{from{opacity:1;transform:none}to{opacity:0;transform:none}}
 .loader.fly .ld-ghost{opacity:0;transition:opacity .3s}
 @media (prefers-reduced-motion:reduce){.loader{display:none}}
+
+/* ---------- hover animations (mouse only) ---------- */
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  /* about tags: they lift, the number glows, the dot pings (transform stays with the scroll script) */
+  .portrait .otag{transition:scale .55s var(--ease),box-shadow .55s var(--ease),background .55s;cursor:default}
+  .portrait .otag:hover{scale:1.08;z-index:3;background:linear-gradient(135deg,rgba(255,255,255,.85),rgba(255,255,255,.5));
+    box-shadow:inset 0 1px 0 #fff,0 26px 44px -22px rgba(21,56,72,.55),0 0 0 1px rgba(150,116,74,.25)}
+  .portrait .otag b{display:inline-block;transition:transform .55s cubic-bezier(.34,1.56,.64,1),text-shadow .55s,color .55s}
+  .portrait .otag:hover b{transform:translateY(-2px) scale(1.12);color:var(--gold-2,#b08a55);text-shadow:0 6px 18px rgba(150,116,74,.35)}
+  .portrait .otag small{transition:letter-spacing .55s var(--ease),color .55s}
+  .portrait .otag:hover small{letter-spacing:.1em;color:var(--navy)}
+  .portrait .otag:hover i{animation:tagPing .9s ease-out infinite}
+  @keyframes tagPing{0%{box-shadow:0 0 0 0 rgba(150,116,74,.45)}100%{box-shadow:0 0 0 12px rgba(150,116,74,0)}}
+
+  /* process: the number flips to gold, the polaroid straightens and lifts */
+  .step .num{transition:background .5s,color .5s,box-shadow .5s,transform .6s cubic-bezier(.34,1.56,.64,1)}
+  .step:hover .num{background:var(--gold);color:var(--paper);transform:rotate(-10deg) scale(1.12);
+    box-shadow:0 0 0 6px var(--cream),0 0 0 12px rgba(150,116,74,.18),0 14px 28px -12px rgba(150,116,74,.7)}
+  .step .polaroid{transition:transform .7s cubic-bezier(.22,1,.36,1),box-shadow .7s cubic-bezier(.22,1,.36,1)}
+  .step .polaroid:hover{transform:rotate(0deg) translateY(-10px) scale(1.04);box-shadow:0 36px 56px -26px rgba(21,56,72,.6)}
+  .step .polaroid img{transition:filter .7s}
+  .step .polaroid:hover img{filter:saturate(1.08) contrast(1.04)}
+  .step .polaroid::before{transition:transform .7s cubic-bezier(.34,1.56,.64,1)}
+  .step .polaroid:hover::before{transform:rotate(-4deg) translateY(-3px)}
+  .step .polaroid figcaption{transition:letter-spacing .7s var(--ease),color .7s}
+  .step .polaroid:hover figcaption{letter-spacing:.03em;color:var(--gold)}
+
+  /* included cards: photo zooms, icon bobs, title underline draws in, texture warms up */
+  .inc-img img{transition:transform 1.2s cubic-bezier(.22,1,.36,1),filter 1.2s}
+  .inc-card:hover .inc-img img{transform:scale(1.07);filter:saturate(1.08)}
+  .inc-body::before{transition:opacity .8s,transform 1.4s cubic-bezier(.22,1,.36,1)}
+  .inc-card:hover .inc-body::before{opacity:.2;transform:scale(1.05)}
+  .inc-card .ic-m{transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+  .inc-card:hover .ic-m{transform:translateY(-4px) rotate(-8deg) scale(1.1)}
+  .inc-card h3{background:linear-gradient(var(--gold),var(--gold)) right bottom/0 2px no-repeat;transition:background-size .7s var(--ease);justify-self:start;width:fit-content;padding-bottom:4px}
+  .inc-card:hover h3{background-size:100% 2px}
+}
 </style>
 <script>(function(R){var seen=false;try{seen=sessionStorage.getItem("nl-seen");sessionStorage.setItem("nl-seen","1")}catch(e){}R.classList.add.apply(R.classList,seen?["ld-skip"]:["ld","ld-hold"])})(document.documentElement)</script>
 </head>
