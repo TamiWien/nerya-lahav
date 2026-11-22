@@ -22,12 +22,12 @@
       "href": "#voices"
     },
     {
-      "label": "צור קשר",
-      "href": "#contact"
-    },
-    {
       "label": "שאלות נפוצות",
       "href": "#faq"
+    },
+    {
+      "label": "צור קשר",
+      "href": "#contact"
     }
   ],
   "hero": {
